@@ -13,6 +13,8 @@ package model.mo;
         private Pagamento[] pagamenti;
         /*1 utente N ordini*/
         private Ordine[] ordini;
+        /*1 utente N prodotti in wishlist*/
+        private Prodotto[] wishlist;
 
         public String getNomeUtente(){
             return nomeUtente;
@@ -148,6 +150,22 @@ package model.mo;
         /*Setta la posizione specificata con l'elemento specificato*/
         public void setOrdine(int index, Ordine ordini) {
             this.ordini[index] = ordini;
+        }
+
+        public Prodotto[] getWishlist() {
+            return wishlist;
+        }
+
+        public void setWishlist(Prodotto[] wishlist) {
+            this.wishlist = wishlist;
+        }
+
+        public Prodotto getWishlistItem(int index) {
+            return this.wishlist[index];
+        }
+
+        public void setWishlistItem(int index, Prodotto prodotto) {
+            this.wishlist[index] = prodotto;
         }
 
     }
