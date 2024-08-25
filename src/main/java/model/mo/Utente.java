@@ -6,7 +6,7 @@ package model.mo;
         private String nomeUtente, cognome, email;
         private String password, genere;
         private String nazione, citta, via, numeroCivico;
-        private int CAP;
+        private int CAP,id;
         private boolean admin, blocked;
 
         /*1 utente N pagamenti*/
@@ -15,6 +15,10 @@ package model.mo;
         private Ordine[] ordini;
         /*1 utente N prodotti in wishlist*/
         private Prodotto[] wishlist;
+
+        public int getId() {return id;}
+
+        public void setId(int id) {this.id = id;}
 
         public String getNomeUtente(){
             return nomeUtente;

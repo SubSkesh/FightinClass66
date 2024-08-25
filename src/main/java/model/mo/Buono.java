@@ -8,21 +8,30 @@ import java.util.Locale;
  * @author Oscar Costanzelli
  */
 public class Buono {
-
+    private int id;
     private java.util.Date dataScadenza;
     private String nomeBuono;
     private int sconto;
-    private long codiceBuono;
+    private String codiceBuono;
     private boolean eliminato, usato;
 
     /*Mappo la relazione con Ordine*/
     private Ordine ordine;
+    // Getter per l'id
+    public int getId() {
+        return id;
+    }
 
-    public long getCodiceBuono(){
+    // Setter per l'id
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCodiceBuono(){
         return codiceBuono;
     }
 
-    public void setCodiceBuono(long c){
+    public void setCodiceBuono(String c){
         codiceBuono=c;
     }
 
