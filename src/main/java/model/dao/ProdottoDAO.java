@@ -2,6 +2,7 @@ package model.dao;
 
 import java.util.ArrayList;
 
+import model.mo.Contiene;
 import model.mo.Prodotto;
 
 /**
@@ -22,10 +23,10 @@ public interface ProdottoDAO {
      * @return l'oggetto Prodotto creato
      * @throws DuplicatedObjectException se un prodotto con lo stesso codice esiste già
      */
-    public Prodotto creaProdotto(String nomeProdotto, String categoria,
+    public Prodotto creaProdotto(String nomeProdotto, String categoria, String codiceProdotto,
                                  String descrizione, String immagine,
                                  float prezzo, long quantita,
-                                 boolean blocked, boolean push)
+                                 boolean blocked, boolean push);
             throws DuplicatedObjectException;
 
     /**
