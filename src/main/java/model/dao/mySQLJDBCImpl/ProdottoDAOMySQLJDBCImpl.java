@@ -42,7 +42,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
     public Prodotto creaProdotto(String nomeProdotto, String categoria, String codiceProdotto,
                                  String descrizione, String immagine,
                                  float prezzo, long quantita,
-                                 boolean blocked, boolean push)
+                                 boolean blocked, boolean push, Contiene[] contiene)
             throws DuplicatedObjectException {
         PreparedStatement ps;
         Prodotto prodotto = new Prodotto();
@@ -55,6 +55,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
         prodotto.setPrezzo(prezzo);
         prodotto.setBlocked(blocked);
         prodotto.setPush(push);
+        prodotto.setContiene(contiene);
 
         try {
             // Verifica se esiste già un prodotto con lo stesso codiceProdotto nel database
@@ -189,7 +190,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
      * @param codiceProdotto
      */
     @Override
-    public void blocca(long codiceProdotto) {
+    public void blocca(String codiceProdotto) {
         PreparedStatement ps;
         try{
             String sql
@@ -199,7 +200,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
                     + " codiceProdotto = ?";
 
             ps = connection.prepareStatement(sql);
-            ps.setLong(1, codiceProdotto);
+            ps.setString(1, codiceProdotto);
             ps.executeUpdate();
             ps.close();
 
@@ -214,7 +215,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
      * @param codiceProdotto
      */
     @Override
-    public void sblocca(long codiceProdotto) {
+    public void sblocca(String codiceProdotto) {
         PreparedStatement ps;
         try{
             String sql
@@ -224,7 +225,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
                     + " codiceProdotto = ?";
 
             ps = connection.prepareStatement(sql);
-            ps.setLong(1, codiceProdotto);
+            ps.setString(1, codiceProdotto);
             ps.executeUpdate();
             ps.close();
 
@@ -239,27 +240,27 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
      * @return ArrayList di String
      */
 
-    public ArrayList<String> trovaNomeCarte(){
+    public ArrayList<String> trovaNomiProdotti(){
         PreparedStatement ps;
-        String nomeCarta;
-        ArrayList<String> nomeCarte = new ArrayList<String>();
+        String nomeProdotto;
+        ArrayList<String> nomeProdotti = new ArrayList<String>();
 
         try{
             /*
              *Prendo tutte le carte esistenti in ordine alfabetico una volta sola
              */
             String sql
-                    = " SELECT DISTINCT nomeCarta "
+                    = " SELECT DISTINCT nomeProdotto "
                     + " FROM prodotto "
-                    + " ORDER BY nomeCarta ";
+                    + " ORDER BY nomeProdotto ";
 
             ps = connection.prepareStatement(sql);
 
             ResultSet resultSet = ps.executeQuery();
 
             while(resultSet.next()){
-                nomeCarta = resultSet.getString("nomeCarta");
-                nomeCarte.add(nomeCarta);
+                nomeProdotto = resultSet.getString("nomeProdotto");
+                nomeProdotti.add(nomeProdotto);
             }
 
             resultSet.close();
@@ -268,36 +269,36 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             throw new RuntimeException(sqle);
         }
 
-        return nomeCarte;
+        return nomeProdotti;
     }
 
     /**
      *
-     * Recupera dal DB tutti i tipi di carta presenti
+     * Recupera dal DB tutti i tipi di categoria presenti
      * @return ArrayList di String
      */
 
-    public ArrayList<String> trovaTipoCarte(){
+    public ArrayList<String> trovaCategorieProdotti(){
         PreparedStatement ps;
-        String tipoCarta;
-        ArrayList<String> tipoCarte = new ArrayList<String>();
+        String tipoCategoria;
+        ArrayList<String> tipoCategorie = new ArrayList<String>();
 
         try{
             /*
              *Prendo tutti i tipi esistenti in ordine alfabetico una volta sola
              */
             String sql
-                    = " SELECT DISTINCT tipoCarta "
+                    = " SELECT DISTINCT categoria "
                     + " FROM prodotto "
-                    + " ORDER BY tipoCarta ";
+                    + " ORDER BY categoria ";
 
             ps = connection.prepareStatement(sql);
 
             ResultSet resultSet = ps.executeQuery();
 
             while(resultSet.next()){
-                tipoCarta = resultSet.getString("tipoCarta");
-                tipoCarte.add(tipoCarta);
+                tipoCategoria = resultSet.getString("categoria");
+                tipoCategorie.add(tipoCategoria);
             }
 
             resultSet.close();
@@ -306,93 +307,92 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             throw new RuntimeException(sqle);
         }
 
-        return tipoCarte;
+        return tipoCategorie;
     }
 
     /**
      *
-     * Recupera dal DB tutte le diverse rarità presenti
      * @return ArrayList di String
      */
-    @Override
-    public ArrayList<String> trovaRare(){
-        PreparedStatement ps;
-        String rarita;
-        ArrayList<String> rare = new ArrayList<String>();
+//    @Override
+//    public ArrayList<String> trovaRare(){
+//        PreparedStatement ps;
+//        String rarita;
+//        ArrayList<String> rare = new ArrayList<String>();
+//
+//        try{
+//            /*
+//             *Prendo tutte le rarità esistenti in ordine alfabetico una volta sola
+//             */
+//            String sql
+//                    = " SELECT DISTINCT rarita "
+//                    + " FROM prodotto "
+//                    + " ORDER BY rarita ";
+//
+//            ps = connection.prepareStatement(sql);
+//
+//            ResultSet resultSet = ps.executeQuery();
+//
+//            while(resultSet.next()){
+//                rarita = resultSet.getString("rarita");
+//                rare.add(rarita);
+//            }
+//
+//            resultSet.close();
+//            ps.close();
+//        }catch(SQLException sqle){
+//            throw new RuntimeException(sqle);
+//        }
+//
+//        return rare;
+//    }
+//
+//    /**
+//     *
+//     * Recupera dal DB tutte le edizioni presenti
+//     * @return ArrayList di String
+//     */
+//    @Override
+//    public ArrayList<String> trovaEdizioni(){
+//        PreparedStatement ps;
+//        String edizione;
+//        ArrayList<String> edizioni = new ArrayList<String>();
+//
+//        try{
+//            /*
+//             *Prendo tutte le edizioni esistenti in ordine alfabetico una volta sola
+//             */
+//            String sql
+//                    = " SELECT DISTINCT edizione "
+//                    + " FROM prodotto "
+//                    + " ORDER BY edizione ";
+//
+//            ps = connection.prepareStatement(sql);
+//
+//            ResultSet resultSet = ps.executeQuery();
+//
+//            while(resultSet.next()){
+//                edizione = resultSet.getString("edizione");
+//                edizioni.add(edizione);
+//            }
+//
+//            resultSet.close();
+//            ps.close();
+//        }catch(SQLException sqle){
+//            throw new RuntimeException(sqle);
+//        }
+//
+//        return edizioni;
+//    }
+//
+//    /**
+//     *
+//     * Recupera dal DB tutti i prodotti appartenenti all'edizione specificata
+//     * @param edizione
+//     * @return ArrayList di Prodotto
+//     */
 
-        try{
-            /*
-             *Prendo tutte le rarità esistenti in ordine alfabetico una volta sola
-             */
-            String sql
-                    = " SELECT DISTINCT rarita "
-                    + " FROM prodotto "
-                    + " ORDER BY rarita ";
-
-            ps = connection.prepareStatement(sql);
-
-            ResultSet resultSet = ps.executeQuery();
-
-            while(resultSet.next()){
-                rarita = resultSet.getString("rarita");
-                rare.add(rarita);
-            }
-
-            resultSet.close();
-            ps.close();
-        }catch(SQLException sqle){
-            throw new RuntimeException(sqle);
-        }
-
-        return rare;
-    }
-
-    /**
-     *
-     * Recupera dal DB tutte le edizioni presenti
-     * @return ArrayList di String
-     */
-    @Override
-    public ArrayList<String> trovaEdizioni(){
-        PreparedStatement ps;
-        String edizione;
-        ArrayList<String> edizioni = new ArrayList<String>();
-
-        try{
-            /*
-             *Prendo tutte le edizioni esistenti in ordine alfabetico una volta sola
-             */
-            String sql
-                    = " SELECT DISTINCT edizione "
-                    + " FROM prodotto "
-                    + " ORDER BY edizione ";
-
-            ps = connection.prepareStatement(sql);
-
-            ResultSet resultSet = ps.executeQuery();
-
-            while(resultSet.next()){
-                edizione = resultSet.getString("edizione");
-                edizioni.add(edizione);
-            }
-
-            resultSet.close();
-            ps.close();
-        }catch(SQLException sqle){
-            throw new RuntimeException(sqle);
-        }
-
-        return edizioni;
-    }
-
-    /**
-     *
-     * Recupera dal DB tutti i prodotti appartenenti all'edizione specificata
-     * @param edizione
-     * @return ArrayList di Prodotto
-     */
-
-    public ArrayList<Prodotto> findByEdizione(String edizione) {
+    public ArrayList<Prodotto> findByCategoria(String categoria) {
         PreparedStatement ps;
         Prodotto prodotto;
         ArrayList<Prodotto> prodotti = new ArrayList<Prodotto>();
@@ -404,10 +404,10 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             String sql
                     = " SELECT * "
                     + " FROM prodotto "
-                    + " WHERE edizione = ? AND blocked = 'N' ";
+                    + " WHERE categoria = ? AND blocked = 'N' ";
 
             ps = connection.prepareStatement(sql);
-            ps.setString(1, edizione);
+            ps.setString(1, categoria);
 
             ResultSet resultSet = ps.executeQuery();
 
@@ -426,141 +426,136 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
         return prodotti;
     }
 
-    /**
-     *
-     * Recupera dal DB tutti i prodotti del tipo specificato
-     * @param tipoCarta
-     * @return ArrayList di Prodotto
-     */
+
+//    @Override
+//    public ArrayList<Prodotto> findByTipoCarta(String tipoCarta) {
+//        PreparedStatement ps;
+//        Prodotto prodotto;
+//        ArrayList<Prodotto> prodotti = new ArrayList<Prodotto>();
+//
+//        try{
+//            /*
+//             *Prende tutti i prodotti del tipo specificato
+//             */
+//            String sql
+//                    = " SELECT * "
+//                    + " FROM prodotto "
+//                    + " WHERE tipoCarta = ? AND Blocked = 'N' ";
+//
+//            ps = connection.prepareStatement(sql);
+//            ps.setString(1, tipoCarta);
+//
+//            ResultSet resultSet = ps.executeQuery();
+//
+//            while(resultSet.next()) {
+//                prodotto = read(resultSet);
+//                prodotti.add(prodotto);
+//            }
+//
+//            resultSet.close();
+//            ps.close();
+//
+//        }catch(SQLException e){
+//            throw new RuntimeException(e);
+//        }
+//
+//        return prodotti;
+//    }
+//
+//    /**
+//     *
+//     * Recupera dal DB tutti i prodotti della rarità specificata
+//     * @param rarita
+//     * @return ArrayList di Prodotto
+//     */
+//    @Override
+//    public ArrayList<Prodotto> findByRarità(String rarita) {
+//        PreparedStatement ps;
+//        Prodotto prodotto;
+//        ArrayList<Prodotto> prodotti = new ArrayList<Prodotto>();
+//
+//        try{
+//            /*
+//             *Prende tutti i prodotti in base alla rarità specificata
+//             */
+//            String sql
+//                    = " SELECT * "
+//                    + " FROM prodotto "
+//                    + " WHERE rarita = ? AND blocked = 'N' ";
+//
+//            ps = connection.prepareStatement(sql);
+//            ps.setString(1, rarita);
+//
+//            ResultSet resultSet = ps.executeQuery();
+//
+//            while(resultSet.next()) {
+//                prodotto = read(resultSet);
+//                prodotti.add(prodotto);
+//            }
+//
+//            resultSet.close();
+//            ps.close();
+//
+//        }catch(SQLException e){
+//            throw new RuntimeException(e);
+//        }
+//
+//        return prodotti;
+//    }
+//
+//    /**
+//     *
+//     * Recupera dal DB tutti i prodotti che soddisfano la stringa di ricerca search
+//     * @param search
+//     * @return ArrayList di Prodotto
+//     */
+//    @Override
+//    public ArrayList<Prodotto> findByString(String search) {
+//        PreparedStatement ps;
+//        Prodotto prodotto;
+//        ArrayList<Prodotto> prodotti = new ArrayList<Prodotto>();
+//
+//        try{
+//            /*
+//             *Prende tutti i prodotti in base alla stringa specificata
+//             */
+//            String sql
+//                    = " SELECT * "
+//                    + " FROM prodotto "
+//                    + " WHERE nomeCarta LIKE '%" +search+ "%' OR"
+//                    + " tipoCarta LIKE '%" +search+ "%' OR"
+//                    + " rarita LIKE '%" +search+ "%' OR"
+//                    + " edizione LIKE '%" +search+ "%' OR"
+//                    + " testo LIKE '%" +search+ "%'"
+//                    + " AND Blocked = 'N' ";
+//
+//            ps = connection.prepareStatement(sql);
+//
+//            ResultSet resultSet = ps.executeQuery();
+//
+//            while(resultSet.next()) {
+//                prodotto = read(resultSet);
+//                prodotti.add(prodotto);
+//            }
+//
+//            resultSet.close();
+//            ps.close();
+//
+//        }catch(SQLException e){
+//            throw new RuntimeException(e);
+//        }
+//
+//        return prodotti;
+//    }
+//
+//    /**
+//     *
+//     * Recupera dal DB il prodotto con il codiceProdotto specificato
+//     * @param codiceProdotto
+//     * @return Prodotto
+
     @Override
-    public ArrayList<Prodotto> findByTipoCarta(String tipoCarta) {
-        PreparedStatement ps;
-        Prodotto prodotto;
-        ArrayList<Prodotto> prodotti = new ArrayList<Prodotto>();
-
-        try{
-            /*
-             *Prende tutti i prodotti del tipo specificato
-             */
-            String sql
-                    = " SELECT * "
-                    + " FROM prodotto "
-                    + " WHERE tipoCarta = ? AND Blocked = 'N' ";
-
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, tipoCarta);
-
-            ResultSet resultSet = ps.executeQuery();
-
-            while(resultSet.next()) {
-                prodotto = read(resultSet);
-                prodotti.add(prodotto);
-            }
-
-            resultSet.close();
-            ps.close();
-
-        }catch(SQLException e){
-            throw new RuntimeException(e);
-        }
-
-        return prodotti;
-    }
-
-    /**
-     *
-     * Recupera dal DB tutti i prodotti della rarità specificata
-     * @param rarita
-     * @return ArrayList di Prodotto
-     */
-    @Override
-    public ArrayList<Prodotto> findByRarità(String rarita) {
-        PreparedStatement ps;
-        Prodotto prodotto;
-        ArrayList<Prodotto> prodotti = new ArrayList<Prodotto>();
-
-        try{
-            /*
-             *Prende tutti i prodotti in base alla rarità specificata
-             */
-            String sql
-                    = " SELECT * "
-                    + " FROM prodotto "
-                    + " WHERE rarita = ? AND blocked = 'N' ";
-
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, rarita);
-
-            ResultSet resultSet = ps.executeQuery();
-
-            while(resultSet.next()) {
-                prodotto = read(resultSet);
-                prodotti.add(prodotto);
-            }
-
-            resultSet.close();
-            ps.close();
-
-        }catch(SQLException e){
-            throw new RuntimeException(e);
-        }
-
-        return prodotti;
-    }
-
-    /**
-     *
-     * Recupera dal DB tutti i prodotti che soddisfano la stringa di ricerca search
-     * @param search
-     * @return ArrayList di Prodotto
-     */
-    @Override
-    public ArrayList<Prodotto> findByString(String search) {
-        PreparedStatement ps;
-        Prodotto prodotto;
-        ArrayList<Prodotto> prodotti = new ArrayList<Prodotto>();
-
-        try{
-            /*
-             *Prende tutti i prodotti in base alla stringa specificata
-             */
-            String sql
-                    = " SELECT * "
-                    + " FROM prodotto "
-                    + " WHERE nomeCarta LIKE '%" +search+ "%' OR"
-                    + " tipoCarta LIKE '%" +search+ "%' OR"
-                    + " rarita LIKE '%" +search+ "%' OR"
-                    + " edizione LIKE '%" +search+ "%' OR"
-                    + " testo LIKE '%" +search+ "%'"
-                    + " AND Blocked = 'N' ";
-
-            ps = connection.prepareStatement(sql);
-
-            ResultSet resultSet = ps.executeQuery();
-
-            while(resultSet.next()) {
-                prodotto = read(resultSet);
-                prodotti.add(prodotto);
-            }
-
-            resultSet.close();
-            ps.close();
-
-        }catch(SQLException e){
-            throw new RuntimeException(e);
-        }
-
-        return prodotti;
-    }
-
-    /**
-     *
-     * Recupera dal DB il prodotto con il codiceProdotto specificato
-     * @param codiceProdotto
-     * @return Prodotto
-     */
-    @Override
-    public Prodotto findByKey(Long codiceProdotto){
+    public Prodotto findByKey(String codiceProdotto){
         PreparedStatement ps;
         Prodotto prodotto = null;
 
@@ -574,7 +569,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
                     + " WHERE codiceProdotto = ?";
 
             ps = connection.prepareStatement(sql);
-            ps.setLong(1, codiceProdotto);
+            ps.setString(1, codiceProdotto);
 
             ResultSet resultSet = ps.executeQuery();
 
@@ -680,24 +675,30 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
     /*Leggo i vari campi del resultset e li carico in prodotto*/
     protected Prodotto read(ResultSet resultSet){
         Prodotto prodotto = new Prodotto();
+        /*leggo l'id del db*/
+        try {
+            prodotto.setId(resultSet.getInt("id"));
+        }catch(SQLException sqle){
+            System.out.println(sqle.getMessage());
+        }
 
         /*Leggo il codice*/
         try {
-            prodotto.setCodiceProdotto(resultSet.getLong("codiceProdotto"));
+            prodotto.setCodiceProdotto(resultSet.getString("codiceProdotto"));
         }catch(SQLException sqle){
             System.out.println(sqle.getMessage());
         }
 
         /*Leggo il nome*/
         try {
-            prodotto.setNomeCarta(resultSet.getString("nomeCarta"));
+            prodotto.setNomeProdotto(resultSet.getString("nomeProdotto"));
         }catch(SQLException sqle){
             System.out.println(sqle.getMessage());
         }
 
-        /*Leggo il tipo*/
+        /*Leggo la categoria*/
         try {
-            prodotto.setTipoCarta(resultSet.getString("tipoCarta"));
+            prodotto.setCategoria(resultSet.getString("categoria"));
         }catch(SQLException sqle){
             System.out.println(sqle.getMessage());
         }
@@ -709,19 +710,14 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             System.out.println(sqle.getMessage());
         }
 
-        /*Leggo rarità*/
+        /*Leggo descrizione*/
         try {
-            prodotto.setRarità(resultSet.getString("rarita"));
+            prodotto.setDescrizione(resultSet.getString("descrizione"));
         }catch(SQLException sqle){
             System.out.println(sqle.getMessage());
         }
 
-        /*Leggo edizione*/
-        try {
-            prodotto.setEdizione(resultSet.getString("edizione"));
-        }catch(SQLException sqle){
-            System.out.println(sqle.getMessage());
-        }
+
 
         /*Leggo l'immagine*/
         try {
@@ -730,12 +726,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             System.out.println(sqle.getMessage());
         }
 
-        /*Leggo la descrizione*/
-        try {
-            prodotto.setTesto(resultSet.getString("testo"));
-        }catch(SQLException sqle){
-            System.out.println(sqle.getMessage());
-        }
+
 
         /*Leggo blocked*/
         try {
@@ -762,7 +753,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
         return prodotto;
     }
 
-    public long getQuantitàByKey(long codiceProdotto){
+    public long getQuantitaByKey(String codiceProdotto){
         PreparedStatement ps;
         long quantita = 0;
 
@@ -776,7 +767,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
                     + " WHERE codiceProdotto = ? ";
 
             ps = connection.prepareStatement(sql);
-            ps.setLong(1, codiceProdotto);
+            ps.setString(1, codiceProdotto);
 
 
             ResultSet resultSet = ps.executeQuery();

@@ -13,19 +13,29 @@ public class Ordine {
     private String statoOrdine, nazione, citta, via;
     private java.util.Date dataOrdine, dataConsegna;
     private int CAP;
-    private long codiceOrdine, numeroCivico;
+    private long  numeroCivico;
+    private String codiceOrdine;
 
     /*Mappo le relazioni*/
     private Pagamento pagamento;
     private Buono buono;
     private Utente utente;
     private ArrayList<Contiene> contiene;
+    private int id;
 
-    public long getCodiceOrdine(){
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCodiceOrdine(){
         return codiceOrdine;
     }
 
-    public void setCodiceOrdine(long c){
+    public void setCodiceOrdine(String c){
         codiceOrdine = c;
     }
 
