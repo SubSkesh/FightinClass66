@@ -14,7 +14,7 @@ Questa repository contiene il codice sorgente e le risorse per il nostro e-comme
 
 ## Funzionalità Principali
 
-- 🥋 **Ampia Selezione di Prodotti:** Dalla protezione al combattimento fino agli accessori, tutto ciò di cui hai bisogno per essere al top delle tue prestazioni.
+- 🥊 **Ampia Selezione di Prodotti:** Dalla protezione al combattimento fino agli accessori, tutto ciò di cui hai bisogno per essere al top delle tue prestazioni.
 - ⚔️ **Pagamenti Sicuri:** Effettua transazioni con la massima sicurezza grazie ai nostri sistemi di pagamento protetti.
 - 🏆 **Supporto Clienti Dedicato:** Il nostro team è pronto a rispondere a tutte le tue domande e a risolvere eventuali problemi.
 
