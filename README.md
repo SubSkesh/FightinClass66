@@ -1,4 +1,4 @@
-# FightinClass66 - Il Tuo E-Commerce di Equipaggiamento da Combattimento 🥋⚔️
+# FightinClass66 - Il Tuo E-Commerce di Equipaggiamento da Combattimento 🥊⚔️
 
 Benvenuti in **FightinClass66**, il regno supremo per tutti i guerrieri, combattenti e appassionati di arti marziali! Qui troverai tutto ciò di cui hai bisogno per prepararti alla battaglia, che tu sia un veterano del combattimento o un novizio entusiasta.
 
