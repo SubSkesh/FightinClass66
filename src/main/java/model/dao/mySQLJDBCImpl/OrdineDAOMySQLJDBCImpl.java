@@ -14,8 +14,6 @@ import model.mo.Ordine;
 import model.mo.Pagamento;
 import model.mo.Utente;
 
-import static services.util.Conversion.convertJavaDateToSqlDate;
-
 /**
  *
  * @author Oscar Costanzelli

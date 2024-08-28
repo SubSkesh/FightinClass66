@@ -19,7 +19,7 @@ public interface ContieneDAO {
      * @return L'oggetto Contiene creato.
      * @throws DuplicatedObjectException se la combinazione ordineId e prodottoId esiste già.
      */
-    public Contiene creaContiene(long ordineId, long prodottoId, int quantitaOrdine)
+    public Contiene creaContiene(int ordineId, int prodottoId, int quantitaOrdine)
             throws DuplicatedObjectException;
 
     /**
