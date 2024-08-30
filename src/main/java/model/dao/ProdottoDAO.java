@@ -2,6 +2,7 @@ package model.dao;
 
 import java.util.ArrayList;
 
+import model.dao.exception.DuplicatedObjectException;
 import model.mo.Contiene;
 import model.mo.Prodotto;
 
@@ -27,7 +28,7 @@ public interface ProdottoDAO {
                                  String descrizione, String immagine,
                                  float prezzo, long quantita,
                                  boolean blocked, boolean push, Contiene[] contiene)
-            throws DuplicatedObjectException;
+            throws DuplicatedObjectException, DuplicatedObjectException;
 
     /**
      * Aggiorna le informazioni di un prodotto esistente.

@@ -28,5 +28,5 @@ public interface ContieneDAO {
      * @param ordineId L'identificatore univoco dell'ordine.
      * @return Una lista di oggetti Contiene rappresentanti i prodotti inclusi nell'ordine.
      */
-    public ArrayList<Contiene> findContieneByOrdine(long ordineId);
+    public ArrayList<Contiene> findContieneByOrdine(int ordineId);
 }

@@ -138,7 +138,7 @@ public class ContieneDAOMySQLJDBCImpl implements ContieneDAO {
 
         try {
             // Leggo la quantità
-            contiene.setQuantitaOrdine(resultSet.getLong("quantitaOrdine"));
+            contiene.setQuantitàOrdine(resultSet.getLong("quantitaOrdine"));
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
         }
