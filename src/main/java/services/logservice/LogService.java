@@ -24,7 +24,7 @@ public class LogService {
      *
      * @return Logger configurato per l'applicazione.
      */
-    public static Logger getLogger() {
+    public static Logger printLog() {
         // Formatter per i log (definisce il formato dei messaggi nel file di log)
         SimpleFormatter formatterTxt;
 

@@ -7,7 +7,8 @@ public class Wishlist {
 
     private int id;         // ID della wishlist (chiave primaria)
     private Utente utente;  // Utente associato alla wishlist
-    private Prodotto prodotto; // Prodotto aggiunto alla wishlist
+    private Prodotto prodotto;
+    private boolean deleted;// Prodotto aggiunto alla wishlist
 
     // Getters e Setters
     public int getId() {
@@ -32,5 +33,11 @@ public class Wishlist {
 
     public void setProdotto(Prodotto prodotto) {
         this.prodotto = prodotto;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

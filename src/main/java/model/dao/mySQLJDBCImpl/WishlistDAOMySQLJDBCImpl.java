@@ -3,6 +3,7 @@ package model.dao.mySQLJDBCImpl;
 import java.sql.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.dao.WishlistDAO;
 import model.dao.exception.DuplicatedObjectException;
@@ -10,6 +11,7 @@ import model.dao.exception.DuplicatedObjectException;
 import model.mo.Utente;
 import model.mo.Prodotto;
 import model.mo.Wishlist;
+import org.apache.catalina.User;
 
 public class WishlistDAOMySQLJDBCImpl implements WishlistDAO {
     Connection conn;
@@ -58,10 +60,8 @@ public class WishlistDAOMySQLJDBCImpl implements WishlistDAO {
             sql
                     = " INSERT INTO wishlist "
                     + "     (utenteId,"
-                    + "     prodottoId,"
-                    + "     deleted "
-                    + "   ) "
-                    + " VALUES (?,?,'N')";
+                    + "     prodottoId)"
+                    + " VALUES (?,?)";
 
             ps = conn.prepareStatement(sql);
             i = 1;
@@ -96,18 +96,18 @@ public class WishlistDAOMySQLJDBCImpl implements WishlistDAO {
                     + " FROM wishlist "
                     + " WHERE "
                     + " deleted ='N' AND "
-                    + " user_id = ? AND"
-                    + " wine_id = ?";
+                    + " userId = ? AND"
+                    + " prodottoId = ?";
 
             ps = conn.prepareStatement(sql);
             int i = 1;
-            ps.setLong(i++, wishlist.getUser().getUserId());
-            ps.setLong(i++, wishlist.getWine().getWineId());
+            ps.setLong(i++, wishlist.getUtente().getId());
+            ps.setLong(i++, wishlist.getProdotto().getId());
 
             ResultSet resultSet = ps.executeQuery();
             resultSet.next();
 
-            Long existing_wishlist_id = (resultSet.getLong("wishlist_id"));
+            int existing_wishlist_id = (resultSet.getInt("id"));
 
             resultSet.close();
 
@@ -116,7 +116,7 @@ public class WishlistDAOMySQLJDBCImpl implements WishlistDAO {
                     + " SET "
                     + " deleted = 'Y' "
                     + " WHERE "
-                    + "  wishlist_id = ? ";
+                    + "  id = ? ";
 
             ps = conn.prepareStatement(sql);
             i = 1;
@@ -131,6 +131,68 @@ public class WishlistDAOMySQLJDBCImpl implements WishlistDAO {
 
         return wishlist;
     }
+
+    public List<Wishlist> trovaWishlistByUtente(Utente user) {
+        PreparedStatement ps = null;
+        List<Wishlist> wishlistTuples = new ArrayList<>();
+        try {
+            Integer userId = user.getId();
+            String sql = "SELECT * FROM wishlist WHERE deleted = 'N' AND userId = ?";
+
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                Wishlist wishlist = read(resultSet);  // Assumendo che read sia un metodo che converte il ResultSet in un oggetto Wishlist
+                wishlistTuples.add(wishlist);
+            }
+
+            resultSet.close();
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante la ricerca della wishlist per l'utente: " + e.getMessage(), e);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException("Errore durante la chiusura del PreparedStatement: " + e.getMessage(), e);
+                }
+            }
+        }
+
+        return wishlistTuples;
+    }
+    Wishlist read(ResultSet rs) {
+        Wishlist wishlist = new Wishlist();
+        Utente user = new Utente();
+        wishlist.setUtente(user);
+        Prodotto prodotto = new Prodotto();
+        wishlist.setProdotto(prodotto);
+
+        try {
+            wishlist.setId(rs.getInt("id"));
+        } catch (SQLException sqle) {
+        }
+        try {
+            wishlist.getUtente().setId(rs.getInt("utenteId"));
+        } catch (SQLException sqle) {
+        }
+        try {
+            wishlist.getProdotto().setId(rs.getInt("prodottoId"));
+        } catch (SQLException sqle) {
+        }
+        try {
+            wishlist.setDeleted(rs.getString("deleted").equals("Y"));
+        } catch (SQLException sqle) {
+        }
+        return wishlist;
+    }
+
+
+
+
 
 
 }

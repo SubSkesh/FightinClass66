@@ -4,6 +4,7 @@ import model.dao.exception.DuplicatedObjectException;
 import model.mo.Prodotto;
 import model.mo.Utente;
 import model.mo.Wishlist;
+import org.apache.catalina.User;
 
 import java.util.List;
 
@@ -15,9 +16,7 @@ public interface WishlistDAO {
     /**
      * Aggiunge un prodotto alla wishlist di un utente.
      *
-     * @param wishlist L'oggetto Wishlist da aggiungere.
      */
-    public void aggiungiAWishlist(Wishlist wishlist);
 
 
     public Wishlist create(Utente utente, Prodotto prodotto) throws  DuplicatedObjectException;
@@ -26,14 +25,13 @@ public interface WishlistDAO {
      *
      *
      */
-    public void rimuoviDaWishlist(int idUtente,int idProdotto);
-
+    public Wishlist remove(Utente utente,Prodotto prodotto);
     /**
      * Trova tutte le wishlist di un utente.
      *
-     * @param utenteId L'ID dell'utente.
+     * @param user l'utente.
      * @return Una lista di oggetti Wishlist.
      */
-    public List<Wishlist> trovaWishlistByUtente(int utenteId);}
+    public List<Wishlist> trovaWishlistByUtente(Utente user);}
 
 
