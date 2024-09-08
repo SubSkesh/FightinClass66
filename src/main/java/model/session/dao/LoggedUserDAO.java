@@ -1,4 +1,4 @@
-package model.session.dao.CookieImpl;
+package model.session.dao;
 import model.session.mo.LoggedUser;
 
 /**

@@ -3,8 +3,9 @@ package model.session.dao.CookieImpl;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.session.dao.LoggedUserDAO;
 import model.session.mo.LoggedUser;
-import model.session.dao.CookieImpl.LoggedUserDAO   ;
 
 /**
  * Implementazione del LoggedUserDAO che utilizza i cookie per memorizzare le informazioni dell'utente loggato.

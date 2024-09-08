@@ -3,11 +3,12 @@ package model.session.dao.CookieImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.session.dao.CookieImpl.CarrelloDAO;
+
+import model.session.dao.CarrelloDAO;
 
 
-import model.session.dao.CookieImpl.SessionDAOFactory;
-import model.session.dao.CookieImpl.LoggedUserDAO;
+import model.session.dao.SessionDAOFactory;
+import model.session.dao.LoggedUserDAO;
 
 public class CookieSessionDAOFactory implements SessionDAOFactory {
 

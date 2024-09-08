@@ -1,5 +1,6 @@
 package model.session.dao.CookieImpl;
 
+import model.session.dao.CarrelloDAO;
 import model.session.mo.Carrello;
 import model.mo.Prodotto;
 

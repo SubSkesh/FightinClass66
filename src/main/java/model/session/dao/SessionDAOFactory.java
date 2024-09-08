@@ -1,4 +1,4 @@
-    package model.session.dao.CookieImpl;
+    package model.session.dao;
     import javax.servlet.http.HttpServletRequest;
     import javax.servlet.http.HttpServletResponse;
 

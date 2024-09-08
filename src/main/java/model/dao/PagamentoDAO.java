@@ -31,17 +31,10 @@ public interface PagamentoDAO {
     /**
      * Recupera l'importo di un pagamento specifico.
      *
-     * @param codicePagamento Identificatore univoco del pagamento.
+     * @param id Identificatore univoco del pagamento.
      * @return                L'importo del pagamento.
      */
     public float getImporto(int id);
-
-    /**
-     * Trova un pagamento per il suo codice.
-     *
-     * @param codicePagamento Codice del pagamento da cercare.
-     * @return Il pagamento trovato o null se non esiste.
-     */
 
 
 }
