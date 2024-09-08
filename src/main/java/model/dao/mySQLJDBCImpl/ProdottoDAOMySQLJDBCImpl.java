@@ -28,7 +28,6 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
      * @param nomeProdotto
      * @param categoria
      * @param descrizione
-     * @param codiceProdotto
      *
        @param immagine
      * @param prezzo
@@ -39,7 +38,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
      * @throws DuplicatedObjectException
      */
     @Override
-    public Prodotto creaProdotto(String nomeProdotto, String categoria, String codiceProdotto,
+    public Prodotto creaProdotto(String nomeProdotto, String categoria,
                                  String descrizione, String immagine,
                                  float prezzo, long quantita,
                                  boolean blocked, boolean push, Contiene[] contiene)
@@ -51,7 +50,6 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
         prodotto.setDescrizione(descrizione);
         prodotto.setImmagine(immagine);
         prodotto.setQuantita(quantita);
-        prodotto.setCodiceProdotto(codiceProdotto);
         prodotto.setPrezzo(prezzo);
         prodotto.setBlocked(blocked);
         prodotto.setPush(push);
@@ -59,9 +57,9 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
 
         try {
             // Verifica se esiste già un prodotto con lo stesso codiceProdotto nel database
-            String sql = "SELECT codiceProdotto FROM prodotto WHERE codiceProdotto = ?";
+            String sql = "SELECT id FROM prodotto WHERE id = ?";
             ps = connection.prepareStatement(sql);
-            ps.setString(1, prodotto.getCodiceProdotto());
+            ps.setInt(1, prodotto.getId());
 
             ResultSet resultSet = ps.executeQuery();
             boolean exist = resultSet.next();
@@ -73,8 +71,8 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             }
 
             // Inserisce il nuovo prodotto nel database
-            sql = "INSERT INTO prodotto (nomeProdotto, categoria, descrizione, immagine, quantita, codiceProdotto, prezzo, blocked, push) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO prodotto (nomeProdotto, categoria, descrizione, immagine, quantita, prezzo, blocked, push) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             int i = 1;
             ps.setString(i++, prodotto.getNomeProdotto());
@@ -82,7 +80,6 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             ps.setString(i++, prodotto.getDescrizione());
             ps.setString(i++, prodotto.getImmagine());
             ps.setLong(i++, prodotto.getQuantita());
-            ps.setString(i++, prodotto.getCodiceProdotto());
             ps.setFloat(i++, prodotto.getPrezzo());
             ps.setString(i++, prodotto.isBlocked() ? "S" : "N");
             ps.setString(i++, prodotto.isPush() ? "S" : "N");
@@ -118,7 +115,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
              * a quello che voglio aggiornare
              */
             String sql
-                    = "SELECT codiceProdotto "
+                    = "SELECT id "
                     + "FROM prodotto "
                     + "WHERE nomeProdotto = ? AND "
                     + "categoria = ? AND "
@@ -163,7 +160,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
                     + "quantita = ?, "
                     + "blocked = ?, "
                     + "push = ? "
-                    + "WHERE codiceProdotto = ?";
+                    + "WHERE id = ?";
 
             ps = connection.prepareStatement(sql);
             i = 1;
@@ -174,7 +171,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             ps.setLong(i++, prodotto.getQuantita());
             ps.setString(i++, prodotto.isBlocked() ? "S" : "N");
             ps.setString(i++, prodotto.isPush() ? "S" : "N");
-            ps.setString(i++, prodotto.getCodiceProdotto());
+            ps.setInt(i++, prodotto.getId());
 
             ps.executeUpdate();
 
@@ -187,20 +184,20 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
     /**
      *
      * Setta come bloccato un prodotto nel DB
-     * @param codiceProdotto
+     * @param id
      */
     @Override
-    public void blocca(String codiceProdotto) {
+    public void blocca(int id) {
         PreparedStatement ps;
         try{
             String sql
                     = " UPDATE prodotto "
                     + " SET blocked = 'S' "
                     + " WHERE "
-                    + " codiceProdotto = ?";
+                    + " id = ?";
 
             ps = connection.prepareStatement(sql);
-            ps.setString(1, codiceProdotto);
+            ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
 
@@ -212,20 +209,20 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
     /**
      *
      * Setta come sbloccato un prodotto nel DB
-     * @param codiceProdotto
+     * @param id
      */
     @Override
-    public void sblocca(String codiceProdotto) {
+    public void sblocca(int id) {
         PreparedStatement ps;
         try{
             String sql
                     = " UPDATE prodotto "
                     + " SET blocked = 'N' "
                     + " WHERE "
-                    + " codiceProdotto = ?";
+                    + " id = ?";
 
             ps = connection.prepareStatement(sql);
-            ps.setString(1, codiceProdotto);
+            ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
 
@@ -555,7 +552,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
 //     * @return Prodotto
 
     @Override
-    public Prodotto findByKey(String codiceProdotto){
+    public Prodotto findByKey(int id){
         PreparedStatement ps;
         Prodotto prodotto = null;
 
@@ -566,10 +563,10 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             String sql
                     = " SELECT * "
                     + " FROM prodotto "
-                    + " WHERE codiceProdotto = ?";
+                    + " WHERE id = ?";
 
             ps = connection.prepareStatement(sql);
-            ps.setString(1, codiceProdotto);
+            ps.setInt(1, id);
 
             ResultSet resultSet = ps.executeQuery();
 
@@ -682,12 +679,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             System.out.println(sqle.getMessage());
         }
 
-        /*Leggo il codice*/
-        try {
-            prodotto.setCodiceProdotto(resultSet.getString("codiceProdotto"));
-        }catch(SQLException sqle){
-            System.out.println(sqle.getMessage());
-        }
+
 
         /*Leggo il nome*/
         try {
@@ -753,7 +745,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
         return prodotto;
     }
 
-    public long getQuantitaByKey(String codiceProdotto){
+    public long getQuantitaByKey(int id){
         PreparedStatement ps;
         long quantita = 0;
 
@@ -764,10 +756,10 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             String sql
                     = " SELECT quantita "
                     + " FROM prodotto "
-                    + " WHERE codiceProdotto = ? ";
+                    + " WHERE id = ? ";
 
             ps = connection.prepareStatement(sql);
-            ps.setString(1, codiceProdotto);
+            ps.setInt(1, id);
 
 
             ResultSet resultSet = ps.executeQuery();

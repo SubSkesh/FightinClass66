@@ -49,7 +49,7 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
                              String statoOrdine,
                              Date dataConsegna,
                              String nazione,
-                             String codiceOrdine,
+
                              String citta,
                              String via,
                              long numeroCivico,
@@ -65,7 +65,6 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
         ordine.setStatoOrdine(statoOrdine);
         ordine.setDataConsegna(dataConsegna);
         ordine.setNazione(nazione);
-        ordine.setCodiceOrdine(codiceOrdine);
         ordine.setCittà(citta);
         ordine.setVia(via);
         ordine.setNumeroCivico(numeroCivico);
@@ -77,10 +76,10 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
 
         try {
             /* Preparo la query per vedere se esiste già un ordine uguale */
-            String sql = "SELECT codiceOrdine FROM ordine WHERE "
+            String sql = "SELECT id FROM ordine WHERE "
                     + "dataOrdine = ? AND statoOrdine = ? AND dataConsegna = ? AND "
                     + "nazione = ? AND citta = ? AND via = ? AND numeroCivico = ? AND "
-                    + "CAP = ? AND utenteId = ? AND pagamentoId = ? AND buonoId = ? and codiceOrdine=?";
+                    + "CAP = ? AND utenteId = ? AND pagamentoId = ? AND buonoId = ?";
 
             ps = connection.prepareStatement(sql);
             int i = 1;
@@ -99,7 +98,6 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
             } else {
                 ps.setNull(i++, Types.INTEGER);
             }
-            ps.setString(i++, ordine.getCodiceOrdine());
 
             ResultSet resultSet = ps.executeQuery();
             boolean exist = resultSet.next();
@@ -112,7 +110,7 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
 
             /* Se l'ordine non esiste, lo inserisco nel database */
             sql = "INSERT INTO ordine (statoOrdine, dataOrdine, dataConsegna, nazione, citta, via, "
-                    + "numeroCivico, CAP, utenteId, pagamentoId, buonoId,codiceOrdine) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "numeroCivico, CAP, utenteId, pagamentoId, buonoId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             i = 1;
@@ -131,7 +129,6 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
             } else {
                 ps.setNull(i++, Types.INTEGER);
             }
-            ps.setString(i++, ordine.getCodiceOrdine());
 
             ps.executeUpdate();
 
@@ -167,12 +164,12 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
     /**
      *
      * Modifica lo stato dell'ordine nel DB
-     * @param codiceOrdine
+     * @param id
      * @param statoOrdine
      * @param dataOdierna
      */
 
-    public void aggiornaStatoConData(String codiceOrdine,
+    public void aggiornaStatoConData(int id,
                                      String statoOrdine,
                                      Date dataOdierna){
         PreparedStatement ps;
@@ -183,13 +180,13 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
                     + " statoOrdine = ?, "
                     + " dataConsegna = ? "
                     + " WHERE "
-                    + " codiceOrdine = ? ";
+                    + " id = ? ";
 
             ps = connection.prepareStatement(sql);
             int i = 1;
             ps.setString(i++, statoOrdine);
             ps.setDate(i++, convertJavaDateToSqlDate(dataOdierna));
-            ps.setString(i++, codiceOrdine);
+            ps.setInt(i++, id);
 
             ps.executeUpdate();
 
@@ -197,7 +194,7 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
             throw new RuntimeException(e);
         }
     }
-    public void aggiornaStato(String codiceOrdine,
+    public void aggiornaStato(int id   ,
                               String statoOrdine){
         PreparedStatement ps;
         try{
@@ -206,12 +203,12 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
                     + " SET "
                     + "   statoOrdine = ? "
                     + " WHERE "
-                    + "   codiceOrdine = ? ";
+                    + "   id = ? ";
 
             ps = connection.prepareStatement(sql);
             int i = 1;
             ps.setString(i++, statoOrdine);
-            ps.setString(i++, codiceOrdine);
+            ps.setInt(i++, id);
 
             ps.executeUpdate();
 
@@ -320,7 +317,7 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
 
     /**
      *
-     * Recupera dal DB il codice dell'ultimo ordine inserito
+     * Recupera dal DB il  dell'ultimo ordine inserito
      * @return long
      */
 
@@ -396,12 +393,6 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
             System.out.println(sqle.getMessage());
         }
 
-        // Leggo il codice dell'ordine
-        try {
-            ordine.setCodiceOrdine(resultSet.getString("codiceOrdine"));
-        } catch (SQLException sqle) {
-            System.out.println(sqle.getMessage());
-        }
 
         // Leggo la data dell'ordine
         try {

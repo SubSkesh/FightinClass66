@@ -45,7 +45,7 @@ public class PagamentoDAOMySQLJDBCImpl implements PagamentoDAO{
                                        java.util.Date dataPagamento,
                                        float importo,
                                        Utente utente,
-                                       Ordine ordine,String codicePagamento) throws DuplicatedObjectException {
+                                       Ordine ordine) throws DuplicatedObjectException {
             PreparedStatement ps;
             Pagamento pagamento = new Pagamento();
             pagamento.setStatoPagamento(statoPagamento);
@@ -55,16 +55,15 @@ public class PagamentoDAOMySQLJDBCImpl implements PagamentoDAO{
             pagamento.setImporto(importo);
             pagamento.setUtente(utente);
             pagamento.setOrdine(ordine);
-            pagamento.setCodicePagamento(codicePagamento);
 
 
 
             try {
                 // Verifica se esiste già un pagamento uguale nel database
-                String sql = "SELECT codicePagamento FROM pagamento WHERE "
+                String sql = "SELECT id FROM pagamento WHERE "
                         + "statoPagamento = ? AND cartaPagamento = ? AND "
                         + "dataRichiestaPagamento = ? AND dataPagamento = ? AND "
-                        + "importo = ? AND utenteId = ? AND ordineId = ? AND codicePagamento = ?";
+                        + "importo = ? AND utenteId = ? AND ordineId = ? ";
 
                 ps = connection.prepareStatement(sql);
                 int i = 1;
@@ -75,7 +74,6 @@ public class PagamentoDAOMySQLJDBCImpl implements PagamentoDAO{
                 ps.setFloat(i++, pagamento.getImporto());
                 ps.setInt(i++, utente.getId());
                 ps.setInt(i++, ordine.getId());
-                ps.setString(i++, codicePagamento);
 
                 ResultSet resultSet = ps.executeQuery();
                 boolean exist = resultSet.next();
@@ -87,7 +85,7 @@ public class PagamentoDAOMySQLJDBCImpl implements PagamentoDAO{
 
                 // Se il pagamento non esiste, lo inserisco nel database
                 sql = "INSERT INTO pagamento (statoPagamento, cartaPagamento, dataRichiestaPagamento, "
-                        + "dataPagamento, importo, utenteId, ordineId, codicePagamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                        + "dataPagamento, importo, utenteId, ordineId) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
                 ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 i = 1;
@@ -98,7 +96,6 @@ public class PagamentoDAOMySQLJDBCImpl implements PagamentoDAO{
                 ps.setFloat(i++, pagamento.getImporto());
                 ps.setInt(i++, utente.getId());
                 ps.setInt(i++, ordine.getId());
-                ps.setString(i++, pagamento.getCodicePagamento());
 
                 ps.executeUpdate();
 
@@ -129,20 +126,20 @@ public class PagamentoDAOMySQLJDBCImpl implements PagamentoDAO{
 
     /**
      *
-     * @param codicePagamento
+     * @param id
      * @return float
      */
     @Override
-    public float getImporto(String codicePagamento){
+    public float getImporto(int id){
         PreparedStatement ps;
         float importo = 0;
         try{
             String sql = " SELECT importo "
                     + " FROM pagamento "
-                    + " WHERE codicePagamento = ? ";
+                    + " WHERE id = ? ";
 
             ps = connection.prepareStatement(sql);
-            ps.setString(1, codicePagamento);
+            ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
             if(rs.next()){

@@ -13,13 +13,13 @@ public class Carrello {
 
     @Override
     public String toString() {
-        return prodotto.getCodiceProdotto() + " " + getQuantità();
+        return prodotto.getId() + " " + getQuantità();
     }
 
     // Getter e Setter
-    public String getCodiceProdotto() {
-        return prodotto.getCodiceProdotto();
-    }
+    public int getidProdotto() {
+
+        return prodotto.getId();}
 
     public void setProdotto(Prodotto prodotto) {
         this.prodotto = prodotto;    }

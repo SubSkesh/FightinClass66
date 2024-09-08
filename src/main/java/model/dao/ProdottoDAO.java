@@ -24,7 +24,7 @@ public interface ProdottoDAO {
      * @return l'oggetto Prodotto creato
      * @throws DuplicatedObjectException se un prodotto con lo stesso codice esiste già
      */
-    public Prodotto creaProdotto(String nomeProdotto, String categoria, String codiceProdotto,
+    public Prodotto creaProdotto(String nomeProdotto, String categoria,
                                  String descrizione, String immagine,
                                  float prezzo, long quantita,
                                  boolean blocked, boolean push, Contiene[] contiene)
@@ -39,15 +39,15 @@ public interface ProdottoDAO {
 
     /**
      * Blocca un prodotto, rendendolo non disponibile per l'acquisto.
-     * @param codiceProdotto il codice del prodotto da bloccare
+     * @param id il codice del prodotto da bloccare
      */
-    public void blocca(String codiceProdotto);
+    public void blocca(int id);
 
     /**
      * Sblocca un prodotto, rendendolo disponibile per l'acquisto.
-     * @param codiceProdotto il codice del prodotto da sbloccare
+     * @param id il codice del prodotto da sbloccare
      */
-    public void sblocca(String codiceProdotto);
+    public void sblocca( int id);
 
     /**
      * Trova tutti i nomi dei prodotti presenti nel database.
@@ -72,10 +72,10 @@ public interface ProdottoDAO {
 
     /**
      * Trova un prodotto in base alla sua chiave primaria.
-     * @param codiceProdotto il codice del prodotto da trovare
+     * @param id il codice del prodotto da trovare
      * @return l'oggetto Prodotto corrispondente, o null se non esiste
      */
-    public Prodotto findByKey(String codiceProdotto);
+    public Prodotto findByKey(int id);
 
     /**
      * Trova tutti i prodotti che sono in promozione (push).
@@ -91,8 +91,8 @@ public interface ProdottoDAO {
 
     /**
      * Trova la quantità disponibile di un prodotto in base alla sua chiave.
-     * @param codiceProdotto il codice del prodotto da trovare
+     * @param id il codice del prodotto da trovare
      * @return la quantità disponibile del prodotto
      */
-    public long getQuantitaByKey(String codiceProdotto);
+    public long getQuantitaByKey(int id);
 }

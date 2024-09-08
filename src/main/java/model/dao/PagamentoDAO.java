@@ -25,7 +25,7 @@ public interface PagamentoDAO {
      */
     public Pagamento creaPagamento(String statoPagamento, String cartaPagamento,
                                    java.util.Date dataRichiestaPagamento, java.util.Date
-                                           dataPagamento, float importo, Utente utente, Ordine ordine,String codicePagamento)
+                                           dataPagamento, float importo, Utente utente, Ordine ordine)
             throws DuplicatedObjectException;
 
     /**
@@ -34,7 +34,7 @@ public interface PagamentoDAO {
      * @param codicePagamento Identificatore univoco del pagamento.
      * @return                L'importo del pagamento.
      */
-    public float getImporto(String codicePagamento);
+    public float getImporto(int id);
 
     /**
      * Trova un pagamento per il suo codice.

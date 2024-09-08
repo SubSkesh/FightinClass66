@@ -11,7 +11,7 @@ public class Pagamento {
 
     private String statoPagamento, cartaPagamento;
     private java.util.Date dataRichiestaPagamento, dataPagamento;
-    private String codicePagamento;
+
     private float importo;
 
     /*Mappo le relazioni con Utente e Ordine*/
@@ -24,13 +24,7 @@ public class Pagamento {
     }
     public void setId(int id) { this.id = id; }
 
-    public String getCodicePagamento(){
-        return codicePagamento;
-    }
 
-    public void setCodicePagamento(String c){
-        codicePagamento=c;
-    }
 
     public java.util.Date getDataRichiestaPagamento(){
         return dataRichiestaPagamento;

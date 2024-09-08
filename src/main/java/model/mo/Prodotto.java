@@ -6,24 +6,18 @@ package model.mo;
 public class Prodotto {
 
     private String nomeProdotto, categoria, descrizione, immagine;
-    private long quantita,Id;
-    private String codiceProdotto;
+    private long quantita;
+    int id;
     private float prezzo;
     private boolean blocked, push;
 
     private Contiene[] contiene; // Relazione con Contiene
 
-    public void setId(int Id) {this.Id = Id;}
+    public void setId(int Id) {this.id = Id;}
 
-    public long getId() {return Id;}
+    public int getId() {return id;}
 
-    public String getCodiceProdotto(){
-        return codiceProdotto;
-    }
 
-    public void setCodiceProdotto(String c){
-        codiceProdotto = c;
-    }
 
     public String getNomeProdotto(){
         return nomeProdotto;

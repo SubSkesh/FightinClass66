@@ -3,6 +3,7 @@ package controller;
 import services.config.Configuration;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,7 +54,7 @@ public class Acquisto {
             ArrayList<Prodotto> prodotti = new ArrayList<>();
 
             for (Carrello carrello : carrelli) {
-                Prodotto prodotto = prodottoDAO.findByKey(carrello.getProdotto().getCodiceProdotto());
+                Prodotto prodotto = prodottoDAO.findByKey(carrello.getProdotto().getId());
                 prodotti.add(prodotto);
             }
 
@@ -63,7 +64,7 @@ public class Acquisto {
 
             for (int i = 0; i < prodotti.size(); i++) {
                 Prodotto prodotto = prodotti.get(i);
-                int quantitaDisponibile = (int)prodottoDAO.getQuantitaByKey(prodotto.getCodiceProdotto());
+                int quantitaDisponibile = (int)prodottoDAO.getQuantitaByKey(prodotto.getId());
 
                 if (carrelli.get(i).getQuantità() <= quantitaDisponibile && !prodotto.isBlocked()) {
                     disponibilita.add(Boolean.TRUE);
@@ -132,7 +133,7 @@ public class Acquisto {
 
             // Recupera il prodotto dal database
             ProdottoDAO prodottoDAO = jdbc.getProdottoDAO();
-            Prodotto prodotto = prodottoDAO.findByKey(request.getParameter("codiceProdotto"));
+            Prodotto prodotto = prodottoDAO.findByKey(Integer.parseInt(request.getParameter("idProdotto")));
 
             // Recupera il carrello dell'utente dalla sessione (cookie)
             CarrelloDAO carrelloDAO = sessionDAO.getCarrelloDAO();
@@ -143,7 +144,7 @@ public class Acquisto {
 
             for (Carrello carrello : carrelli) {
                 Prodotto prodottoCarrello = carrello.getProdotto();
-                int quantitaDisponibile =(int) prodottoDAO.getQuantitaByKey(prodottoCarrello.getCodiceProdotto());
+                int quantitaDisponibile =(int) prodottoDAO.getQuantitaByKey(prodottoCarrello.getId());
 
                 if (carrello.getQuantità() <= quantitaDisponibile && !prodottoCarrello.isBlocked()) {
                     disponibilita.add(Boolean.TRUE);
@@ -213,7 +214,7 @@ public class Acquisto {
 
             // Recupero del Prodotto dal database tramite il suo codice prodotto
             ProdottoDAO prodottoDAO = jdbc.getProdottoDAO();
-            Prodotto prodottoDaRimuovere = prodottoDAO.findByKey(request.getParameter("codiceProdotto"));
+            Prodotto prodottoDaRimuovere = prodottoDAO.findByKey(Integer.parseInt(request.getParameter("idProdotto")));
 
             // Rimozione del prodotto dal carrello
             CarrelloDAO carrelloDAO = sessionDAO.getCarrelloDAO();
@@ -221,14 +222,14 @@ public class Acquisto {
 
             // Recupero di tutti i prodotti nel carrello aggiornato
             for (Carrello carrello : carrelli) {
-                prodotti.add(prodottoDAO.findByKey(carrello.getProdotto().getCodiceProdotto()));
+                prodotti.add(prodottoDAO.findByKey(carrello.getProdotto().getId()));
             }
 
             ArrayList<Boolean> disponibilitaProdotti = new ArrayList<>();
 
             // Controllo della disponibilità dei prodotti
             for (int i = 0; i < prodotti.size(); i++) {
-                if (carrelli.get(i).getQuantità() <= prodottoDAO.getQuantitaByKey(prodotti.get(i).getCodiceProdotto())) {
+                if (carrelli.get(i).getQuantità() <= prodottoDAO.getQuantitaByKey(prodotti.get(i).getId())) {
                     disponibilitaProdotti.add(Boolean.TRUE);
                 } else {
                     disponibilitaProdotti.add(Boolean.FALSE);
@@ -336,7 +337,7 @@ public class Acquisto {
 
             // Estrai ogni prodotto dal DB e verifica la disponibilità
             for (Carrello carrello : carrelli) {
-                Prodotto prodotto = prodottoDAO.findByKey(carrello.getProdotto().getCodiceProdotto());
+                Prodotto prodotto = prodottoDAO.findByKey(carrello.getProdotto().getId());
                 prodotti.add(prodotto);
             }
 
@@ -344,7 +345,7 @@ public class Acquisto {
 
             // Verifica se la quantità richiesta eccede la disponibilità o se il prodotto è bloccato
             for (int i = 0; i < carrelli.size(); i++) {
-                if (carrelli.get(i).getQuantità() > prodottoDAO.getQuantitaByKey(carrelli.get(i).getProdotto().getCodiceProdotto())
+                if (carrelli.get(i).getQuantità() > prodottoDAO.getQuantitaByKey(carrelli.get(i).getProdotto().getId())
                         || prodotti.get(i).isBlocked()) {
                     disponibilità = false;
                     break;  // Se un prodotto non è disponibile, non ha senso continuare
@@ -437,7 +438,7 @@ public class Acquisto {
                 ProdottoDAO prodottoDAO = jdbc.getProdottoDAO();
                 ArrayList<Prodotto> prodotti = new ArrayList<>();
                 for (Carrello carrello : carrelli) {
-                    prodotti.add(prodottoDAO.findByKey(carrello.getProdotto().getCodiceProdotto())); // Trova ogni prodotto nel DB
+                    prodotti.add(prodottoDAO.findByKey(carrello.getProdotto().getId())); // Trova ogni prodotto nel DB
                 }
 
                 // Calcola il prezzo totale del carrello
@@ -536,12 +537,12 @@ public class Acquisto {
 
             // Estraggo i prodotti dal carrello
             for (Carrello carrello : carrelli) {
-                prodotti.add(prodottoDAO.findByKey(carrello.getProdotto().getCodiceProdotto()));
+                prodotti.add(prodottoDAO.findByKey(carrello.getProdotto().getId()));
             }
 
             // Controllo disponibilità
             for (int i = 0; i < carrelli.size(); i++) {
-                if (carrelli.get(i).getQuantità() > prodottoDAO.getQuantitaByKey(carrelli.get(i).getProdotto().getCodiceProdotto())
+                if (carrelli.get(i).getQuantità() > prodottoDAO.getQuantitaByKey(carrelli.get(i).getProdotto().getId())
                         || prodotti.get(i).isBlocked()) {
                     disponibilità = false;
                 }
@@ -565,7 +566,7 @@ public class Acquisto {
                 // Creo il pagamento
                 Pagamento pagamento = null;
                 PagamentoDAO pagamentoDAO = jdbc.getPagamentoDAO();
-                Date dataOdierna = new Date();
+                java.util.Date dataOdierna = new Date();
 
                 try {
                     pagamento = pagamentoDAO.creaPagamento("confermato", request.getParameter("cartaPagamento"), dataOdierna,
@@ -593,13 +594,13 @@ public class Acquisto {
                 // Aggiungo i prodotti all'ordine
                 ContieneDAO contieneDAO = jdbc.getContieneDAO();
                 for (Carrello carrello : carrelli) {
-                    contieneDAO.creaContiene(ordine.getCodiceOrdine(), carrello.getProdotto().getCodiceProdotto(), carrello.getQuantità());
+                    contieneDAO.creaContiene(ordine.getId(), carrello.getProdotto().getId(), carrello.getQuantità());
                 }
 
                 // Aggiorno la giacenza dei prodotti
                 for (Carrello carrello : carrelli) {
-                    Prodotto prodotto = prodottoDAO.findByKey(carrello.getProdotto().getCodiceProdotto());
-                    prodotto.setQuantità(prodottoDAO.getQuantitàByKey(carrello.getProdotto().getCodiceProdotto()) - carrello.getQuantità());
+                    Prodotto prodotto = prodottoDAO.findByKey(carrello.getProdotto().getId());
+                    prodotto.setQuantita( prodottoDAO.getQuantitaByKey(carrello.getProdotto().getId()) - carrello.getQuantità());
                     prodottoDAO.aggiorna(prodotto);
                 }
 

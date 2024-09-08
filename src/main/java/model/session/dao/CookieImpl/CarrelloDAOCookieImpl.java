@@ -43,9 +43,9 @@ public class CarrelloDAOCookieImpl implements CarrelloDAO {
         boolean trovato = false;
 
         for (Carrello carrello : listaCarrello) {
-            if (carrello.getProdotto().getCodiceProdotto().equals(prodotto.getCodiceProdotto())) {
+            if (carrello.getProdotto().getId()==(prodotto.getId())) {
                 carrello.setQuantità(carrello.getQuantità() + quantita);
-                trovato = true;    //se trova un prodotto con lo stesso codice aggiunge la quantità
+                trovato = true;    //se trova un prodotto con lo stesso id aggiunge la quantità
                 break;
             }
         }
@@ -66,7 +66,7 @@ public class CarrelloDAOCookieImpl implements CarrelloDAO {
     public ArrayList<Carrello> rimuovi(Prodotto prodotto) {
         ArrayList<Carrello> listaCarrello = trova();
 
-        listaCarrello.removeIf(carrello -> carrello.getProdotto().getCodiceProdotto().equals(prodotto.getCodiceProdotto()));
+        listaCarrello.removeIf(carrello -> carrello.getProdotto().getId()==(prodotto.getId()));
         elimina(); //rimuove se ogni oggetto carrelo ha il codiceprodotto ufuale al prodotto passato
 
         if (!listaCarrello.isEmpty()) {
@@ -107,7 +107,7 @@ public class CarrelloDAOCookieImpl implements CarrelloDAO {
         ArrayList<Carrello> listaCarrello = trova();
 
         for (Carrello carrello : listaCarrello) {
-            if (carrello.getProdotto().getCodiceProdotto().equals(prodotto.getCodiceProdotto())) {
+            if (carrello.getProdotto().getId()==(prodotto.getId())) {
                 carrello.setQuantità(quantita);
             }
         }
@@ -127,7 +127,7 @@ public class CarrelloDAOCookieImpl implements CarrelloDAO {
     private String encode(ArrayList<Carrello> carrello) {
         StringBuilder encodedTemp = new StringBuilder();//classe che consente di costruire stringhe in modo efficiente
         for (Carrello item : carrello) {
-            encodedTemp.append(item.getProdotto().getCodiceProdotto())
+            encodedTemp.append(item.getProdotto().getId())
                     .append("#")
                     .append(item.getQuantità())
                     .append("%");
@@ -153,7 +153,7 @@ public class CarrelloDAOCookieImpl implements CarrelloDAO {
 
         // Crea un oggetto Prodotto e impostane il codice
         Prodotto prodotto = new Prodotto();
-        prodotto.setCodiceProdotto(values[0]);
+        prodotto.setId(Integer.parseInt(values[0]));
 
         carrello.setProdotto(prodotto);
         carrello.setQuantità(Integer.parseInt(values[1]));

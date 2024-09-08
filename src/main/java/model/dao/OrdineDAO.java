@@ -36,7 +36,6 @@ public interface OrdineDAO {
                              String statoOrdine,
                              Date dataConsegna,
                              String nazione,
-                             String codiceOrdine,
                              String citta,
                              String via,
                              long numeroCivico,
@@ -49,19 +48,19 @@ public interface OrdineDAO {
     /**
      * Aggiorna lo stato di un ordine specificato.
      *
-     * @param codiceOrdine Codice univoco dell'ordine.
+     * @param id Codice univoco dell'ordine.
      * @param stato        Nuovo stato dell'ordine (es. "in viaggio").
      */
-    public void aggiornaStato(String codiceOrdine, String stato);
+    public void aggiornaStato(int id, String stato);
 
     /**
      * Aggiorna lo stato e la data di consegna di un ordine specificato.
      *
-     * @param codiceOrdine Codice univoco dell'ordine.
+     * @param id Codice univoco dell'ordine.
      * @param statoOrdine  Nuovo stato dell'ordine (es. "consegnato").
      * @param dataOdierna  Data in cui l'ordine è stato consegnato.
      */
-    public void aggiornaStatoConData(String codiceOrdine, String statoOrdine, Date dataOdierna);
+    public void aggiornaStatoConData(int id, String statoOrdine, Date dataOdierna);
 
     /**
      * Recupera tutti gli ordini effettuati nel sistema.
