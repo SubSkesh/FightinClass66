@@ -649,10 +649,48 @@ public class Acquisto {
         }
     }
 
+    public static void commonView(JDBC jdbc, SessionDAOFactory sessionDAO, HttpServletRequest request) {
+        /*Recupero il cookie carrello*/
+        ArrayList<Carrello> carrelli = new ArrayList<Carrello>();
+        CarrelloDAO carrelloDAO = sessionDAO.getCarrelloDAO();
+        carrelli = carrelloDAO.trova();
+        double prezzo = 0;
 
+        ArrayList<Prodotto> prodotti = new ArrayList<Prodotto>();
 
+        ProdottoDAO prodottoDAO = jdbc.getProdottoDAO();
 
+        /*Estraggo i prodotti dal DB*/
+        for (Carrello carrello : carrelli) {
+            prodotti.add(prodottoDAO.findByKey(carrello.getProdotto().getId()));
+        }
 
+        ArrayList<Boolean> disponibilità = new ArrayList<Boolean>();
+
+        /*Mappo le disponibilità dei prodotti*/
+        for (int j = 0; j < prodotti.size(); j++) {
+            if (carrelli.get(j).getQuantità() < prodottoDAO.getQuantitaByKey(carrelli.get(j).getidProdotto()) && !prodotti.get(j).isBlocked()) {
+                disponibilità.add(Boolean.TRUE);
+            } else {
+                disponibilità.add(Boolean.FALSE);
+            }
+        }
+
+        /*Calcolo il prezzo totale del carrello*/
+        for (int i = 0; i < prodotti.size(); i++) {
+            prezzo += prodotti.get(i).getPrezzo() * carrelli.get(i).getQuantità();
+        }
+
+        /*Arrotondo il prezzo alla seconda cifra decimale*/
+        prezzo = Math.round(prezzo * 100.0) / 100.0;
+
+        /*Setto gli attributi del viewModel*/
+        request.setAttribute("prezzo", prezzo);
+        request.setAttribute("disponibilita", disponibilità);
+        request.setAttribute("prodotti", prodotti);
+        request.setAttribute("carrello", carrelli);
+
+    }
 
     //add here
 }
