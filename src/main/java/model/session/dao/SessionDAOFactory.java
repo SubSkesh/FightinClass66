@@ -1,6 +1,6 @@
     package model.session.dao;
-    import javax.servlet.http.HttpServletRequest;
-    import javax.servlet.http.HttpServletResponse;
+    import jakarta.servlet.http.HttpServletRequest;
+    import jakarta.servlet.http.HttpServletResponse;
 
     /**
      * Interfaccia per la creazione di DAO specifici per la sessione utente.

@@ -11,44 +11,56 @@
   <url>http://maven.apache.org</url>
 
   <dependencies>
-    <!-- Servlet API -->
+    <!-- Servlet API, updated for Tomcat 10 -->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.1</version>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>5.0.0</version>
       <scope>provided</scope>
     </dependency>
-    <!-- JSP API -->
+
+    <!-- JSP API, updated for Jakarta EE -->
     <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>javax.servlet.jsp-api</artifactId>
-      <version>2.3.3</version>
+      <groupId>jakarta.servlet.jsp</groupId>
+      <artifactId>jakarta.servlet.jsp-api</artifactId>
+      <version>3.0.0</version>
       <scope>provided</scope>
     </dependency>
+
     <!-- JSTL -->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.2</version>
+      <groupId>jakarta.servlet.jsp.jstl</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+      <version>2.0.0</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+
     <!-- Tomcat Embed -->
     <dependency>
       <groupId>org.apache.tomcat.embed</groupId>
       <artifactId>tomcat-embed-core</artifactId>
       <version>10.1.8</version>
     </dependency>
+
     <dependency>
       <groupId>org.apache.tomcat.embed</groupId>
       <artifactId>tomcat-embed-jasper</artifactId>
       <version>10.1.8</version>
     </dependency>
-    <!-- JUnit per i test -->
+
+    <!-- JUnit for testing -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
+
     <!-- MySQL Connector -->
     <dependency>
       <groupId>mysql</groupId>
@@ -60,6 +72,7 @@
   <build>
     <finalName>Ecommerce</finalName>
     <plugins>
+      <!-- Maven Compiler Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -69,9 +82,11 @@
           <target>18</target>
         </configuration>
       </plugin>
+
+      <!-- Tomcat 10 Maven Plugin -->
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
-        <artifactId>tomcat7-maven-plugin</artifactId>
+        <artifactId>tomcat7-maven-plugin</artifactId> <!-- Puoi usare anche tomcat9-maven-plugin -->
         <version>2.2</version>
         <configuration>
           <url>http://localhost:8080/manager/text</url>
@@ -81,6 +96,7 @@
           <path>/Ecommerce</path>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
 </project>

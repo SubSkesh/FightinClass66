@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import model.dao.ContieneDAO;
 
 import model.dao.JDBC;
@@ -27,7 +27,7 @@ import services.logservice.LogService;
 
 /**
  *
- * @author Giacomo Polastri
+ * @author Oscar Costanzelli
  */
 public class Ordini {
 

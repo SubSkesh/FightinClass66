@@ -3,8 +3,8 @@ package controller;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import model.session.dao.SessionDAOFactory;
 import model.session.dao.LoggedUserDAO;
