@@ -5,7 +5,7 @@ package model.mo;
  */
 public class Prodotto {
 
-    private String nomeProdotto, categoria, descrizione, immagine;
+    private String nomeProdotto, categoria, descrizione, immagine,taglia,materiale;
     private long quantita;
     int id;
     private float prezzo;
@@ -82,6 +82,14 @@ public class Prodotto {
     public void setPush(boolean p){
         push = p;
     }
+
+    public String getMateriale(){return materiale;}
+
+    public void setMateriale(String m){materiale = m;}
+
+    public String getTaglia(){return taglia;}
+
+    public void setTaglia(String t){taglia = t;}
 
     /*Ritorna l'intero array*/
     public Contiene[] getContiene() {

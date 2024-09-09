@@ -27,7 +27,7 @@ public interface ProdottoDAO {
     public Prodotto creaProdotto(String nomeProdotto, String categoria,
                                  String descrizione, String immagine,
                                  float prezzo, long quantita,
-                                 boolean blocked, boolean push, Contiene[] contiene)
+                                 boolean blocked, boolean push, Contiene[] contiene,String materiale,String taglia)
             throws DuplicatedObjectException, DuplicatedObjectException;
 
     /**
@@ -77,11 +77,16 @@ public interface ProdottoDAO {
      */
     public Prodotto findByKey(int id);
 
+
+    public ArrayList<Prodotto> findByTaglia(String taglia);
+    public ArrayList<Prodotto> findByMateriale(String materiale);
+
     /**
      * Trova tutti i prodotti che sono in promozione (push).
      * @return una lista di prodotti in promozione
      */
     public ArrayList<Prodotto> findForPush();
+
 
     /**
      * Recupera tutti i prodotti presenti nel database.
@@ -89,10 +94,15 @@ public interface ProdottoDAO {
      */
     public ArrayList<Prodotto> trovaProdotti();
 
-    /**
-     * Trova la quantità disponibile di un prodotto in base alla sua chiave.
-     * @param id il codice del prodotto da trovare
-     * @return la quantità disponibile del prodotto
-     */
+    public ArrayList<Prodotto> findByString(String search);
+
+        /**
+         * Trova la quantità disponibile di un prodotto in base alla sua chiave.
+         * @param id il codice del prodotto da trovare
+         * @return la quantità disponibile del prodotto
+         */
     public long getQuantitaByKey(int id);
+
+    public ArrayList<String> trovaTaglie();
+    public ArrayList<String> trovaMateriali();
 }
