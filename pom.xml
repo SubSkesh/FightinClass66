@@ -70,7 +70,7 @@
   </dependencies>
 
   <build>
-    <finalName>Ecommerce</finalName>
+    <finalName>FightinClass66</finalName>
     <plugins>
       <!-- Maven Compiler Plugin -->
       <plugin>
@@ -93,7 +93,7 @@
           <server>TomcatServer</server>
           <username>admin</username>
           <password>admin</password>
-          <path>/Ecommerce</path>
+          <path>/FightinClass66</path>
         </configuration>
       </plugin>
 
