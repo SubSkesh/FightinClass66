@@ -1,0 +1,37 @@
+. Accesso iniziale:
+index.jsp:   OOK
+Punto di partenza dell'applicazione. Verifica se viene reindirizzato correttamente alla pagina di login o a una pagina iniziale (es. homepage o catalogo).
+2. Autenticazione (Login):
+logging.jsp (per utenti):OK
+Verifica il login come utente. Se l'autenticazione va a buon fine, l'utente dovrebbe essere reindirizzato a una pagina come il catalogo.
+loggingAdmin.jsp (per amministratori):
+Verifica il login come amministratore. Dovresti essere reindirizzato alla dashboard amministrativa.
+3. Gestione utenti post-login:
+Per utenti normali:
+
+catalogo.jsp:
+Mostra i prodotti disponibili. Assicurati che le informazioni siano corrette e che sia possibile aggiungere prodotti al carrello.
+carrello.jsp:
+Verifica che i prodotti aggiunti siano visualizzati correttamente e che sia possibile aggiornare quantità o rimuovere articoli.
+pagamento.jsp:
+Simula il pagamento per finalizzare l'ordine.
+riepilogo.jsp:
+Mostra un riepilogo finale dell'ordine effettuato.
+Per amministratori:
+
+homeAdmin.jsp:
+Verifica che la dashboard amministrativa sia accessibile e che fornisca le giuste opzioni per la gestione dell'applicazione.
+Gestione dei prodotti:
+gestisciProdotto.jsp: Permette di aggiungere o modificare prodotti nel catalogo.
+Gestione degli ordini:
+ordiniManagement.jsp: Mostra gli ordini effettuati dai clienti, con la possibilità di gestirli.
+Gestione degli utenti:
+utenti.jsp: Gestisce gli utenti registrati.
+4. Gestione Buoni (facoltativa):
+buoni.jsp:
+Verifica la gestione dei buoni sconto disponibili per gli utenti.
+creaBuono.jsp:
+Consente agli amministratori di creare nuovi buoni.
+5. Verifica delle sezioni aggiuntive:
+footer.jsp, HeaderUtente.jsp, HeaderAdmin.jsp:
+Questi file inclusi forniscono gli elementi fissi nella pagina (header e footer). Verifica che siano correttamente visualizzati su tutte le pagine del sito, a seconda se l'utente è autenticato o amministratore.

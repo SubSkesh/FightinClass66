@@ -1,13 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Oscar Costanzelli
-  Date: 12/09/2024
-  Time: 16:41
-  To change this template use File | Settings | File Templates.
---%>
-<footer class="clearfix">
+<!-- includes/footer.jsp -->
+<footer class="clearfix"><!-- Defining the footer section of the page -->
     <section id="privacy">
-        FightinClass66 - Prodotti da combattimento<br>
-        Via Per Burana 137
+        FightinClass66
+        via per Burana 137,Bondeno FE 44012 ALL FIGHTS RESERVED
     </section>
 </footer>
