@@ -13,27 +13,52 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    // Recupera gli attributi dalla richiesta
+    // Recupera gli attributi dalla richiesta con controllo sui null
     String nazione = (String) request.getAttribute("nazione");
+    if (nazione == null) nazione = "Nazione non specificata";
+
     String citta = (String) request.getAttribute("citta");
+    if (citta == null) citta = "Città non specificata";
+
     String via = (String) request.getAttribute("via");
-    long numeroCivico = (long) request.getAttribute("numeroCivico");
-    int CAP = (int) request.getAttribute("CAP");
+    if (via == null) via = "Via non specificata";
+
+    Long numeroCivicoObj = (Long) request.getAttribute("numeroCivico");
+    long numeroCivico = (numeroCivicoObj != null) ? numeroCivicoObj : 0; // Valore di default
+
+    Integer capObj = (Integer) request.getAttribute("CAP");
+    int CAP = (capObj != null) ? capObj : 0; // Valore di default
+
     String cartaPagamento = (String) request.getAttribute("cartaPagamento");
-    double prezzo = (double) request.getAttribute("prezzo");
-    boolean buonoPresente = (boolean) request.getAttribute("buonoPresente");
+    if (cartaPagamento == null) cartaPagamento = "Carta non specificata";
+
+    Double prezzoObj = (Double) request.getAttribute("prezzo");
+    double prezzo = (prezzoObj != null) ? prezzoObj : 0.0; // Valore di default
+
+    Boolean buonoPresenteObj = (Boolean) request.getAttribute("buonoPresente");
+    boolean buonoPresente = (buonoPresenteObj != null) ? buonoPresenteObj : false;
+
     Buono buono = (Buono) request.getAttribute("buono");
     String codiceBuono = null;
-    if (buonoPresente) {
+    if (buonoPresente && buono != null) {
         codiceBuono = buono.getCodiceBuono();
     }
 
     ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) request.getAttribute("prodotti");
-    ArrayList<Carrello> carrello = (ArrayList<Carrello>) request.getAttribute("carrello");
+    if (prodotti == null) prodotti = new ArrayList<>(); // Valore di default
 
-    int numProdotto = (prodotti != null) ? prodotti.size() : 0;
+    ArrayList<Carrello> carrello = (ArrayList<Carrello>) request.getAttribute("carrello");
+    if (carrello == null) carrello = new ArrayList<>(); // Valore di default
+
+    int numProdotto = prodotti.size();
 
     LoggedUser ul = (LoggedUser) request.getAttribute("loggedUser");
+    if (ul == null) {
+        ul = new LoggedUser(); // Crea un utente vuoto se non esiste
+        ul.setNomeUtente("Utente");
+        ul.setCognome("Sconosciuto");
+    }
+
     String applicationMessage = (String) request.getAttribute("applicationMessage");
 %>
 
@@ -104,8 +129,8 @@
             <br/>
             <h3>Dati buono sconto</h3>
             <br/>
-            <p>Codice buono sconto: <%= buono.getCodiceBuono() %></p>
-            <p>Sconto applicato: <%= buono.getSconto() %>%</p>
+            <p>Codice buono sconto: <%= codiceBuono != null ? codiceBuono : "Non disponibile" %></p>
+            <p>Sconto applicato: <%= buono != null ? buono.getSconto() : "0" %>%</p>
             <% } %>
         </div>
 
@@ -113,10 +138,14 @@
         <div class="pagamento">
             <h3>Lista prodotti inclusi nell'ordine</h3>
             <br/>
+            <% if (numProdotto == 0) { %>
+            <p>Nessun prodotto nel carrello.</p>
+            <% } else { %>
             <% for (int i = 0; i < numProdotto; i++) { %>
             <p><b><%= prodotti.get(i).getNomeProdotto() %></b><br/>
                 Quantità: <%= carrello.get(i).getQuantità() %><br/>
                 Prezzo unitario: €<%= prodotti.get(i).getPrezzo() %><br/><br/></p>
+            <% } %>
             <% } %>
 
             <p><b>Prezzo finale:</b> €<%= prezzo %></p>

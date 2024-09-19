@@ -73,6 +73,8 @@
                 <tr>
                     <th>Prodotto</th>
                     <th>Categoria</th>
+                    <th>Taglia</th> <!-- Aggiunto -->
+                    <th>Materiale</th> <!-- Aggiunto -->
                     <th>Disponibilità</th>
                     <th>Quantità</th>
                     <th>Prezzo Unitario</th>
@@ -93,14 +95,16 @@
                         <form name="prodottoForm<%=i%>" action="<%= pageContext.getServletContext().getContextPath() %>/Dispatcher" method="post" style="display:inline;">
                             <input type="hidden" name="controllerAction" value="Catalogo.viewProdotto"/>
                             <input type="hidden" name="idProdotto" value="<%= prodotto.getId() %>"/>
-                            <a href="javascript:prodottoFormSubmit(<%=i%>, '<%= prodotto.getId() %>');">
+                            <a href="javascript:prodottoFormSubmit(<%=i%> '<%= prodotto.getId() %>');">
                                 <img src="<%= pageContext.getServletContext().getContextPath() %>/images/<%= prodotto.getImmagine() %>" width="100" height="100" alt="Immagine <%= prodotto.getNomeProdotto() %>"/>
                             </a>
                         </form>
                         <br/>
                         <strong><%= prodotto.getNomeProdotto() %></strong>
                     </td>
-                    <td><%= prodotto.getCategoria() %></td>
+                    <td><%= prodotto.getCategoria() %></td> <!-- Categoria -->
+                    <td><%= prodotto.getTaglia() %></td>    <!-- Taglia -->
+                    <td><%= prodotto.getMateriale() %></td> <!-- Materiale -->
                     <td>
                         <% if (isDisponibile) { %>
                         <span style="color: green;">Disponibile</span>
@@ -133,6 +137,7 @@
                 <% } %>
                 </tbody>
             </table>
+
         </div>
 
         <div class="col-md-4">

@@ -138,67 +138,105 @@ public class Ordini {
      * Carico tutti gli ordini presenti nel DB se l'utente loggato è un admin,
      * altrimenti carico tutti gli ordini che appartengono all'utente loggato
      */
+//    public static void commonView(JDBC jdbc, SessionDAOFactory sessionDAO, HttpServletRequest request){
+//        LoggedUser ul;
+//
+//        /*Recupero il cookie utente*/
+//        LoggedUserDAO ulDAO = sessionDAO.getLoggedUserDAO();
+//        ul = ulDAO.trova();
+//
+//        ArrayList<Carrello> carrelli = new ArrayList<Carrello>();
+//
+//        /*Recupero il cookie carrello*/
+//        CarrelloDAO carrelloDAO = sessionDAO.getCarrelloDAO();
+//        carrelli = carrelloDAO.trova();
+//
+//        ArrayList<Ordine> ordini = null;
+//        ArrayList<Contiene> contiene = null;
+//
+//        OrdineDAO ordineDAO = jdbc.getOrdineDAO();
+//        PagamentoDAO pagamentoDAO = jdbc.getPagamentoDAO();
+//        ContieneDAO contieneDAO = jdbc.getContieneDAO();
+//        ProdottoDAO prodottoDAO = jdbc.getProdottoDAO();
+//        UtenteDAO utenteDAO = jdbc.getUtenteDAO();
+//
+//        /*Se si tratta di un admin estraggo dal DB tutti gi ordini
+//        Se si tratta di un utente estraggo dal DB solo i suoi ordini*/
+//        if(ul.isAdmin()){
+//            ordini = ordineDAO.findOrdini();
+//        }else{
+//            ordini = ordineDAO.findByUtente(ul.getEmail());
+//        }
+//
+//        /*Per ogni ordine carico il prezzo complessivo*/
+//        for(int i=0 ; i<ordini.size() ; i++){
+//            ordini.get(i).getPagamento().setImporto(pagamentoDAO.getImporto(ordini.get(i).getPagamento().getId()));
+//        }
+//
+//        /*Carico 'CONTIENE'*/
+//        for(int i=0 ; i<ordini.size() ; i++){
+//            ordini.get(i).setContiene(contieneDAO.findContieneByOrdine(ordini.get(i).getId()));
+//        }
+//
+//        /*Per ogni ordine carico all'interno di ogni contiene il prodotto specificato dal codice*/
+//        for(int i=0 ; i<ordini.size() ; i++){
+//            for(int j=0 ; j<ordini.get(i).getContiene().size() ; j++){
+//                ordini.get(i).getContiene().get(j).setProdotto(prodottoDAO.findByKey(ordini.get(i).getContiene().get(j).getProdotto().getId()));
+//            }
+//        }
+//
+//        /*Carico nome e cognome dell'utente proprietario di ogni ordine*/
+//        for(int i=0; i<ordini.size() ; i++){
+//            ordini.get(i).setUtente(utenteDAO.findByEmail(ordini.get(i).getUtente().getEmail()));
+//        }
+//
+//        if(ul.isAdmin()){
+//            request.setAttribute("viewUrl", "ordini/ordiniManagement");
+//        }else{
+//            request.setAttribute("carrello", carrelli);
+//            request.setAttribute("viewUrl", "ordini/ordini");
+//        }
+//        request.setAttribute("ordini", ordini);
+//        request.setAttribute("loggedOn",ul!=null);
+//        request.setAttribute("loggedUser", ul);
+//    }
     public static void commonView(JDBC jdbc, SessionDAOFactory sessionDAO, HttpServletRequest request){
         LoggedUser ul;
 
-        /*Recupero il cookie utente*/
+        // Recupero il cookie utente
         LoggedUserDAO ulDAO = sessionDAO.getLoggedUserDAO();
         ul = ulDAO.trova();
 
-        ArrayList<Carrello> carrelli = new ArrayList<Carrello>();
-
-        /*Recupero il cookie carrello*/
-        CarrelloDAO carrelloDAO = sessionDAO.getCarrelloDAO();
-        carrelli = carrelloDAO.trova();
+        // Verifica che l'utente sia loggato
+        if (ul == null) {
+            // Gestisci il caso in cui l'utente non sia loggato
+            request.setAttribute("applicationMessage", "Devi essere loggato per visualizzare gli ordini.");
+            request.setAttribute("viewUrl", "logon/logging");
+            return;
+        }
 
         ArrayList<Ordine> ordini = null;
-        ArrayList<Contiene> contiene = null;
-
         OrdineDAO ordineDAO = jdbc.getOrdineDAO();
-        PagamentoDAO pagamentoDAO = jdbc.getPagamentoDAO();
-        ContieneDAO contieneDAO = jdbc.getContieneDAO();
-        ProdottoDAO prodottoDAO = jdbc.getProdottoDAO();
-        UtenteDAO utenteDAO = jdbc.getUtenteDAO();
 
-        /*Se si tratta di un admin estraggo dal DB tutti gi ordini
-        Se si tratta di un utente estraggo dal DB solo i suoi ordini*/
-        if(ul.isAdmin()){
+        // Se l'utente è un admin, estraggo dal DB tutti gli ordini
+        if (ul.isAdmin()) {
             ordini = ordineDAO.findOrdini();
-        }else{
+        } else {
+            // Altrimenti, estraggo solo gli ordini dell'utente loggato
             ordini = ordineDAO.findByUtente(ul.getEmail());
         }
 
-        /*Per ogni ordine carico il prezzo complessivo*/
-        for(int i=0 ; i<ordini.size() ; i++){
-            ordini.get(i).getPagamento().setImporto(pagamentoDAO.getImporto(ordini.get(i).getPagamento().getId()));
-        }
+        // Imposta gli attributi necessari per la view
+        request.setAttribute("ordini", ordini);
+        request.setAttribute("loggedOn", true);
+        request.setAttribute("loggedUser", ul);
 
-        /*Carico 'CONTIENE'*/
-        for(int i=0 ; i<ordini.size() ; i++){
-            ordini.get(i).setContiene(contieneDAO.findContieneByOrdine(ordini.get(i).getId()));
-        }
-
-        /*Per ogni ordine carico all'interno di ogni contiene il prodotto specificato dal codice*/
-        for(int i=0 ; i<ordini.size() ; i++){
-            for(int j=0 ; j<ordini.get(i).getContiene().size() ; j++){
-                ordini.get(i).getContiene().get(j).setProdotto(prodottoDAO.findByKey(ordini.get(i).getContiene().get(j).getProdotto().getId()));
-            }
-        }
-
-        /*Carico nome e cognome dell'utente proprietario di ogni ordine*/
-        for(int i=0; i<ordini.size() ; i++){
-            ordini.get(i).setUtente(utenteDAO.findByEmail(ordini.get(i).getUtente().getEmail()));
-        }
-
-        if(ul.isAdmin()){
+        if (ul.isAdmin()) {
             request.setAttribute("viewUrl", "ordini/ordiniManagement");
-        }else{
-            request.setAttribute("carrello", carrelli);
+        } else {
             request.setAttribute("viewUrl", "ordini/ordini");
         }
-        request.setAttribute("ordini", ordini);
-        request.setAttribute("loggedOn",ul!=null);
-        request.setAttribute("loggedUser", ul);
     }
+
 
 }

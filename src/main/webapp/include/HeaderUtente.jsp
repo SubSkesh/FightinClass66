@@ -9,7 +9,7 @@
         <nav class="clearfix">
             <div class="logo">
                 <a href="${pageContext.request.contextPath}/Dispatcher?controllerAction=Catalogo.view">
-                    <img id="LogoWeb" src="${pageContext.request.contextPath}/images/FightinClass66.png" width="370" height="105" alt="Torna alla Home Page"/>
+                    <img id="LogoWeb" src="${pageContext.request.contextPath}/images/FightinClass66.jpg" width="300" height="100" alt="Torna alla Home Page"/>
                 </a>
             </div>
             <div class="barra">
@@ -17,10 +17,10 @@
                     <a href="${pageContext.request.contextPath}/Dispatcher?controllerAction=Catalogo.view">CATALOGO</a>
                 </div>
                 <div class="utente">
-                    <a href="${pageContext.request.contextPath}/Dispatcher?controllerAction=Carrello.view">CARRELLO</a>
+                    <a href="${pageContext.request.contextPath}/Dispatcher?controllerAction=Acquisto.view">CARRELLO</a>
                 </div>
                 <div class="utente">
-                    <a href="${pageContext.request.contextPath}/Dispatcher?controllerAction=Ordini.viewUtente">I MIEI ORDINI</a>
+                    <a href="${pageContext.request.contextPath}/Dispatcher?controllerAction=Ordini.view">I MIEI ORDINI</a>
                 </div>
                 <div class="utente">
                     <a href="javascript:logoutForm.submit()">LOGOUT</a>

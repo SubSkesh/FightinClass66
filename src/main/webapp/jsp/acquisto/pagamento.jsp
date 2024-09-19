@@ -122,7 +122,7 @@
 
 <main class="container mt-4">
     <div class='nome' style="margin-bottom: 15px;">
-        <p>Benvenuto <%= loggedUser != null ? loggedUser.getNomeUtente() + " " + loggedUser.getCognome() : "Utente" %></p>
+        <p>Benvenuto <%= loggedUser != null ? loggedUser.getNomeUtente() + " " + loggedUser.getCognome() : "Combattente" %></p>
     </div>
 
     <div style="margin-top: 15px; margin-bottom: 15px;">
@@ -140,27 +140,27 @@
 
                 <div class="form">
                     <label for="nazione">Nazione:* </label>
-                    <input type="text" id="nazione" name="nazione" value="" maxlength="20" required placeholder="Italia"/>
+                    <input type="text" id="nazione" name="nazione" value="" maxlength="20" required placeholder="Thailand"/>
                 </div>
 
                 <div class="form">
                     <label for="citta">Citt&agrave;:* </label>
-                    <input type="text" id="citta" name="citta" value="" maxlength="20" required placeholder="Roma"/>
+                    <input type="text" id="citta" name="citta" value="" maxlength="20" required placeholder="Bangkok"/>
                 </div>
 
                 <div class="form">
                     <label for="via">Via:* </label>
-                    <input type="text" id="via" name="via" value="" maxlength="20" required placeholder="Via Garibaldi"/>
+                    <input type="text" id="via" name="via" value="" maxlength="20" required placeholder="Via Yokkao"/>
                 </div>
 
                 <div class="form" id="nc">
                     <label for="numeroCivico">Numero civico:* </label>
-                    <input type="text" id="numeroCivico" name="numeroCivico" value="" maxlength="11" required placeholder="1"/>
+                    <input type="text" id="numeroCivico" name="numeroCivico" value="" maxlength="11" required placeholder="66"/>
                 </div>
 
                 <div class="form" id="cap">
                     <label for="CAP">CAP:* </label>
-                    <input type="text" id="CAPPagamento" name="CAP" value="" maxlength="5" required placeholder="12345"/>
+                    <input type="text" id="CAPPagamento" name="CAP" value="" maxlength="5" required placeholder="226622"/>
                 </div>
             </div>
 

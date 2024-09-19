@@ -37,7 +37,7 @@ public class Dispatcher extends HttpServlet{
             String controllerAction = request.getParameter("controllerAction");
 
             /*Nel caso in cui si arrivi da index (quindi è nullo) lo setto di default al catalogo*/
-            if(controllerAction == null) controllerAction="Catalogo.view";
+            if(controllerAction ==   null) controllerAction="Catalogo.view";
 
             String[] splittedAction=controllerAction.split("\\."); //Divide controllerAction in due parti: il nome del controller e il nome del metodo.
 
@@ -57,6 +57,7 @@ public class Dispatcher extends HttpServlet{
             e.printStackTrace(out);
             throw new ServerException("Dispacther Servlet Error",e);
         }finally{
+
             out.close();
         }
     }
