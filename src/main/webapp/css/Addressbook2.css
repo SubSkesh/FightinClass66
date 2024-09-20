@@ -1,0 +1,61 @@
+/* Stili per l'header */
+header {
+    background-color: #262626; /* Sfondo scuro per l'header */
+    padding: 0;
+    color: white;
+    width: 100%; /* L'header occupa tutta la larghezza */
+    position: relative;
+    z-index: 10;
+}
+
+/* Contenitore della navbar */
+/* Contenitore della navbar */
+/* Contenitore della navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Allinea verticalmente tutti gli elementi al centro */
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 126px; /* Altezza fissa della barra */
+    padding: 0 20px;
+}
+
+/* Contenitore del logo */
+.logo {
+    flex: 0 0 50%; /* Occupa il 50% della larghezza della navbar */
+    display: flex;
+    align-items: center; /* Allinea verticalmente il logo al centro */
+    justify-content: flex-start;
+    height: 100%; /* Altezza del contenitore uguale alla barra */
+}
+
+/* Stile per il logo */
+.logo img {
+    max-height: 100%; /* Altezza massima pari a quella della barra */
+    width: auto; /* Mantiene le proporzioni */
+    object-fit: contain; /* Impedisce distorsioni */
+}
+
+
+
+/* Contenitore per i link di navigazione */
+.barra {
+    display: flex;
+    justify-content: flex-end; /* Allinea i link a destra */
+    gap: 20px; /* Spaziatura tra i link */
+    flex: 1;
+}
+
+/* Stile per i link */
+.barra .utente a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.barra .utente a:hover {
+    color: #ff2e2e; /* Cambia colore al passaggio del mouse */
+}

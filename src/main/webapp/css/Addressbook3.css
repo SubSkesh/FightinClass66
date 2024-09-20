@@ -1,0 +1,210 @@
+/* Stili generali */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #1c1c1c;
+    color: white;
+}
+
+/* Stili per l'header */
+header {
+    background: linear-gradient(90deg, #262626, #1a1a1a);
+    padding: 0;
+    color: white;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Contenitore della navbar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 126px;
+    padding: 0 20px;
+}
+
+/* Contenitore del logo */
+.logo {
+    flex: 0 0 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+/* Stile per il logo */
+.logo img {
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.4);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.logo img:hover {
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.7);
+    transform: scale(1.05);
+}
+
+/* Contenitore per i link di navigazione */
+.barra {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 20px;
+    background: rgba(255, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(255, 0, 0, 0.6);
+    margin: 0 auto;
+}
+
+.barra:hover {
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.barra .utente a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding-bottom: 5px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+}
+
+.barra .utente a:hover {
+    color: #ff2e2e;
+    transform: scale(1.1);
+}
+
+.barra .utente a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ff2e2e;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.barra .utente a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Stile del main layout */
+main {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Sidebar laterale per la ricerca */
+.left_content {
+    width: 25%;
+    padding: 20px;
+    background-color: #2a2a2a;
+    border-right: 1px solid #ff2e2e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+}
+
+.left_content:hover {
+    transform: scale(1.02);
+}
+
+.left_content h1 {
+    font-size: 1.5em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ff2e2e;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ff2e2e;
+    padding-bottom: 5px;
+}
+
+/* Stile per la barra di ricerca */
+.searchBar {
+    width: 60%;
+    padding: 20px;
+    background-color: #2a2a2a;
+    border-radius: 5px;
+    border: 1px solid #ff2e2e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+#searchName {
+    width: 100%;
+    height: 35px;
+    font-size: large;
+    background-color: #1c1c1c;
+    color: white;
+    border: 1px solid #ff2e2e;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+.searchBar a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    color: #ff2e2e;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid #ff2e2e;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.searchBar a:hover {
+    background-color: #ff2e2e;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Stili per la sezione Attenzione */
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ff2e2e;
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 1em;
+    max-width: 600px;
+    text-align: center;
+    margin: 20px auto;
+}
+
+/* Footer */
+footer {
+    margin-top: 30px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 0.9em;
+    color: white;
+    padding: 10px;
+}

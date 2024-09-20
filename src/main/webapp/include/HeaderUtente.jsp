@@ -1,17 +1,17 @@
-<!-- includes/HeaderUtente.jsp -->
-<header class="clearfix"><!-- Defining the header section of the page -->
-
+<header class="clearfix">
     <form name="logoutForm" action="${pageContext.request.contextPath}/Dispatcher" method="post">
         <input type="hidden" name="controllerAction" value="LogOn.logout"/>
     </form>
 
     <div style="height: 126px;">
-        <nav class="clearfix">
+        <nav class="navbar">
+            <!-- Logo sulla sinistra -->
             <div class="logo">
                 <a href="${pageContext.request.contextPath}/Dispatcher?controllerAction=Catalogo.view">
-                    <img id="LogoWeb" src="${pageContext.request.contextPath}/images/FightinClass66.jpg" width="300" height="100" alt="Torna alla Home Page"/>
+                    <img id="LogoWeb" src="${pageContext.request.contextPath}/images/FightinClass663.jpg"  alt="Torna alla Home Page" />
                 </a>
             </div>
+            <!-- Link del menu sulla destra -->
             <div class="barra">
                 <div class="utente">
                     <a href="${pageContext.request.contextPath}/Dispatcher?controllerAction=Catalogo.view">CATALOGO</a>
@@ -28,5 +28,4 @@
             </div>
         </nav>
     </div>
-
 </header>

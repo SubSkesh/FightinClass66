@@ -1,16 +1,8 @@
-/* 
-    Created on : 6-sep-2024, 11.39.41
-    Author     : Oscar costanzelli
-*/
-
-/**********RIMUOVO I DEFAULT**********/
-
-/**********RIMUOVO I DEFAULT**********/
-
-/* Reset */
+/********** RESET E DEFAULT **********/
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 ol, ul {
@@ -23,21 +15,19 @@ a:link, a:active, a:visited {
 }
 
 .clearfix:after {
-    content: ".";
-    visibility: hidden;
-    display: block;
-    height: 0;
+    content: "";
+    display: table;
     clear: both;
 }
 
-/* Global settings */
+/********** IMPOSTAZIONI GLOBALI **********/
 body {
     background: url(../images/sfondo2.png) no-repeat center center fixed;
     background-size: cover;
     font-family: 'Roboto', sans-serif;
     font-size: 1em;
     width: 100%;
-    margin:0 auto;
+    margin: 0 auto;
     color: white;
     background-color: #1c1c1c;
 }
@@ -49,54 +39,52 @@ hr {
     height: 2px;
 }
 
-/* Header */
-header nav {
-    background: #121212;
-    padding-top: 8px;
+/********** HEADER **********/
+/* Stili per l'header */
+header {
+    background-color: #262626; /* Sfondo scuro per l'header */
+    padding: 20px 0;
+    color: white; /* Colore del testo */
+    width: 100%; /* L'header occupa tutta la larghezza */
 }
 
-.logo {
-    padding-top: 20px;
-    padding-left: 20px;
-    font-size: 2.4em;
-    font-weight: bold;
-    color: #ff2e2e; /* Rosso intenso per dare un effetto di impatto */
+/* Contenitore della navbar */
+.navbar {
+    display: flex; /* Usa Flexbox per gestire l'allineamento */
+    justify-content: space-between; /* Spaziatura tra logo e link */
+    align-items: center; /* Allinea verticalmente gli elementi al centro */
+    max-width: 1200px; /* Larghezza massima */
+    margin: 0 auto; /* Centra la navbar */
+    padding: 0 20px; /* Aggiunge padding interno */
 }
 
+/* Stile per il logo */
+.logo img {
+    height: 100px;
+    width: auto;
+}
+
+/* Contenitore per i link */
 .barra {
-    float: left;
-    height: 80px;
+    display: flex;
+    gap: 20px; /* Spaziatura tra i link */
 }
 
-.menu {
-    float: left;
-    width: 200px;
-    text-align: center;
-    font-size: 22px;
+/* Stile per i link della barra */
+.barra .utente a {
+    text-decoration: none;
+    color: white; /* Testo bianco */
+    font-size: 18px;
     font-weight: bold;
-    margin-top: 50px;
-    color: #ffffff;
 }
 
-.menu a {
-    color: #ff2e2e;
-    transition: color 0.3s;
+.barra .utente a:hover {
+    color: #ff2e2e; /* Cambia colore al passaggio del mouse */
 }
 
-.menu a:hover {
-    color: #d1d1d1;
-}
+/********** HEADER **********/
 
-/* Nome utente loggato */
-.nome {
-    font-family: 'Roboto', sans-serif;
-    clear: both;
-    font-size: 0.9em;
-    color: #d1d1d1;
-    line-height: 1.5;
-}
-
-/* Search Bar */
+/********** RICERCA **********/
 .left_content {
     float: left;
     width: 15%;
@@ -122,7 +110,7 @@ header nav {
     padding-left: 10px;
 }
 
-/* Main Content */
+/********** CONTENUTO PRINCIPALE **********/
 main {
     background-color: #1c1c1c;
     padding: 20px;
@@ -140,7 +128,7 @@ main {
     margin-right: 4%;
 }
 
-/* Product Articles */
+/********** ARTICOLI PRODOTTI **********/
 #box {
     margin: 20px 0;
 }
@@ -170,7 +158,7 @@ main {
     font-weight: bold;
 }
 
-/* Magazzino */
+/********** MAGAZZINO **********/
 #boxMagazzino article {
     float: left;
     width: 500px;
@@ -185,7 +173,7 @@ main {
     color: white;
 }
 
-/* Buttons */
+/********** BOTTONI **********/
 .mainButton, .button {
     padding: 10px 15px;
     background-color: #ff2e2e;
@@ -202,7 +190,7 @@ main {
     color: #ffffff;
 }
 
-/* Footer */
+/********** FOOTER **********/
 footer {
     padding: 20px 30px;
     font-size: 12px;
@@ -223,3 +211,19 @@ footer p {
     float: right;
 }
 
+/********** DESIGN RESPONSIVO **********/
+@media (max-width: 768px) {
+    .barra {
+        flex-direction: column;
+    }
+
+    .menu {
+        margin-top: 10px;
+        font-size: 18px;
+    }
+
+    #box article {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

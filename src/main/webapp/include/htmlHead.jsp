@@ -4,6 +4,9 @@
     <title>FightinClass66: <%= (String) request.getAttribute("menuActiveLink") %></title>
 
     <!-- Link ai fogli di stile -->
+    <link rel="shortcut icon" href="images/FightinClass66.jpg" />
+    <link rel="stylesheet" href="css/Addressbook3.css" type="text/css" media="screen">
+<%--    <link rel="stylesheet" href="css/addressbook.css" type="text/css" media="screen">--%>
 
     <!-- Script JavaScript -->
     <%
