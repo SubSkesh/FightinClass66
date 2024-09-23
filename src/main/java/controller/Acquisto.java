@@ -21,7 +21,7 @@ import model.mo.*;
 
 import services.logservice.LogService;
 
-public class Acquisto {
+public class    Acquisto {
 
     private Acquisto() {
     }

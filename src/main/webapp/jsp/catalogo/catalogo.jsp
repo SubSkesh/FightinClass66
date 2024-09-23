@@ -188,7 +188,7 @@
 
     <!--LISTA PRODOTTI DA VISUALIZZARE-->
     <%if(numProdotto == 0){%>
-    <div style='margin-top: 20px; margin-left: 163px;'>
+    <div  id ="attenzione"style='margin-top: 20px; margin-left: 163px;'>
         <h2>Attenzione</h2>
         <p>La ricerca effettuata non ha prodotto risultati. Per visionare il catalogo degli articoli naviga su <a href="Dispatcher?controllerAction=Catalogo.view">FightinClass66</a> e, quando trovi un articolo che ti interessa, clicca su "Aggiungi al carrello"</p>
     </div>

@@ -31,7 +31,9 @@
 %>
 
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it-IT">
+<%@include file="/include/htmlHead.jsp" %>
 <head>
     <script language="javascript">
         function UtentiManagementSubmit(){
@@ -54,25 +56,6 @@
             f.submit();
         }
     </script>
-    <style>
-        .content {
-            margin-top: 15px;
-            margin-left: 5%;
-            width: 90%;
-        }
-
-        .image {
-            width: 25%;
-            float: left;
-        }
-
-        #linkImage {
-            width: 150px;
-            height: 150px;
-            margin-left: 22%;
-        }
-    </style>
-    <%@include file="/include/htmlHead.jsp" %>
 </head>
 <body>
 <header>
@@ -81,65 +64,68 @@
 
 <hr>
 
-<main>
-    <div class='nome'>
+    <main>
+    <div class="admin-welcome">
         <p>Benvenuto <%=ul.getNomeUtente()%> <%=ul.getCognome()%></p>
     </div>
 
     <% if (applicationMessage != null && !applicationMessage.isEmpty()) { %>
-    <div class="alert alert-info">
+    <div id="admin-alert-info">
         <p><%= applicationMessage %></p>
     </div>
     <% } %>
 
-    <div class="content">
-        <!-- FORM PER PASSARE ALLA SCHERMATA DI GESTIONE ORDINI -->
+    <div id="admin-content">
+        <!-- FORM PER GESTIONE ORDINI -->
         <div class="image">
             <form name="ordini" action="Dispatcher" method="post">
                 <input type="hidden" name="controllerAction" value="Ordini.view"/>
                 <a href="javascript:ordiniSubmit();">
-                    <img id="linkImageOrdini" src="${pageContext.request.contextPath}/images/Ordini.png" width="300" height="300" alt="Ordini"/>
-                    </br><p style="text-align: center"><b>GESTIONE ORDINI</b></p>
+                    <img src="${pageContext.request.contextPath}/images/Ordini.png" alt="Ordini"/>
+                    <br><p><b>Gestione Ordini</b></p>
                 </a>
             </form>
         </div>
 
-        <!-- FORM PER PASSARE ALLA SCHERMATA DI GESTIONE UTENTI -->
+        <!-- FORM PER GESTIONE UTENTI -->
         <div class="image">
             <form name="utentiManagement" action="Dispatcher" method="post">
                 <input type="hidden" name="controllerAction" value="HomeManagement.view"/>
                 <a href="javascript:UtentiManagementSubmit();">
-                    <img id="linkImageUtenti" src="${pageContext.request.contextPath}/images/Utenti.png" width="300" height="300" alt="Utenti"/></br><p style="text-align: center"><b>GESTIONE UTENTI</b></p>
+                    <img src="${pageContext.request.contextPath}/images/Utenti.png" alt="Utenti"/>
+                    <br><p><b>Gestione Utenti</b></p>
                 </a>
             </form>
         </div>
 
-        <!-- FORM PER PASSARE ALLA SCHERMATA DI GESTIONE PRODOTTI -->
+        <!-- FORM PER GESTIONE MAGAZZINO -->
         <div class="image">
             <form name="magazzino" action="Dispatcher" method="post">
                 <input type="hidden" name="controllerAction" value="ProdottoManagement.view"/>
                 <a href="javascript:magazzinoSubmit();">
-                    <img id="linkImageMagazzino" src="${pageContext.request.contextPath}/images/Magazzino.png" width="300" height="300" alt="Magazzino"/></br><p style="text-align: center"><b>GESTIONE MAGAZZINO</b></p>
+                    <img src="${pageContext.request.contextPath}/images/Magazzino.png" alt="Magazzino"/>
+                    <br><p><b>Gestione Magazzino</b></p>
                 </a>
             </form>
         </div>
 
-        <!-- FORM PER PASSARE ALLA SCHERMATA DI GESTIONE BUONI -->
+        <!-- FORM PER GESTIONE BUONI -->
         <div class="image">
             <form name="buoni" action="Dispatcher" method="post">
                 <input type="hidden" name="controllerAction" value="BuonoManagement.view"/>
                 <a href="javascript:buoniSubmit();">
-                    <img id="linkImageBuoni" src="${pageContext.request.contextPath}/images/Buoni.png" width="300" height="300" alt="Buoni"/></br><p style="text-align: center"><b>GESTIONE BUONI</b></p>
+                    <img src="${pageContext.request.contextPath}/images/Buoni.png" alt="Buoni"/>
+                    <br><p><b>Gestione Buoni</b></p>
                 </a>
             </form>
         </div>
     </div>
-
-    <div style="clear: both; margin-bottom: 15px;"></div>
-
 </main>
 
-<%@include file="/include/footer.jsp" %>
+<footer id="admin-footer">
+    <%@include file="/include/footer.jsp" %>
+</footer>
 
 </body>
 </html>
+
