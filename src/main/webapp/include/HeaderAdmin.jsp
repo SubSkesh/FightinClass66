@@ -7,7 +7,7 @@
         <nav class="navbar">
             <div class="logo">
                 <a href="${pageContext.request.contextPath}/Dispatcher?controllerAction=HomeAdmin.view">
-                    <img id="LogoWeb" src="${pageContext.request.contextPath}/images/FightinClass663.jpg" width="370" height="105" alt="Torna alla Home Page"/>
+                    <img id="LogoWeb" src="${pageContext.request.contextPath}/images/modified_FightinClass663_with_blue_eyes.jpg" width="370" height="105" alt="Torna alla Home Page"/>
                 </a>
             </div>
             <div class="barra">

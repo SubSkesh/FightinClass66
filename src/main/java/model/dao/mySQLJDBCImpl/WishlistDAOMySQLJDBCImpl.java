@@ -95,7 +95,7 @@ public class WishlistDAOMySQLJDBCImpl implements WishlistDAO {
                     = " SELECT * "
                     + " FROM wishlist "
                     + " WHERE "
-                    + " deleted ='N' AND "
+                    + " deleted ='0' AND "
                     + " userId = ? AND"
                     + " prodottoId = ?";
 
@@ -137,7 +137,7 @@ public class WishlistDAOMySQLJDBCImpl implements WishlistDAO {
         List<Wishlist> wishlistTuples = new ArrayList<>();
         try {
             Integer userId = user.getId();
-            String sql = "SELECT * FROM wishlist WHERE deleted = 'N' AND userId = ?";
+            String sql = "SELECT * FROM wishlist WHERE deleted = '0' AND userId = ?";
 
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userId);

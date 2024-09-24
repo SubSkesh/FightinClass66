@@ -1,7 +1,7 @@
 <%--
     Document   : gestisciProdotto
-    Created on : 5-mar-2020, 14.59.44
-    Author     : Giacomo Polastri
+    Created on : 5-mar-2024, 14.59.44
+    Author     : Oscar Costanzelli
 --%>
 
 <%@page session = "false"%>

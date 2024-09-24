@@ -77,7 +77,7 @@
                         <input type="hidden" name="controllerAction" value="ProdottoManagement.modificaProdottoView"/>
                         <input type="hidden" name="idProdotto"/>
                         <a href="javascript:prodottoFormSubmit(<%= i %> <%= prodotti.get(i).getId() %>);">
-                            <img id="ProdImage" src="images/<%= prodotti.get(i).getImmagine() %>" width="170" height="170" alt="Visualizza prodotto"/>
+                            <img id="ProdImage" src="<%= request.getContextPath() %>/images/<%= prodotti.get(i).getImmagine() %>" width="170" height="170" alt="Visualizza prodotto"/>
                         </a>
                     </form>
                 </div>

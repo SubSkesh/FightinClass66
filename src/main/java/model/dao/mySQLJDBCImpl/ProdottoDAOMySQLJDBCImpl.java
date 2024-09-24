@@ -83,8 +83,8 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             ps.setString(i++, prodotto.getImmagine());
             ps.setLong(i++, prodotto.getQuantita());
             ps.setFloat(i++, prodotto.getPrezzo());
-            ps.setString(i++, prodotto.isBlocked() ? "S" : "N");
-            ps.setString(i++, prodotto.isPush() ? "S" : "N");
+            ps.setString(i++, prodotto.isBlocked() ? "1" : "0");
+            ps.setString(i++, prodotto.isPush() ? "1" : "0");
             ps.setString(i++, prodotto.getMateriale());
             ps.setString(i++, prodotto.getTaglia());
             ps.executeUpdate();
@@ -203,7 +203,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
         try{
             String sql
                     = " UPDATE prodotto "
-                    + " SET blocked = 'S' "
+                    + " SET blocked = '1' "
                     + " WHERE "
                     + " id = ?";
 
@@ -228,7 +228,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
         try{
             String sql
                     = " UPDATE prodotto "
-                    + " SET blocked = 'N' "
+                    + " SET blocked = '0' "
                     + " WHERE "
                     + " id = ?";
 
@@ -444,7 +444,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             String sql
                     = " SELECT * "
                     + " FROM prodotto "
-                    + " WHERE categoria = ? AND blocked = 'N' ";
+                    + " WHERE categoria = ? AND blocked = '0' ";
 
             ps = connection.prepareStatement(sql);
             ps.setString(1, categoria);
@@ -477,7 +477,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             String sql
                     = " SELECT * "
                     + " FROM prodotto "
-                    + " WHERE taglia = ? AND blocked = 'N' ";
+                    + " WHERE taglia = ? AND blocked = '0' ";
 
             ps = connection.prepareStatement(sql);
             ps.setString(1, taglia);
@@ -510,7 +510,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             String sql
                     = " SELECT * "
                     + " FROM prodotto "
-                    + " WHERE materiale = ? AND blocked = 'N' ";
+                    + " WHERE materiale = ? AND blocked = '0' ";
 
             ps = connection.prepareStatement(sql);
             ps.setString(1, materiale);
@@ -712,7 +712,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             String sql
                     = " SELECT * "
                     + " FROM prodotto "
-                    + " WHERE push = 'S' AND blocked = 'N'";
+                    + " WHERE push = '1' AND blocked = '0'";
 
             ps = connection.prepareStatement(sql);
 
@@ -788,7 +788,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
                     + "WHERE (nomeProdotto LIKE '%" + search + "%' "
                     + "OR categoria LIKE '%" + search + "%' "
                     + "OR descrizione LIKE '%" + search + "%') "
-                    + "AND Blocked = 'N'";
+                    + "AND Blocked = '0'";
 
             ps = connection.prepareStatement(sql);
 

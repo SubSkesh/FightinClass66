@@ -46,7 +46,7 @@ public class BuonoDAOMySQLJDBCImpl implements BuonoDAO {
 
             // Inserisce il nuovo buono nel database
 
-            sql = "INSERT INTO buono (codiceBuono, nomeBuono, dataScadenza, sconto, usato, eliminato) VALUES (?,?,?,?, 'N', 'N')";
+            sql = "INSERT INTO buono (codiceBuono, nomeBuono, dataScadenza, sconto, usato, eliminato) VALUES (?,?,?,?, '0', '0')";
             ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS); //salva l'ultimo valore con chiave autoincrementata nel db dopo lultimo insert
             int i = 1;
             ps.setString(i++, buono.getCodiceBuono());
@@ -92,7 +92,7 @@ public class BuonoDAOMySQLJDBCImpl implements BuonoDAO {
     public void eliminaByKey(String codiceBuono) {
         PreparedStatement ps;
         try {
-            String sql = "UPDATE buono SET eliminato = 'S' WHERE codiceBuono = ?";
+            String sql = "UPDATE buono SET eliminato = '1' WHERE codiceBuono = ?";
             ps = connection.prepareStatement(sql);
             ps.setString(1, codiceBuono);
             ps.executeUpdate();
@@ -107,7 +107,7 @@ public class BuonoDAOMySQLJDBCImpl implements BuonoDAO {
     public void eliminaByName(String nomeBuono) {
         PreparedStatement ps;
         try {
-            String sql = "UPDATE buono SET eliminato = 'S' WHERE nomeBuono = ?";
+            String sql = "UPDATE buono SET eliminato = '1' WHERE nomeBuono = ?";
             ps = connection.prepareStatement(sql);
             ps.setString(1, nomeBuono);
             ps.executeUpdate();

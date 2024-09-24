@@ -341,18 +341,20 @@ public class ProdottoManagement {
             String descrizione = request.getParameter("descrizione");
             Float prezzo = Float.parseFloat(request.getParameter("prezzo"));
             Long quantita = Long.parseLong(request.getParameter("quantita"));
-            boolean blocked;
-            if(request.getParameter("blocked").equals("S")){
-                blocked = true;
-            }else{
-                blocked = false;
-            }
-            boolean push;
-            if(request.getParameter("push").equals("S")){
-                push = true;
-            }else{
-                push = false;
-            }
+            boolean blocked =false;
+//            if(request.getParameter("blocked").equals("S")){
+//                blocked = true;
+//            }else{
+//                blocked = false;
+//            }
+//
+
+            boolean push=false;
+//            if(request.getParameter("push").equals("S")){
+//                push = true;
+//            }else{
+//                push = false;
+//            }
 
             try{
                 ProdottoDAO prodottoDAO = jdbc.getProdottoDAO();

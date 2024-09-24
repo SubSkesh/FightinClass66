@@ -241,7 +241,7 @@ public class UtenteDAOMySQLJDBCImpl implements UtenteDAO{
                     = " SELECT *"
                     + " FROM utente "
                     + " WHERE email = ? AND "
-                    + "   blocked  = 'N' ";
+                    + "   blocked  = '0' ";
 
             ps = connection.prepareStatement(sql);
             ps.setString(1, email);
@@ -273,7 +273,7 @@ public class UtenteDAOMySQLJDBCImpl implements UtenteDAO{
             String sql
                     = " UPDATE utente "
                     + " SET "
-                    + "   blocked = 'S' "
+                    + "   blocked = '1' "
                     + " WHERE "
                     + "   email = ? ";
 
@@ -299,7 +299,7 @@ public class UtenteDAOMySQLJDBCImpl implements UtenteDAO{
             String sql
                     = " UPDATE utente "
                     + " SET "
-                    + "   blocked = 'N' "
+                    + "   blocked = '0' "
                     + " WHERE "
                     + "   email = ? ";
 

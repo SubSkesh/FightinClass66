@@ -67,6 +67,8 @@
     <main>
     <div class="admin-welcome">
         <p>Benvenuto <%=ul.getNomeUtente()%> <%=ul.getCognome()%></p>
+        <img src="${pageContext.request.contextPath}/images/result.png" alt="Welcome Image" class="welcome-image">
+
     </div>
 
     <% if (applicationMessage != null && !applicationMessage.isEmpty()) { %>

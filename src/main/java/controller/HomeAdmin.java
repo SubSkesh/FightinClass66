@@ -17,7 +17,7 @@ import services.logservice.LogService;
  *
  * @author Oscar Costanzelli
  */
-public class HomeAdmin {
+public class  HomeAdmin {
 
     /*Classe che gestisce la vista di homeAdmin.jsp*/
 

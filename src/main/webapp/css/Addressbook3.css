@@ -310,6 +310,7 @@ main {
     transform: scale(1.02);
 }
 
+
 .left_content h1 {
     font-size: 1.5em;
     font-family: 'Montserrat', sans-serif;
@@ -319,6 +320,25 @@ main {
     margin-bottom: 15px;
     border-bottom: 2px solid #ff2e2e;
     padding-bottom: 5px;
+}
+.left_content a {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    display: block;
+    margin: 10px 0;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-left: 2px solid transparent; /* Effetto bordo laterale */
+    transition: color 0.3s ease, border-left 0.3s ease;
+}
+
+/* Hover per i link */
+.left_content a:hover {
+    color: #ff2e2e;
+    border-left: 2px solid #ff2e2e; /* Linea rossa accattivante al passaggio del mouse */
+    transform: scale(1.05); /* Leggero effetto di ingrandimento */
 }
 
 /* ------------------------- SEARCH BAR STYLES ------------------------- */
@@ -493,23 +513,18 @@ footer {
 /* Modifica lo stile del messaggio di benvenuto */
 /* Stile per il messaggio di benvenuto */
 .admin-welcome {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.5em;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8em;
     font-weight: bold;
-    color: #ffffff;
+    color: #ff2e2e;
     text-align: center;
-    margin: 40px 0;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    transition: transform 0.3s ease;
-    z-index: 10; /* Assicurati che sia sopra gli altri elementi */
-    position: relative; /* Necessario per far funzionare lo z-index */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    transition: color 0.3s ease;
 }
-
 .admin-welcome:hover {
     transform: scale(1.05);
 }
@@ -625,14 +640,72 @@ footer {
 /* Modifica lo stile del messaggio di benvenuto */
 
 
+/* Layout generale */
 #admin-content {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-evenly; /* Distribuisce gli elementi in modo uniforme */
+    align-items: flex-start;
+    gap: 40px; /* Aumenta lo spazio tra i loghi */
     flex-wrap: wrap;
     padding: 20px 0;
+    margin-top: 20px;
 }
-/* Stile per il messaggio di benvenuto */
+
+/* Stili per i contenitori dei loghi */
+#admin-content .image {
+    width: 24%; /* Imposta una larghezza leggermente più grande per i loghi */
+    margin-bottom: 30px; /* Aggiunge spazio tra i loghi */
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+/* Stile dell'hover per i loghi */
+#admin-content .image:hover {
+    transform: scale(1.05);
+}
+
+/* Rimuovere l'alone rosso intorno alle immagini */
+#admin-content .image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: none;
+    border: none;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+#admin-content .image img:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+}
+
+/* Stili per i titoli sotto i loghi */
+#admin-content .image p {
+    color: red;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 10px;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Pulsanti interni */
+#admin-content a {
+    text-decoration: none;
+    color: red;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#admin-content a:hover {
+    color: #ff2e2e;
+}
+
+/* Stili per il messaggio di benvenuto */
 .admin-welcome {
     font-family: 'Montserrat', sans-serif;
     font-size: 2.5em;
@@ -649,115 +722,17 @@ footer {
     z-index: 10;
 }
 
+.admin-welcome img.welcome-image {
+    width: 250px; /* Dimensioni dell'immagine */
+    margin-top: 15px;
+    border-radius: 8px; /* Arrotonda i bordi dell'immagine */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Ombra sotto l'immagine */
+}
+
 .admin-welcome:hover {
+    color:red;
     transform: scale(1.05);
 }
-/* Stile per il messaggio di applicazione */
-#admin-alert-info {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.6);
-    border-left: 6px solid #ff2e2e;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    color: #ffffff;
-    font-family: 'Roboto', sans-serif;
-    z-index: 9; /* Più basso del messaggio di benvenuto */
-    position: relative;
-}
-
-#admin-alert-info p {
-    font-size: 1.2em;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    text-shadow: none;
-}
-#admin-content {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 40px 0; /* Aumenta il padding per distanziare meglio gli elementi */
-}
-
-/* Effetto hover sui blocchi di gestione */
-#admin-content .image:hover {
-    transform: scale(1.05);
-    z-index: 1; /* Manteniamo l'hover sotto il messaggio */
-    position: relative;
-}
-
-/* Generale per evitare sovrapposizioni */
-#admin-content .image {
-    width: 22%;
-    margin: 20px; /* Aggiunge più margine tra i blocchi */
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-/* Rimuovere l'alone rosso intorno alle immagini */
-#admin-content .image img {
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    /* Rimuovi l'alone rosso */
-    box-shadow: none; /* Elimina l'ombra rossa */
-    border: none; /* Elimina eventuali bordi rossi */
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-#admin-content .image img:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7); /* Mantieni un'ombra più neutra e professionale */
-    transform: scale(1.1); /* Mantieni l'effetto hover */
-}
-
-
-#admin-content .image p {
-    color: red;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-top: 10px;
-    text-transform: uppercase;
-    background: rgba(0, 0, 0, 0.6); /* Sfondo nero con opacità */
-    padding: 5px 10px;
-    border-radius: 8px; /* Per un effetto più morbido */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Leggera ombra per far risaltare */
-}
-
-#admin-content a {
-    text-decoration: none;
-    color: red;
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-#admin-content a:hover {
-    color: #ff2e2e;
-}
-
-.admin-welcome p {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #ff2e2e;
-    text-align: center;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Aggiunge ombra al testo */
-    transition: color 0.3s ease;
-}
-
-.admin-welcome p:hover {
-    color: white;
-    transform: scale(1.05);
-}
-
-
 
 /* Stile per il messaggio di applicazione */
 #admin-alert-info {
@@ -771,7 +746,7 @@ footer {
     text-align: center;
     color: #ffffff;
     font-family: 'Roboto', sans-serif;
-    z-index: 999; /* Più basso del messaggio di benvenuto */
+    z-index: 9;
     position: relative;
 }
 
@@ -782,6 +757,7 @@ footer {
     line-height: 1.6;
     text-shadow: none;
 }
+
 /* Allineamento del footer */
 /*footer.admin-footer {*/
 /*    background: linear-gradient(90deg, #262626, #1a1a1a);*/
@@ -790,3 +766,201 @@ footer {
 /*    text-align: center;*/
 /*    border-top: 2px solid #ff2e2e;*/
 /*}*/
+
+/*-------------------------------stile per creaprodotti*/
+/* Stile per i titoli */
+.content h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    color: #ff2e2e; /* Colore rosso coerente */
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Stili per i campi del form */
+.content input[type="text"],
+.content textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    background: rgba(0, 0, 0, 0.7); /* Sfondo semi-trasparente */
+    color: white;
+    border: 2px solid #ff2e2e; /* Bordi rossi */
+    border-radius: 5px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px; /* Distanza tra i campi */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content input[type="text"]:focus,
+.content textarea:focus {
+    border-color: #ffffff; /* Bordo bianco quando il campo è attivo */
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.7);
+}
+
+/* Stili per il campo textarea */
+.content textarea {
+    height: 150px; /* Altezza aumentata per il campo di testo */
+    resize: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Placeholder elegante */
+::placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+/* Stili per le etichette */
+.content label {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    color: white;
+    margin-bottom: 5px;
+}
+
+/* Stili per i bottoni */
+/* Stili per i bottoni */
+.content input[type="button"] {
+    width: 30%; /* Riduci la larghezza dei bottoni */
+    padding: 8px 12px; /* Riduci il padding per farli meno ingombranti */
+    background: #ff2e2e; /* Colore rosso */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9em; /* Riduci la dimensione del font */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 20px auto; /* Aumenta il margine intorno ai bottoni */
+    display: block;
+    text-align: center;
+}
+
+.content input[type="button"]:hover {
+    background-color: #e60000; /* Colore più scuro al passaggio del mouse */
+    transform: scale(1.05); /* Leggero effetto di zoom al passaggio del mouse */
+}
+
+
+/* Stile per la parte sinistra e destra del form */
+.content .form {
+    width: 48%;
+    float: left;
+    margin-bottom: 20px;
+}
+
+.content .form:last-child {
+    clear: both;
+}
+
+/* Pulizia dei float */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+/* Stile per il form */
+form {
+    margin-bottom: 40px; /* Aggiungi più spazio sotto il form */
+}
+
+.form {
+    margin-bottom: 20px; /* Aggiungi spazio tra i campi del form */
+}
+
+textarea {
+    margin-top: 10px; /* Aggiungi un margine sopra la textarea per distanziarla */
+}
+/*------------------------stile per magazzino.jsp*/
+/* Stile per il form "Nuovo prodotto" */
+/* Stile per il form "Nuovo prodotto" */
+form[name="inserisciProdotto"] {
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 40px; /* Aggiunge spazio sopra al pulsante */
+}
+
+/* Stile del bottone "Nuovo prodotto" */
+form[name="inserisciProdotto"] .mainButton {
+    background-color: #ff2e2e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(255, 0, 0, 0.5);
+    margin: 20px auto;
+    display: inline-block;
+}
+
+/* Rimuovi il blocco rosso invasivo */
+form[name="inserisciProdotto"] .mainButton:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
+
+/* Stile per il contenuto del magazzino */
+#boxMagazzino {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Distanza tra gli articoli */
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 20px;
+}
+
+#boxMagazzino article {
+    background: rgba(0, 0, 0, 0.5); /* Sfondo semi-trasparente */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+#boxMagazzino img {
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#boxMagazzino img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.7);
+}
+
+/* Stile per le informazioni del prodotto */
+#boxMagazzino p {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+/* Stile per i bottoni Blocca/Sblocca */
+#boxMagazzino .button {
+    background-color: #ff2e2e;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#boxMagazzino .button:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
