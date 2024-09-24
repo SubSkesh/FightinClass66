@@ -2,7 +2,7 @@
 
 Benvenuti in **FightinClass66**, il regno supremo per tutti i guerrieri, combattenti e appassionati di arti marziali! Qui troverai tutto ciò di cui hai bisogno per prepararti alla battaglia, che tu sia un veterano del combattimento o un novizio entusiasta.
 
-![FightinClass66](https://via.placeholder.com/1200x300.png?text=FightinClass66+-+Equipaggiamento+da+Combattimento) 
+![FightinClass66]([https://via.placeholder.com/1200x300.png?text=FightinClass66+-+Equipaggiamento+da+Combattimento](https://github.com/SubSkesh/FightinClass66/blob/jsptest/src/main/webapp/images/FightinClass66_inverted.jpg)) 
 
 ## Contenuti della Repository
 
