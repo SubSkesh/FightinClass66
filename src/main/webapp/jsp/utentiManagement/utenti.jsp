@@ -39,7 +39,7 @@
     LoggedUser ul = (LoggedUser) request.getAttribute("loggedUser");
     if (ul == null) {
         ul = new LoggedUser(); // Crea un utente vuoto se non esiste
-        ul.setNomeUtente("Admin ");
+        ul.setNomeUtente("Utente");
         ul.setCognome("Sconosciutonomagomedov");
     }
 
@@ -54,18 +54,18 @@
 <!DOCTYPE html>
 <html lang="it-IT">
 <head>
-    <style>
-        .initial {
-            color: black;
-        }
+<%--    <style>--%>
+<%--        .initial {--%>
+<%--            color: black;--%>
+<%--        }--%>
 
-        .selectedInitial {
-            color: steelblue;
-        }
-        .email {
-            font-size: 0.9em;
-        }
-    </style>
+<%--        .selectedInitial {--%>
+<%--            color: steelblue;--%>
+<%--        }--%>
+<%--        .email {--%>
+<%--            font-size: 0.9em;--%>
+<%--        }--%>
+<%--    </style>--%>
     <script language="javascript">
         function changeInitial(inital) {
             document.changeInitialForm.selectedInitial.value = inital;
@@ -127,11 +127,15 @@
     </nav>
 
     <section id="box" class="clearfix">
+
+
         <!-- Controlla se ci sono utenti -->
         <% if (numUtenti == 0) { %>
         <p>Nessun fighter disponibile.</p>
         <% } else { %>
-        <!--LISTA DEGLI UTENTI DA MOSTRARE-->
+
+
+        <!-- LISTA DEGLI UTENTI DA MOSTRARE -->
         <% for (i = 0; i < numUtenti; i++) { %>
         <article>
             <h1><%= utenti.get(i).getNomeUtente() %> <%= utenti.get(i).getCognome() %></h1>
@@ -140,20 +144,65 @@
                 <%= utenti.get(i).getVia() %> n.<%= utenti.get(i).getNumeroCivico() %><br/>
                 <%= utenti.get(i).getCittà() %>, <%= utenti.get(i).getNazione() %><br/>
             </address>
-            <% if(!utenti.get(i).isAdmin()) { %>
-            <p>Ordini effettuati: <%= (numeroOrdini != null && i < numOrdini) ? numeroOrdini.get(i) : 0 %></p>
-            <% } else { %>
+
+            <!-- Se l'utente non è admin, mostra il numero di ordini effettuati -->
+            <!-- Se l'utente è admin, mostra che è admin -->
+            <% if (utenti.get(i).isAdmin()) { %>
             <p>Admin</p>
+            <% } else { %>
+            <p>Ordini effettuati: <%= (numeroOrdini != null && i < numOrdini) ? numeroOrdini.get(i) : 0 %></p>
             <% } %>
 
-            <!--BOTTONI PER BLOCCARE O SBLOCCARE UN UTENTE-->
-            <% if(!utenti.get(i).isBlocked()) { %>
+            <!-- BOTTONI PER BLOCCARE O SBLOCCARE UN UTENTE -->
+            <% if (!utenti.get(i).isBlocked()) { %>
+            <!-- Se l'utente NON è bloccato, mostra il pulsante "Blocca" -->
             <a class="button" href="javascript:bloccaUtente('<%= utenti.get(i).getEmail() %>');">Blocca</a>
             <% } else { %>
+            <!-- Se l'utente è bloccato, mostra il pulsante "Sblocca" -->
             <a class="button" href="javascript:sbloccaUtente('<%= utenti.get(i).getEmail() %>');">Sblocca</a>
             <% } %>
         </article>
         <% } %>
+            <!-- FORM PER IL BLOCCO/SBLOCCO DEL PRODOTTO -->
+<%--            <div style="float: left;">--%>
+<%--                <% if(utenti.get(i).isBlocked()) { %>--%>
+<%--                <form name="sbloccaProdotto<%= i %>" action="Dispatcher" method="post">--%>
+<%--                    <input type="hidden" name="idProdotto" value="<%= utenti.get(i).getId() %>"/>--%>
+<%--                    <input type="hidden" name="controllerAction" value="HomeManagement.sbloccaUtente"/>--%>
+<%--                    <input type="submit" value="Sblocca" class="button">--%>
+<%--                </form>--%>
+<%--                <% } else { %>--%>
+<%--                <form name="bloccaProdotto<%= i %>" action="Dispatcher" method="post">--%>
+<%--                    <input type="hidden" name="idProdotto" value="<%= utenti.get(i).getId() %>"/>--%>
+<%--                    <input type="hidden" name="controllerAction" value="HomeManagement.bloccaUtente"/>--%>
+<%--                    <input type="submit" value="Blocca" class="button">--%>
+<%--                </form>--%>
+<%--                <% } %>--%>
+<%--            </div>--%>
+
+    <%--        <!--LISTA DEGLI UTENTI DA MOSTRARE-->--%>
+<%--        <% for (i = 0; i < numUtenti; i++) { %>--%>
+<%--        <article>--%>
+<%--            <h1><%= utenti.get(i).getNomeUtente() %> <%= utenti.get(i).getCognome() %></h1>--%>
+<%--            <span class="email"><%= utenti.get(i).getEmail() %></span>--%>
+<%--            <address>--%>
+<%--                <%= utenti.get(i).getVia() %> n.<%= utenti.get(i).getNumeroCivico() %><br/>--%>
+<%--                <%= utenti.get(i).getCittà() %>, <%= utenti.get(i).getNazione() %><br/>--%>
+<%--            </address>--%>
+<%--            <% if(!utenti.get(i).isAdmin()) { %>--%>
+<%--            <p>Ordini effettuati: <%= (numeroOrdini != null && i < numOrdini) ? numeroOrdini.get(i) : 0 %></p>--%>
+<%--            <% } else { %>--%>
+<%--            <p>Admin</p>--%>
+<%--            <% } %>--%>
+
+<%--            <!--BOTTONI PER BLOCCARE O SBLOCCARE UN UTENTE-->--%>
+<%--            <% if(!utenti.get(i).isBlocked()) { %>--%>
+<%--            <a class="button" href="javascript:bloccaUtente('<%= utenti.get(i).getEmail() %>');">Blocca</a>--%>
+<%--            <% } else { %>--%>
+<%--            <a class="button" href="javascript:sbloccaUtente('<%= utenti.get(i).getEmail() %>');">Sblocca</a>--%>
+<%--            <% } %>--%>
+<%--        </article>--%>
+<%--        <% } %>--%>
         <% } %>
     </section>
 

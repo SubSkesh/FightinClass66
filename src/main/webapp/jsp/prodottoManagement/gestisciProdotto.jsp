@@ -13,6 +13,9 @@
 <%
     int i = 0;
 
+    // Azione: modifica o inserisci
+    String action = (request.getAttribute("prodotto") != null) ? "modify" : "insert";
+
     // Gestione del prodotto per evitare null pointer exceptions
     Prodotto prodotto = (Prodotto) request.getAttribute("prodotto");
     if (prodotto == null) {
@@ -37,8 +40,7 @@
         applicationMessage = "Nessun messaggio disponibile.";
     }
 
-    // Azione: modifica o inserisci
-    String action = (request.getAttribute("prodotto") != null) ? "modify" : "insert";
+
 %>
 <!DOCTYPE html>
 <html lang="it-IT">
@@ -54,7 +56,7 @@
                 errors.push("Il campo Nome Prodotto è obbligatorio");
             }
 
-            if (!form.categoriaProdotto.value.trim()) {
+            if (!form.categoria.value.trim()) {
                 errors.push("Il campo Categoria Prodotto è obbligatorio");
             }
 
@@ -143,9 +145,40 @@
             <h2>AGGIUNGI UN PRODOTTO</h2>
         </div>
         <%}%>
+        <%-- Sezione di Debug: Visualizza i Valori Correnti del Prodotto --%>
+        <% if(action.equals("modify")) { %>
+        <div class="debug-section" style="border: 1px solid #f00; padding: 10px; margin-bottom: 20px;">
+            <h3>Debug: Valori Correnti del Prodotto</h3>
+            <ul>
+                <li><strong>ID Prodotto:</strong> <%= prodotto.getId() %></li>
+                <li><strong>Nome Prodotto:</strong> <%= prodotto.getNomeProdotto() %></li>
+                <li><strong>Categoria:</strong> <%= prodotto.getCategoria() %></li>
+                <li><strong>Materiale:</strong> <%= prodotto.getMateriale() %></li>
+                <li><strong>Taglia:</strong> <%= prodotto.getTaglia() %></li>
+                <li><strong>Quantità:</strong> <%= prodotto.getQuantita() %></li>
+                <li><strong>Prezzo:</strong> <%= prodotto.getPrezzo() %></li>
+                <li><strong>Immagine:</strong> <%= prodotto.getImmagine() %></li>
+                <li><strong>Descrizione:</strong> <%= prodotto.getDescrizione() %></li>
+                <li><strong>Blocked:</strong> <%= prodotto.isBlocked() ? "Sì" : "No" %></li>
+                <li><strong>Push:</strong> <%= prodotto.isPush() ? "Sì" : "No" %></li>
+            </ul>
+        </div>
+        <% } %>
+
+        <!-- Visualizzazione dell'immagine del prodotto -->
+        <% if(action.equals("modify")) { %>
+
+        <div class="product-image">
+            <img src="<%= request.getContextPath() %>/images/<%= prodotto.getImmagine() %>" alt="Immagine del prodotto" />
+            <p>Nome immagine: <%= prodotto.getImmagine() %></p>
+        </div>
+        <% } %>
 
         <!--FORM PER L'INSERIMENTO O LA MODIFICA DI UN PRODOTTO-->
         <form name="inserisciProdotto" action="Dispatcher" method="post">
+
+
+
 
             <div class="form" style="width: 48%; float: left;">
                 <label for="nomeProdotto">Nome del Prodotto: </label>
@@ -153,9 +186,15 @@
             </div>
 
             <div class="form" style="width: 48%; float: right;">
-                <label for="categoriaProdotto">Categoria di prodotto: </label>
-                <input type="text" id="categoriaProdotto" name="categoriaProdotto" value="<%= (prodotto.getCategoria() != null) ? prodotto.getCategoria() : "" %>" required maxlength="20" placeholder="Colpitori"/>
+                <label for="categoria">Categoria di prodotto: </label>
+                <input type="text" id="categoria" name="categoria" value="<%= (prodotto.getCategoria() != null) ? prodotto.getCategoria() : "" %>" required maxlength="20" placeholder="Colpitori"/>
             </div>
+            <!-- Campo Categoria -->
+<%--            <div class="form" style="width: 48%; float: right;">--%>
+<%--                <label for="categoria">Categoria di prodotto: </label>--%>
+<%--                <input type="text" id="categoria" name="categoria" value="<%= (prodotto.getCategoria() != null) ? prodotto.getCategoria() : "" %>" required maxlength="20" placeholder="Colpitori"/>--%>
+<%--            </div>--%>
+
 
             <div class="form" style="width: 48%; float: left;">
                 <label for="materiale">Materiale: </label>
@@ -185,9 +224,18 @@
             <div style="clear: both;"></div>
 
             <div class="form">
-                <label for="testo">Testo: </label>
-                <textarea id="testo" name="testo" cols="100" rows="10" wrap="soft" required placeholder="Gloves for smashin' your face out"><%= (prodotto.getDescrizione() != null) ? prodotto.getDescrizione() : "" %></textarea>
+                <label for="descrizione">Testo: </label>
+                <textarea id="descrizione" name="descrizione" cols="100" rows="10" wrap="soft" required placeholder="Gloves for smashin' your face out"><%= (prodotto.getDescrizione() != null) ? prodotto.getDescrizione() : "" %></textarea>
             </div>
+            <!-- Campo Descrizione -->
+<%--            <div class="form">--%>
+<%--                <label for="descrizione">Descrizione: </label>--%>
+<%--                <textarea id="descrizione" name="descrizione" cols="100" rows="10" wrap="soft" required placeholder="Gloves for smashin' your face out"><%= (prodotto.getDescrizione() != null) ? prodotto.getDescrizione() : "" %></textarea>--%>
+<%--            </div>--%>
+            <% if(action.equals("modify")) { %>
+            <input type="hidden" name="blocked" value="<%= prodotto.isBlocked() ? "1" : "0" %>"/>
+            <input type="hidden" name="push" value="<%= prodotto.isPush() ? "1" : "0" %>"/>
+            <% } %>
 
             <input type="hidden" name="controllerAction"/>
             <%if(action.equals("modify")){%>
@@ -205,6 +253,7 @@
     <form name="backForm" method="post" action="Dispatcher">
         <input type="hidden" name="controllerAction"/>
     </form>
+
 
 </main>
 

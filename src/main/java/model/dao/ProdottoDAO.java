@@ -26,7 +26,7 @@ public interface ProdottoDAO {
      */
     public Prodotto creaProdotto(String nomeProdotto, String categoria,
                                  String descrizione, String immagine,
-                                 float prezzo, long quantita,
+                                 float prezzo, int quantita,
                                  boolean blocked, boolean push, Contiene[] contiene,String materiale,String taglia)
             throws DuplicatedObjectException, DuplicatedObjectException;
 
@@ -101,7 +101,7 @@ public interface ProdottoDAO {
          * @param id il codice del prodotto da trovare
          * @return la quantità disponibile del prodotto
          */
-    public long getQuantitaByKey(int id);
+    public int getQuantitaByKey(int id);
 
     public ArrayList<String> trovaTaglie();
     public ArrayList<String> trovaMateriali();

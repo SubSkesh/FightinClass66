@@ -1,5 +1,6 @@
 package controller;
 
+import jakarta.servlet.RequestDispatcher;
 import services.config.Configuration;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -7,6 +8,9 @@ import java.util.logging.Logger;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import java.io.IOException;
 
 import model.dao.JDBC;
 import model.dao.OrdineDAO;
@@ -127,6 +131,8 @@ public class HomeManagement {
             request.setAttribute("loggedOn",ul!=null);
             request.setAttribute("loggedUser", ul);
             request.setAttribute("viewUrl", "utentiManagement/utenti");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/utentiManagement/utenti.jsp");
+            dispatcher.forward(request, response);
 
         }catch(Exception e){
             logger.log(Level.SEVERE, "Errore Controller HomeManagement", e);

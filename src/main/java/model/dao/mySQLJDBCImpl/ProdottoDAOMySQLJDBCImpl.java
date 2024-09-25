@@ -40,8 +40,8 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
     @Override
     public Prodotto creaProdotto(String nomeProdotto, String categoria,
                                  String descrizione, String immagine,
-                                 float prezzo, long quantita,
-                                 boolean blocked, boolean push, Contiene[] contiene,String materiale,String taglia)
+                                 float prezzo, int quantita,
+                                 boolean blocked, boolean push, Contiene[] contiene, String materiale, String taglia)
             throws DuplicatedObjectException {
         PreparedStatement ps;
         Prodotto prodotto = new Prodotto();
@@ -81,7 +81,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             ps.setString(i++, prodotto.getCategoria());
             ps.setString(i++, prodotto.getDescrizione());
             ps.setString(i++, prodotto.getImmagine());
-            ps.setLong(i++, prodotto.getQuantita());
+            ps.setInt(i++, prodotto.getQuantita());
             ps.setFloat(i++, prodotto.getPrezzo());
             ps.setString(i++, prodotto.isBlocked() ? "1" : "0");
             ps.setString(i++, prodotto.isPush() ? "1" : "0");
@@ -110,25 +110,107 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
      * @throws DuplicatedObjectException
      */
 
+//    @Override
+//    public void aggiorna(Prodotto prodotto) throws DuplicatedObjectException {
+//        PreparedStatement ps;
+//        try {
+//            /*
+//             * Preparo la query per vedere se nel DB esiste già un prodotto uguale
+//             * a quello che voglio aggiornare
+//             */
+//            String sql
+//                    = "SELECT id "
+//                    + "FROM prodotto "
+//                    + "WHERE nomeProdotto = ? AND "
+//                    + "categoria = ? AND "
+//                    + "descrizione = ? AND "
+//                    + "immagine = ? AND "
+//                    + "quantita = ? AND "
+//                    + "prezzo = ? AND "
+//                    + "materiale = ? AND "
+//                    + "taglia = ?";
+//            ps = connection.prepareStatement(sql);
+//            int i = 1;
+//            ps.setString(i++, prodotto.getNomeProdotto());
+//            ps.setString(i++, prodotto.getCategoria());
+//            ps.setString(i++, prodotto.getDescrizione());
+//            ps.setString(i++, prodotto.getImmagine());
+//            ps.setLong(i++, prodotto.getQuantita());
+//            ps.setFloat(i++, prodotto.getPrezzo());
+//            ps.setString(i++, prodotto.getMateriale());
+//            ps.setString(i++, prodotto.getTaglia());
+//
+//            ResultSet resultSet = ps.executeQuery();
+//
+//            boolean exist;
+//            exist = resultSet.next();
+//            resultSet.close();
+//
+//            /*
+//             * Se exist è true vuol dire che il prodotto esiste già, quindi sollevo
+//             * l'eccezione DuplicatedObjectException e la gestisco
+//             */
+//            if (exist) {
+//                throw new DuplicatedObjectException("ProdottoDAOMySQLJDBCImpl.aggiorna: Tentativo di aggiornamento di un prodotto già esistente");
+//            }
+//
+//            /*
+//             * Se sono arrivato qui il prodotto non esiste nel DB quindi creo la
+//             * query per aggiornarlo
+//             */
+//
+//            sql = "UPDATE prodotto "
+//                    + "SET nomeProdotto = ?, "
+//                    + "categoria = ?, "
+//                    + "descrizione = ?, "
+//                    + "immagine = ?, "
+//                    + "quantita = ?, "
+//                    + "blocked = ?, "
+//                    + "push = ?, "
+//                    + "materiale = ?,"
+//                    + "taglia = ?"
+//                    + "WHERE id = ?";
+//
+//            ps = connection.prepareStatement(sql);
+//            i = 1;
+//            ps.setString(i++, prodotto.getNomeProdotto());
+//            ps.setString(i++, prodotto.getCategoria());
+//            ps.setString(i++, prodotto.getDescrizione());
+//            ps.setString(i++, prodotto.getImmagine());
+//            ps.setLong(i++, prodotto.getQuantita());
+//            ps.setBoolean(i++, prodotto.isBlocked());
+//            ps.setBoolean(i++, prodotto.isPush());
+//            ps.setString(i++, prodotto.getMateriale());
+//            ps.setString(i++, prodotto.getTaglia());
+//            ps.setInt(i++, prodotto.getId());
+//
+//            ps.executeUpdate();
+//
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
     @Override
     public void aggiorna(Prodotto prodotto) throws DuplicatedObjectException {
         PreparedStatement ps;
         try {
             /*
              * Preparo la query per vedere se nel DB esiste già un prodotto uguale
-             * a quello che voglio aggiornare
+             * a quello che voglio aggiornare, escludendo l'id corrente.
              */
-            String sql
-                    = "SELECT id "
+
+            String sql = "SELECT id "
                     + "FROM prodotto "
                     + "WHERE nomeProdotto = ? AND "
                     + "categoria = ? AND "
                     + "descrizione = ? AND "
                     + "immagine = ? AND "
                     + "quantita = ? AND "
-                    + "prezzo = ? AND"
+                    + "prezzo = ? AND "
                     + "materiale = ? AND "
-                    + "taglia = ?";
+                    + "taglia = ? AND "
+                    + "id != ?";
+
             ps = connection.prepareStatement(sql);
             int i = 1;
             ps.setString(i++, prodotto.getNomeProdotto());
@@ -139,11 +221,11 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             ps.setFloat(i++, prodotto.getPrezzo());
             ps.setString(i++, prodotto.getMateriale());
             ps.setString(i++, prodotto.getTaglia());
+            ps.setInt(i++, prodotto.getId());
 
             ResultSet resultSet = ps.executeQuery();
 
-            boolean exist;
-            exist = resultSet.next();
+            boolean exist = resultSet.next();
             resultSet.close();
 
             /*
@@ -167,8 +249,8 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
                     + "quantita = ?, "
                     + "blocked = ?, "
                     + "push = ?, "
-                    + "materiale = ?,"
-                    + "taglia = ?"
+                    + "materiale = ?, "
+                    + "taglia = ? "
                     + "WHERE id = ?";
 
             ps = connection.prepareStatement(sql);
@@ -178,13 +260,16 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             ps.setString(i++, prodotto.getDescrizione());
             ps.setString(i++, prodotto.getImmagine());
             ps.setLong(i++, prodotto.getQuantita());
-            ps.setString(i++, prodotto.isBlocked() ? "S" : "N");
-            ps.setString(i++, prodotto.isPush() ? "S" : "N");
+            ps.setBoolean(i++, prodotto.isBlocked());
+            ps.setBoolean(i++, prodotto.isPush());
             ps.setString(i++, prodotto.getMateriale());
             ps.setString(i++, prodotto.getTaglia());
             ps.setInt(i++, prodotto.getId());
 
-            ps.executeUpdate();
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new SQLException("Aggiornamento del prodotto fallito, nessuna riga modificata.");
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -192,61 +277,99 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
     }
 
 
+
     /**
      *
      * Setta come bloccato un prodotto nel DB
      * @param id
-     */
-    @Override
-    public void blocca(int id) {
-        PreparedStatement ps;
-        try{
-            String sql
-                    = " UPDATE prodotto "
-                    + " SET blocked = '1' "
-                    + " WHERE "
-                    + " id = ?";
-
-            ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.executeUpdate();
-            ps.close();
-
-        }catch(SQLException e){
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
      *
-     * Setta come sbloccato un prodotto nel DB
-     * @param id
+     *
+     *
      */
-    @Override
-    public void sblocca(int id) {
-        PreparedStatement ps;
-        try{
-            String sql
-                    = " UPDATE prodotto "
-                    + " SET blocked = '0' "
-                    + " WHERE "
-                    + " id = ?";
-
-            ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.executeUpdate();
-            ps.close();
-
-        }catch(SQLException e){
-            throw new RuntimeException(e);
-        }
-    }
+//    @Override
+//    public void blocca(int id) {
+//        PreparedStatement ps;
+//        try{
+//            String sql
+//                    = " UPDATE prodotto "
+//                    + " SET blocked = '1' "
+//                    + " WHERE "
+//                    + " id = ?";
+//
+//            ps = connection.prepareStatement(sql);
+//            ps.setInt(1, id);
+//            ps.executeUpdate();
+//            ps.close();
+//
+//        }catch(SQLException e){
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    /**
+//     *
+//     * Setta come sbloccato un prodotto nel DB
+//     * @param id
+//     */
+//    @Override
+//    public void sblocca(int id) {
+//        PreparedStatement ps;
+//        try{
+//            String sql
+//                    = " UPDATE prodotto "
+//                    + " SET blocked = '0' "
+//                    + " WHERE "
+//                    + " id = ?";
+//
+//            ps = connection.prepareStatement(sql);
+//            ps.setInt(1, id);
+//            ps.executeUpdate();
+//            ps.close();
+//
+//        }catch(SQLException e){
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     /**
      *
      * Recupera dal DB tutte le carte presenti
      * @return ArrayList di String
      */
+    @Override
+    public void blocca(int id) {
+        try{
+            String sql = "UPDATE prodotto SET blocked = ? WHERE id = ?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setBoolean(1, true);
+                ps.setInt(2, id);
+                int rowsUpdated = ps.executeUpdate();
+                if(rowsUpdated == 0){
+                    throw new SQLException("Nessun prodotto trovato con ID: " + id);
+                }
+            }
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void sblocca(int id) {
+        try{
+            String sql = "UPDATE prodotto SET blocked = ? WHERE id = ?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setBoolean(1, false);
+                ps.setInt(2, id);
+                int rowsUpdated = ps.executeUpdate();
+                if(rowsUpdated == 0){
+                    throw new SQLException("Nessun prodotto trovato con ID: " + id);
+                }
+            }
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public ArrayList<String> trovaNomiProdotti(){
         PreparedStatement ps;
@@ -878,12 +1001,18 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
         }catch(SQLException sqle){
             System.out.println(sqle.getMessage());
         }
+        /*Leggo l'immagine*/
+        try {
+            prodotto.setQuantita(resultSet.getInt("quantita"));
+        }catch(SQLException sqle){
+            System.out.println(sqle.getMessage());
+        }
 
 
 
         /*Leggo blocked*/
         try {
-            if(resultSet.getString("blocked").equals("S")){
+            if(resultSet.getBoolean("blocked")){
                 prodotto.setBlocked(true);
             }else{
                 prodotto.setBlocked(false);
@@ -895,7 +1024,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
 
         /*Leggo push*/
         try {
-            if(resultSet.getString("push").equals("S")){
+            if(resultSet.getBoolean("push")){
                 prodotto.setPush(true);
             }else{
                 prodotto.setPush(false);
@@ -907,9 +1036,9 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
         return prodotto;
     }
 
-    public long getQuantitaByKey(int id){
+    public int getQuantitaByKey(int id){
         PreparedStatement ps;
-        long quantita = 0;
+        int quantita = 0;
 
         try{
             /*
@@ -927,7 +1056,7 @@ public class ProdottoDAOMySQLJDBCImpl implements ProdottoDAO{
             ResultSet resultSet = ps.executeQuery();
 
             if(resultSet.next()) {
-                quantita = resultSet.getLong("quantita");
+                quantita = resultSet.getInt("quantita");
             }
 
             resultSet.close();

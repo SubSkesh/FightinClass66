@@ -424,27 +424,27 @@ public class LogOn {
 
     /*
      *
-     * Metodo per caricare tipi, rarità e edizioni e prodotti
+     * Metodo per caricare categorie,taglie,materiali prodotti
      */
     private static void commonView(JDBC jdbc, SessionDAOFactory sessionDAO, HttpServletRequest request) {
-        ArrayList<String> tipoCarte;
-        ArrayList<String> rare;
-        ArrayList<String> edizioni;
+        ArrayList<String> categorie;
+        ArrayList<String> taglie;
+        ArrayList<String> materiali;
         ArrayList<Prodotto> prodotti = null;
 
         ProdottoDAO prodottoDAO = jdbc.getProdottoDAO();
 
         /*Estraggo materiali,taglie,categorie*/
-        tipoCarte = prodottoDAO.trovaCategorieProdotti();
-        rare = prodottoDAO.trovaMateriali();
-        edizioni = prodottoDAO.trovaMateriali();
+        categorie = prodottoDAO.trovaCategorieProdotti();
+        materiali = prodottoDAO.trovaMateriali();
+        taglie = prodottoDAO.trovaTaglie();
 
         /*Estraggo i prodotti da visualizzare*/
         prodotti = prodottoDAO.findForPush();
 
-        request.setAttribute("tipoCarte", tipoCarte);
-        request.setAttribute("rare", rare);
-        request.setAttribute("edizioni", edizioni);
+        request.setAttribute("tipoCarte", categorie);
+        request.setAttribute("rare", taglie);
+        request.setAttribute("edizioni", materiali);
         request.setAttribute("prodotti", prodotti);
 
     }

@@ -93,7 +93,7 @@ public class UtenteDAOMySQLJDBCImpl implements UtenteDAO{
             // Recupero l'ID generato automaticamente e lo setto nell'oggetto utente
             resultSet = ps.getGeneratedKeys();
             if (resultSet.next()) {
-                utente.setId(resultSet.getInt("id"));
+                utente.setId(resultSet.getInt(1));
             }
             resultSet.close();
 
@@ -394,7 +394,7 @@ public class UtenteDAOMySQLJDBCImpl implements UtenteDAO{
 
         /*Leggo admin*/
         try {
-            if(resultSet.getString("Admin").equals("S")){
+            if(resultSet.getString("Admin").equals("1")){
                 utente.setAdmin(true);
             }else{
                 utente.setAdmin(false);
@@ -405,7 +405,7 @@ public class UtenteDAOMySQLJDBCImpl implements UtenteDAO{
 
         /*Leggo blocked*/
         try {
-            if(resultSet.getString("Blocked").equals("S")){
+            if(resultSet.getString("Blocked").equals("1")){
                 utente.setBlocked(true);
             }else{
                 utente.setBlocked(false);

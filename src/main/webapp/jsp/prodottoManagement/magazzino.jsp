@@ -58,6 +58,12 @@
     <div class="nome" style="margin-bottom: 15px;">
         <p>Benvenuto <%= ul.getNomeUtente() %> <%= ul.getCognome() %></p>
     </div>
+    <!-- Messaggio Applicativo -->
+    <% if(applicationMessage != null && !applicationMessage.isEmpty()) { %>
+    <div class="messaggio">
+        <p><%= applicationMessage %></p>
+    </div>
+    <% } %>
 
     <!-- FORM PER INSERIRE UN NUOVO PRODOTTO -->
     <form name="inserisciProdotto" action="Dispatcher" method="post">
@@ -74,8 +80,9 @@
                 <!-- IMMAGINE SULLA SINISTRA -->
                 <div style="float: left; margin-right: 50px;">
                     <form name="prodottoForm<%= i %>" action="Dispatcher" method="post">
+                        <input type="hidden" name="idProdotto"  value="<%= prodotti.get(i).getId() %>"/>
                         <input type="hidden" name="controllerAction" value="ProdottoManagement.modificaProdottoView"/>
-                        <input type="hidden" name="idProdotto"/>
+
                         <a href="javascript:prodottoFormSubmit(<%= i %> <%= prodotti.get(i).getId() %>);">
                             <img id="ProdImage" src="<%= request.getContextPath() %>/images/<%= prodotti.get(i).getImmagine() %>" width="170" height="170" alt="Visualizza prodotto"/>
                         </a>
@@ -88,7 +95,11 @@
                     <p><b>Categoria:</b> <%= prodotti.get(i).getCategoria() %></p>
                     <p><b>Materiale:</b> <%= prodotti.get(i).getMateriale() %></p>
                     <p><b>Taglia:</b> <%= prodotti.get(i).getTaglia() %></p>
-                    <p><b>Prezzo:</b> €<%= prodotti.get(i).getPrezzo() %></p>
+<%--                    <p><b>Prezzo:</b> €<%= prodotti.get(i).getPrezzo() %></p>--%>
+                    <p><b>Prezzo:</b> €<%= String.format("%.2f", prodotti.get(i).getPrezzo()) %></p>
+
+                    <p><b>Quantità:</b><%= prodotti.get(i).getQuantita() %></p>
+
 
                     <!-- FORM PER IL BLOCCO/SBLOCCO DEL PRODOTTO -->
                     <div style="float: left;">
@@ -105,6 +116,16 @@
                             <input type="submit" value="Blocca" class="button">
                         </form>
                         <% } %>
+                    </div>
+                    <div style="float: left;">
+
+                        <form name="modificaProdotto<%= i %>" action="Dispatcher" method="post">
+                            <input type="hidden" name="idProdotto" value="<%= prodotti.get(i).getId() %>"/>
+                            <input type="hidden" name="controllerAction" value="ProdottoManagement.modificaProdottoView"/>
+                            <input type="submit" value="Modifica" class="button">
+                        </form>
+
+
                     </div>
                 </div>
 

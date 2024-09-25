@@ -6,7 +6,7 @@ package model.mo;
 public class Prodotto {
 
     private String nomeProdotto, categoria, descrizione, immagine,taglia,materiale;
-    private long quantita;
+    private int quantita;
     int id;
     private float prezzo;
     private boolean blocked, push;
@@ -59,11 +59,11 @@ public class Prodotto {
         immagine = img;
     }
 
-    public long getQuantita(){
+    public int getQuantita(){
         return quantita;
     }
 
-    public void setQuantita(long q){
+    public void setQuantita(int q){
         quantita = q;
     }
 

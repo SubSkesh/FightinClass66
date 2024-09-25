@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import java.io.IOException;
 
 import model.dao.JDBC;
 import model.dao.ProdottoDAO;
@@ -24,7 +27,7 @@ import services.logservice.LogService;
 
 /**
  *
- * @author Giacomo Polastri
+ * @author oscar costanzelli
  */
 public class ProdottoManagement {
 
@@ -122,6 +125,11 @@ public class ProdottoManagement {
             request.setAttribute("loggedOn",ul!=null);
             request.setAttribute("loggedUser", ul);
             request.setAttribute("viewUrl", "prodottoManagement/magazzino");
+            /* Inoltro alla vista magazzino.jsp */
+            RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/prodottoManagement/magazzino.jsp");
+            dispatcher.forward(request, response);
+
+
 
         }catch(Exception e){
             logger.log(Level.SEVERE, "Errore Controller prodottoManagement", e);
@@ -279,16 +287,16 @@ public class ProdottoManagement {
             Float prezzo = Float.parseFloat(request.getParameter("prezzo"));
             prodotto.setPrezzo(prezzo);
 
-            Long quantita = Long.parseLong(request.getParameter("quantita"));
+            int quantita = Integer.parseInt(request.getParameter("quantita"));
             prodotto.setQuantita(quantita);
 
-            if(request.getParameter("blocked").equals("S")){
+            if(request.getParameter("blocked").equals("1")){
                 prodotto.setBlocked(true);
             }else{
                 prodotto.setBlocked(false);
             }
 
-            if(request.getParameter("push").equals("S")){
+            if(request.getParameter("push").equals("1")){
                 prodotto.setPush(true);
             }else{
                 prodotto.setPush(false);
@@ -340,7 +348,7 @@ public class ProdottoManagement {
             String immagine = request.getParameter("immagine");
             String descrizione = request.getParameter("descrizione");
             Float prezzo = Float.parseFloat(request.getParameter("prezzo"));
-            Long quantita = Long.parseLong(request.getParameter("quantita"));
+            Integer quantita = Integer.parseInt(request.getParameter("quantita"));
             boolean blocked =false;
 //            if(request.getParameter("blocked").equals("S")){
 //                blocked = true;
@@ -489,15 +497,16 @@ public class ProdottoManagement {
             prodotto.setCategoria(request.getParameter("categoria"));
             prodotto.setImmagine(request.getParameter("immagine"));
             prodotto.setPrezzo(Float.parseFloat(request.getParameter("prezzo")));
-            prodotto.setQuantita(Long.parseLong(request.getParameter("quantita")));
+            prodotto.setQuantita(Integer.parseInt(request.getParameter("quantita")));
+            prodotto.setMateriale(request.getParameter("materiale"));
 
-            if(request.getParameter("blocked").equals("S")){
+            if(request.getParameter("blocked").equals("1")){
                 prodotto.setBlocked(true);
             }else{
                 prodotto.setBlocked(false);
             }
             boolean push = false;
-            if(request.getParameter("push").equals("S")){
+            if(request.getParameter("push").equals("1")){
                 prodotto.setPush(true);
             }else{
                 prodotto.setPush(false);
@@ -548,6 +557,8 @@ public class ProdottoManagement {
         ProdottoDAO prodottoDAO = jdbc.getProdottoDAO();
 
         prodotti = prodottoDAO.trovaProdotti();
+        LogService.printLog().log(Level.INFO, "Numero di prodotti recuperati: " + prodotti.size());
+
 
         /*Setto gli attributi del view model*/
         request.setAttribute("prodotti", prodotti);

@@ -867,9 +867,9 @@ footer {
     display: table;
 }
 /* Stile per il form */
-form {
-    margin-bottom: 40px; /* Aggiungi più spazio sotto il form */
-}
+/*form {*/
+/*    margin-bottom: 40px; !* Aggiungi più spazio sotto il form *!*/
+/*}*/
 
 .form {
     margin-bottom: 20px; /* Aggiungi spazio tra i campi del form */
@@ -964,3 +964,358 @@ form[name="inserisciProdotto"] .mainButton:hover {
     background-color: #e60000;
     transform: scale(1.05);
 }
+
+/* Stili specifici per la pagina utenti.jsp */
+
+/* Stile per il nome dell'utente */
+#box article h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ff2e2e;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Stile per l'email dell'utente */
+#box article .email {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 1em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Stile per l'indirizzo dell'utente */
+#box article address {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+/* Stile per i link iniziali */
+nav a.initial {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+nav a.initial:hover {
+    color: #ff2e2e;
+}
+
+nav .selectedInitial {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ff2e2e;
+    padding: 5px 10px;
+}
+
+/* Stile per i bottoni Blocca/Sblocca */
+#box article .button {
+    background-color: #ff2e2e;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+}
+
+#box article .button:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
+/* Stile per la sezione che mostra gli utenti */
+#box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+#box article {
+    background: rgba(0, 0, 0, 0.5); /* Sfondo semi-trasparente */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+#box article:hover {
+    transform: scale(1.02); /* Effetto di ingrandimento */
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.5);
+}
+/* Stile per il contenitore principale */
+#loginContent {
+    width: 60%;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.8); /* Sfondo semi-trasparente */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Ombra per dare profondità */
+}
+
+/* Stile per i titoli (Login o Crea un account) */
+h2#loginTitle, h2#registerTitle {
+    font-family: 'Montserrat', sans-serif;
+    color: #ff2e2e;
+    font-size: 2em;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Ombra per evidenziare il testo */
+}
+
+/* Stili per i campi di input */
+#loginContent input[type="text"],
+#loginContent input[type="email"],
+#loginContent input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1); /* Sfondo semi-trasparente */
+    color: white;
+    border: 2px solid transparent; /* Rimuove il bordo rosso di default */
+    border-radius: 5px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); /* Ombra interna */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px; /* Spazio tra i campi */
+}
+
+/* Effetto focus sui campi di input */
+#loginContent input[type="text"]:focus,
+#loginContent input[type="email"]:focus,
+#loginContent input[type="password"]:focus {
+    border-color: #ff2e2e; /* Bordo rosso al focus */
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+}
+
+/* Stile per i campi radio (Sesso) */
+#loginContent input[type="radio"] {
+    margin-right: 5px;
+    accent-color: #ff2e2e; /* Colore rosso per i radio buttons */
+}
+
+/* Stili per le label */
+#loginContent label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    color: white;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Gestione layout dei campi affiancati (es. Nome e Cognome) */
+#loginContent .form-left {
+    width: 48%;
+    float: left;
+    margin-right: 2%;
+}
+
+#loginContent .form-right {
+    width: 48%;
+    float: left;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Pulsanti Ok e Annulla */
+#loginContent .button {
+    width: 120px;
+    padding: 10px;
+    background-color: #ff2e2e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#loginContent .button:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
+/* Stile per il testo della clausola */
+#clausola {
+    font-size: 0.9em;
+    color: #a8a8a8;
+    text-align: center;
+}
+
+/* Gestione responsive per schermi più piccoli */
+@media screen and (max-width: 768px) {
+    #loginContent {
+        width: 90%; /* Riduzione della larghezza per dispositivi mobili */
+    }
+
+    #loginContent .form-left,
+    #loginContent .form-right {
+        width: 100%;
+        margin-right: 0;
+        float: none;
+    }
+}
+
+/* -----------Stile per il form di inserimento utente */
+form[name="inserisciUtente"] .mainButton {
+    background-color: #ff2e2e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(255, 0, 0, 0.5);
+    margin: 20px auto;
+    display: block;
+}
+
+form[name="inserisciUtente"] .mainButton:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
+
+/*!* Stili specifici per il modulo di login e registrazione su logging.jsp *!*/
+/*.content {*/
+/*    width: 60%; !* Larghezza del contenitore del form *!*/
+/*    margin: 0 auto;*/
+/*    background-color: rgba(0, 0, 0, 0.8); !* Sfondo semi-trasparente *!*/
+/*    padding: 30px;*/
+/*    border-radius: 10px;*/
+/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); !* Ombra per dare profondità *!*/
+/*}*/
+
+/*!* Stile per i titoli h2 (Login o Crea un account) *!*/
+/*h2 {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    color: #ff2e2e;*/
+/*    font-size: 2em;*/
+/*    text-align: center;*/
+/*    text-transform: uppercase;*/
+/*    margin-bottom: 20px;*/
+/*    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); !* Ombra per evidenziare il testo *!*/
+/*}*/
+
+/*!* Stili per i campi di input del form *!*/
+/*input[type="text"],*/
+/*input[type="email"],*/
+/*input[type="password"] {*/
+/*    width: 100%; !* Larghezza completa *!*/
+/*    padding: 10px;*/
+/*    background: rgba(255, 255, 255, 0.1); !* Sfondo semi-trasparente *!*/
+/*    color: white;*/
+/*    border: 2px solid transparent; !* Rimuove il bordo rosso di default *!*/
+/*    border-radius: 5px;*/
+/*    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); !* Ombra interna *!*/
+/*    transition: border-color 0.3s ease, box-shadow 0.3s ease;*/
+/*}*/
+
+/*!* Effetto focus sui campi di input *!*/
+/*input[type="text"]:focus,*/
+/*input[type="email"]:focus,*/
+/*input[type="password"]:focus {*/
+/*    border-color: #ff2e2e; !* Bordo rosso al focus *!*/
+/*    box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);*/
+/*}*/
+
+/*!* Stile per i campi radio (Sesso) *!*/
+/*input[type="radio"] {*/
+/*    margin-right: 5px;*/
+/*    accent-color: #ff2e2e; !* Colore rosso per i radio buttons *!*/
+/*}*/
+
+/*!* Stili per le label *!*/
+/*label {*/
+/*    font-family: 'Roboto', sans-serif;*/
+/*    font-size: 1em;*/
+/*    color: white;*/
+/*    margin-bottom: 5px;*/
+/*    display: block;*/
+/*}*/
+
+/*!* Gestione layout dei campi affiancati (es. Nome e Cognome) *!*/
+/*#left {*/
+/*    width: 48%;*/
+/*    float: left;*/
+/*    margin-right: 2%;*/
+/*}*/
+
+/*.clearfix::after {*/
+/*    content: "";*/
+/*    clear: both;*/
+/*    display: table;*/
+/*}*/
+
+/*!* Pulsanti Ok e Annulla *!*/
+/*.button {*/
+/*    width: 100px;*/
+/*    padding: 10px;*/
+/*    background-color: #ff2e2e;*/
+/*    color: white;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 1em;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease, transform 0.3s ease;*/
+/*}*/
+
+/*.button:hover {*/
+/*    background-color: #e60000;*/
+/*    transform: scale(1.05);*/
+/*}*/
+
+/*!* Stile per il messaggio di benvenuto *!*/
+/*.nomeUtente p {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 1.2em;*/
+/*    font-weight: bold;*/
+/*    color: white;*/
+/*    text-align: center;*/
+/*    margin-bottom: 20px;*/
+/*    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);*/
+/*}*/
+
+/*!* Stile per il testo della clausola *!*/
+/*#clausola {*/
+/*    font-size: 0.9em;*/
+/*    color: #a8a8a8;*/
+/*    text-align: center;*/
+/*}*/
+
+/*!* Gestione responsive per schermi più piccoli *!*/
+/*@media screen and (max-width: 768px) {*/
+/*    .content {*/
+/*        width: 90%; !* Riduzione della larghezza per dispositivi mobili *!*/
+/*    }*/
+
+/*    #left {*/
+/*        width: 100%;*/
+/*        margin-right: 0;*/
+/*        float: none;*/
+/*    }*/
+/*}*/
+
