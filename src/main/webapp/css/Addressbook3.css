@@ -1196,6 +1196,117 @@ form[name="inserisciUtente"] .mainButton:hover {
     background-color: #e60000;
     transform: scale(1.05);
 }
+/* per logging*/
+.nomeUtente p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ff2e2e;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    transition: color 0.3s ease;
+}
+
+.nomeUtente p:hover {
+    color: white;
+    transform: scale(1.05);
+}
+/*----------stili buono------------*/
+/* Stile per il div nomeBuono */
+.mainButton {
+    background-color: #ff2e2e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(255, 0, 0, 0.5);
+    margin: 20px auto;
+    display: inline-block;
+}
+
+.mainButton:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+.nomeBuono {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+    text-align: center;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nomeBuono:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.7);
+}
+#box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+#box article {
+    background: rgba(0, 0, 0, 0.7); /* Sfondo leggermente più scuro per i singoli articoli */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#box article:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.7);
+}
+
+#box h3 {
+    color: #ff2e2e;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+#box p {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 10px;
+}
+p {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 1em;
+    max-width: 600px;
+    text-align: center;
+    margin: 20px auto;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ff2e2e;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
 
 
 /*!* Stili specifici per il modulo di login e registrazione su logging.jsp *!*/

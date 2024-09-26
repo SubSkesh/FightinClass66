@@ -66,6 +66,8 @@ public class HomeManagement {
 
             jdbc.commitTransaction();
 
+            request.setAttribute("adminCreating", request.getParameter("adminCreating"));//OMod
+
             request.setAttribute("loggedOn",ul!=null);
             request.setAttribute("loggedUser", ul);
             request.setAttribute("viewUrl", "utentiManagement/utenti");

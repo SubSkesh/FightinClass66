@@ -93,6 +93,8 @@
         <div class="image">
             <form name="utentiManagement" action="Dispatcher" method="post">
                 <input type="hidden" name="controllerAction" value="HomeManagement.view"/>
+                <input type="hidden" name="adminCreating" value="true"/> <!-- Parametro per indicare che è un admin -->
+
                 <a href="javascript:UtentiManagementSubmit();">
                     <img src="${pageContext.request.contextPath}/images/Utenti.png" alt="Utenti"/>
                     <br><p><b>Gestione Utenti</b></p>

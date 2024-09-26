@@ -11,6 +11,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
+
+
     int i = 0;
 
     // Recupera l'iniziale selezionata e gestisci il valore null
@@ -95,6 +97,9 @@
 <hr>
 
 <main>
+    <p id="admin-creating-value" ><%= request.getAttribute("adminCreating") %></p>
+<%--    <input type="hidden" name="adminCreating" value=<%request.getAttribute("adminCreating"); %> />--%>
+
 
     <div class="nome" style="margin-bottom: 15px;">
         <p>Benvenuto <%= ul.getNomeUtente() %> <%= ul.getCognome() %></p>
@@ -103,8 +108,11 @@
     <section>
         <!--FORM PER PASSARE ALLA PAGINA DI REGISTRAZIONE DI UN NUOVO UTENTE-->
         <form name="inserisciUtente" action="Dispatcher" method="post">
+            <input type="hidden" name="adminCreating" value="true"/> <!-- Parametro per indicare che è un admin -->
+
             <input type="hidden" name="controllerAction" value="LogOn.view"/>
             <input type="hidden" name="opzione" value="R"/>
+
             <input type="submit" value="Nuovo utente" class="mainButton">
         </form>
     </section>
