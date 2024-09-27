@@ -1,5 +1,6 @@
     package controller;
 
+    import jakarta.servlet.RequestDispatcher;
     import services.config.Configuration;
     import static java.sql.Date.valueOf;
     import java.util.ArrayList;
@@ -256,6 +257,8 @@
                 request.setAttribute("loggedOn",ul!=null);
                 request.setAttribute("loggedUser", ul);
                 request.setAttribute("viewUrl", "buoniManagement/buoni");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/buoniManagement/buoni.jsp");
+                dispatcher.forward(request, response);
 
             }catch(Exception e){
                 logger.log(Level.SEVERE, "Errore Controller BuonoManagement", e);

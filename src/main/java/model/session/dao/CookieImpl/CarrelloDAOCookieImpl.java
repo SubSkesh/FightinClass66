@@ -110,6 +110,7 @@ public class CarrelloDAOCookieImpl implements CarrelloDAO {
         for (Carrello carrello : listaCarrello) {
             if (carrello.getProdotto().getId()==(prodotto.getId())) {
                 carrello.setQuantità(quantita);
+                break;//Omod
             }
         }
 

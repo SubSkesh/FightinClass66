@@ -1,5 +1,6 @@
 package controller;
 
+import jakarta.servlet.RequestDispatcher;
 import model.dao.PagamentoDAO;
 import services.config.Configuration;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.logging.Logger;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 
 import model.dao.JDBC;
 import model.dao.ProdottoDAO;
@@ -79,13 +81,13 @@ public class Catalogo{
             if(request.getParameter("searchType") == null){
                 prodotti = prodottoDAO.findForPush();
             }
-            if(request.getParameter("searchType") != null && request.getParameter("searchType").equals("categoria")){
+            if(request.getParameter("searchType") != null && request.getParameter("searchType").equals("categorie")){
                 prodotti = prodottoDAO.findByCategoria(request.getParameter("searchName"));
             }
-            if(request.getParameter("searchType") != null && request.getParameter("searchType").equals("taglia")){
+            if(request.getParameter("searchType") != null && request.getParameter("searchType").equals("taglie")){
                 prodotti = prodottoDAO.findByTaglia(request.getParameter("searchName"));
             }
-            if (request.getParameter("searchType") != null && request.getParameter("searchType").equals("materiale")){
+            if (request.getParameter("searchType") != null && request.getParameter("searchType").equals("materiali")){
                 prodotti = prodottoDAO.findByMateriale(request.getParameter("searchName"));
             }
             if(request.getParameter("searchType") != null && request.getParameter("searchType").equals("searchString")){
@@ -207,9 +209,14 @@ public class Catalogo{
 
         try {
 
+
             /*Inizializzo la sessione*/
             sessionDAO = new CookieSessionDAOFactory();
             sessionDAO.initSession(request, response);
+            /*Inizio la transazione*/
+            jdbc = JDBC.getJDBC(Configuration.DAO_IMPL);
+            jdbc.beginTransaction();
+
 
             /*Recupero il cookie utente*/
             LoggedUserDAO ulDAO = sessionDAO.getLoggedUserDAO();
@@ -227,15 +234,23 @@ public class Catalogo{
 
             /*Se un cookie carrello esiste già aggiungo il prodotto al carello,
             altrimenti ne creo uno nuovo*/
-            if(carrelli == null){
+            if(carrelli.isEmpty()){
                 carrelloDAO.crea(prodotto, quantita);
             }else{
                 carrelloDAO.aggiungi(prodotto, quantita);
             }
+            /* Aggiorna la disponibilità del prodotto */
+//            prodotto.setQuantita(prodotto.getQuantita() - quantita);
+//            prodottoDAO.aggiorna(prodotto);
+            if(prodotto.getQuantita() < quantita){
+                // Gestisci errore di quantità insufficiente
+                request.setAttribute("errorMessage", "Quantità richiesta non disponibile.");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("viewProdotto.jsp");
+                dispatcher.forward(request, response);
+                return;
+            }
 
-            /*Inizio la transazione*/
-            jdbc = JDBC.getJDBC(Configuration.DAO_IMPL);
-            jdbc.beginTransaction();
+
 
             /*Recupero dal DB il prodotto selezionato*/
 //            ProdottoDAO prodottoDAO = jdbc.getProdottoDAO();

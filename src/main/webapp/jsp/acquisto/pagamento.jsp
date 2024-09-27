@@ -131,70 +131,67 @@
 
     <!--FORM PER L'INSERIMENTO DEI DATI PER L'ORDINE-->
     <div class="clearfix">
-        <form name="pagamentoForm" action="<%= pageContext.getServletContext().getContextPath() %>/Dispatcher" method="post">
+        <form id="pagamentoForm" name="pagamentoForm" action="<%= pageContext.getServletContext().getContextPath() %>/Dispatcher" method="post">
 
             <!--LATO DI SINISTRA DEDICATO ALL'INDIRIZZO DI CONSEGNA-->
-            <div class="indirizzo">
+            <div class="indirizzo" id="indirizzoConsegna">
                 <h3>Indirizzo di consegna</h3>
-                </br>
+                <br>
 
-                <div class="form">
+                <div class="form" id="nazioneField">
                     <label for="nazione">Nazione:* </label>
                     <input type="text" id="nazione" name="nazione" value="" maxlength="20" required placeholder="Thailand"/>
                 </div>
 
-                <div class="form">
-                    <label for="citta">Citt&agrave;:* </label>
+                <div class="form" id="cittaField">
+                    <label for="citta">Città:* </label>
                     <input type="text" id="citta" name="citta" value="" maxlength="20" required placeholder="Bangkok"/>
                 </div>
 
-                <div class="form">
+                <div class="form" id="viaField">
                     <label for="via">Via:* </label>
                     <input type="text" id="via" name="via" value="" maxlength="20" required placeholder="Via Yokkao"/>
                 </div>
 
-                <div class="form" id="nc">
+                <div class="form" id="numeroCivicoField">
                     <label for="numeroCivico">Numero civico:* </label>
                     <input type="text" id="numeroCivico" name="numeroCivico" value="" maxlength="11" required placeholder="66"/>
                 </div>
 
-                <div class="form" id="cap">
+                <div class="form" id="capField">
                     <label for="CAP">CAP:* </label>
-                    <input type="text" id="CAPPagamento" name="CAP" value="" maxlength="5" required placeholder="226622"/>
+                    <input type="text" id="CAP" name="CAP" value="" maxlength="5" required placeholder="226622"/>
                 </div>
             </div>
 
             <!--LATO DI DESTRA DEDICATO ALLA CARTA E AL BUONO SCONTO-->
-            <div class="pagamento">
+            <div class="pagamento" id="datiPagamento">
                 <h3>Dati carta di credito</h3>
-                </br>
+                <br>
 
-                <div class="form">
+                <div class="form" id="cartaPagamentoField">
                     <label for="cartaPagamento">Numero carta:* </label>
                     <input type="text" id="cartaPagamento" name="cartaPagamento" value="" maxlength="16" required/>
                 </div>
 
-                </br>
+                <br>
                 <h3>Dati buono sconto</h3>
-                </br>
+                <br>
 
-                <div class="form">
+                <div class="form" id="buonoScontoField">
                     <label for="codiceBuono">Codice buono sconto: </label>
                     <input type="text" id="codiceBuono" name="codiceBuono" value="" maxlength="11"/>
                 </div>
 
                 <input type="hidden" name="controllerAction"/>
             </div>
-            <div style="clear: both">
-                <input type="button" name="submitButton" value="Procedi" class="btn btn-primary" style="font-size: medium;">
-                <input type="button" name="backButton" value="Annulla" class="btn btn-secondary" style="font-size: medium;">
+
+            <div id="formButtons" style="clear: both">
+                <input type="button" id="submitButton" name="submitButton" value="Procedi" class="btn btn-primary" style="font-size: medium;">
+                <input type="button" id="backButton" name="backButton" value="Annulla" class="btn btn-secondary" style="font-size: medium;">
             </div>
 
         </form>
-
-        <div style="margin-top: 20px;">
-            <p id="clausola">*: Campo obbligatorio</p>
-        </div>
     </div>
 
     <!--FORM DI ANNULLA => TORNO NELLA VISTA DEL CARRELLO-->

@@ -110,7 +110,7 @@ public class OrdineDAOMySQLJDBCImpl implements OrdineDAO{
 
             /* Se l'ordine non esiste, lo inserisco nel database */
             sql = "INSERT INTO ordine (statoOrdine, dataOrdine, dataConsegna, nazione, citta, via, "
-                    + "numeroCivico, CAP, utenteId, pagamentoId, buonoId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "numeroCivico, CAP, utenteId, pagamentoId, buonoId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
             ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             i = 1;

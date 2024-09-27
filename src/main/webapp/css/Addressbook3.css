@@ -295,21 +295,24 @@ main {
 }
 
 /* Sidebar laterale per la ricerca */
+/* Spazio tra la barra laterale e il contenuto principale */
 .left_content {
     width: 25%;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.6); /* Aggiungi uno sfondo semi-trasparente */
+    margin-right: 20px; /* Aggiunge spazio tra la barra e i prodotti */
+    background-color: rgba(0, 0, 0, 0.6);
     border-right: 1px solid #ff2e2e;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-    margin-right: 20px;
     transition: transform 0.3s ease;
 }
-
 
 .left_content:hover {
     transform: scale(1.02);
 }
-
+/* Aggiunge più spazio tra gli elementi della barra laterale */
+.left_content ul li {
+    margin-bottom: 10px;
+}
 
 .left_content h1 {
     font-size: 1.5em;
@@ -343,54 +346,110 @@ main {
 
 /* ------------------------- SEARCH BAR STYLES ------------------------- */
 
+/*!* Stili per la barra di ricerca *!*/
+/* Stili per la barra di ricerca */
+/* Stili per la barra di ricerca */
 /* Stili per la barra di ricerca */
 .searchBar {
-    width: 60%;
-    padding: 20px;
-    background-color: #2a2a2a;
-    border-radius: 5px;
-    border: 1px solid #ff2e2e;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    width: 60%; /* Dimensione ridotta per centrare meglio */
+    padding: 10px 20px; /* Spaziatura interna per bilanciare */
+    margin: 20px auto; /* Centrata orizzontalmente */
+    background-color: #333; /* Colore di sfondo scuro per contrasto */
+    border-radius: 30px; /* Angoli arrotondati per un look più moderno */
     display: flex;
-    flex-direction: column;
+    justify-content: space-between; /* Allinea input e pulsante */
     align-items: center;
-    margin: 0 auto;
-    gap: 10px; /* Aggiunge uno spazio tra gli elementi */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Ombra leggera per profondità */
 }
 
-#searchName {
-    width: 100%;
-    height: 35px;
-    font-size: large;
-    background-color: #1c1c1c;
-    color: white;
-    border: 1px solid #ff2e2e;
-    padding-left: 10px;
-    margin-bottom: 10px;
-    margin-right: 15px; /* Aggiunge spazio tra il campo di input e il pulsante */
+/* Stile per l'input di ricerca */
+.searchBar input[type="text"] {
+    width: 75%; /* Occupa la maggior parte della barra */
+    padding: 12px 15px;
+    border: none; /* Rimuove il bordo */
+    border-radius: 20px; /* Bordi arrotondati */
+    font-size: 1em;
+    background-color: #222; /* Colore di sfondo per l'input */
+    color: #fff; /* Colore del testo */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra interna */
+    transition: background-color 0.3s ease;
 }
 
+/* Effetto hover e focus per l'input */
+.searchBar input[type="text"]:focus {
+    background-color: #444; /* Cambia il colore di sfondo al focus */
+    outline: none; /* Rimuove l'effetto outline */
+}
+
+/* Stile per il pulsante di ricerca */
 .searchBar a {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 1.1em;
+    background-color: #ff2e2e; /* Colore rosso per richiamare l'attenzione */
+    color: white;
+    padding: 2px 25px;
     text-transform: uppercase;
-    color: #ff2e2e;
+    font-weight: bold;
+    border-radius: 20px; /* Bordi arrotondati per uniformità */
     text-decoration: none;
-    padding: 10px 20px;
-    border: 2px solid #ff2e2e;
-    border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    text-align: center;
-    display: inline-block;
-    margin-left: 15px; /* Aggiunge spazio tra il pulsante e l'input */
 }
 
+/* Effetto hover per il pulsante di ricerca */
 .searchBar a:hover {
-    background-color: #ff2e2e;
-    color: white;
-    transform: scale(1.05);
+    background-color: #e60000; /* Un rosso più scuro al passaggio del mouse */
+    transform: scale(1.05); /* Leggero ingrandimento */
 }
+
+
+/*.searchBar a {*/
+/*    background-color: #ff2e2e;*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*    padding: 10px 20px;*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-weight: bold;*/
+/*    text-transform: uppercase;*/
+/*    border-radius: 5px;*/
+/*    transition: background-color 0.3s ease, transform 0.3s ease;*/
+/*}*/
+
+/*.searchBar a:hover {*/
+/*    background-color: #e60000;*/
+/*    transform: scale(1.05);*/
+/*}*/
+
+/*#searchName {*/
+/*    width: 100%;*/
+/*    height: 35px;*/
+/*    font-size: large;*/
+/*    background-color: #1c1c1c;*/
+/*    color: white;*/
+/*    border: 1px solid #ff2e2e;*/
+/*    padding-left: 10px;*/
+/*    margin-bottom: 10px;*/
+/*    margin-right: 15px; !* Aggiunge spazio tra il campo di input e il pulsante *!*/
+/*}*/
+
+/*.searchBar a {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-weight: 700;*/
+/*    font-size: 1.1em;*/
+/*    text-transform: uppercase;*/
+/*    color: #ff2e2e;*/
+/*    text-decoration: none;*/
+/*    padding: 10px 20px;*/
+/*    border: 2px solid #ff2e2e;*/
+/*    border-radius: 5px;*/
+/*    transition: background-color 0.3s ease, transform 0.3s ease;*/
+/*    text-align: center;*/
+/*    display: inline-block;*/
+/*    margin-left: 15px; !* Aggiunge spazio tra il pulsante e l'input *!*/
+/*}*/
+
+/*.searchBar a:hover {*/
+/*    background-color: #ff2e2e;*/
+/*    color: white;*/
+/*    transform: scale(1.05);*/
+/*}*/
 
 /* ------------------------- WARNING AND ATTENTION STYLES ------------------------- */
 
@@ -1307,6 +1366,694 @@ h3 {
     color: #ff2e2e;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
+.form input[type="text"],
+.form input[type="date"] {
+    width: 90%;
+    padding: 10px;
+    border: 2px solid #ff2e2e;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.form input[type="text"]:focus,
+.form input[type="date"]:focus {
+    border-color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.form label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+.button {
+    width: 100px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #ff2e2e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #e60000;
+}
+.nome p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ff2e2e;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+#creaBuonoForm {
+    background-color: rgba(0, 0, 0, 0.9); /* Sfondo quasi opaco per maggiore contrasto */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+#creaBuonoForm label {
+    color: white; /* Cambia il colore delle etichette a bianco */
+}
+
+#creaBuonoForm input[type="text"],
+#creaBuonoForm input[type="date"] {
+    background-color: rgba(255, 255, 255, 0.1); /* Sfondo trasparente per i campi di input */
+    color: white;
+    border: 1px solid #ff2e2e; /* Bordo rosso per maggiore contrasto */
+}
+
+#creaBuonoForm input[type="button"] {
+    background-color: #ff2e2e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#creaBuonoForm input[type="button"]:hover {
+    background-color: #e60000;
+    transform: scale(1.05); /* Effetto hover sui bottoni */
+}
+/* Griglia di visualizzazione dei prodotti */
+/* Griglia dei prodotti */
+.catalogo-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 30px;
+    margin-left: 10px;
+}
+/* Stile per i singoli articoli del catalogo */
+.catalogo-item {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/*.catalogo-item {*/
+/*    background-color: rgba(0, 0, 0, 0.7); !* Sfondo semi-trasparente *!*/
+/*    border-radius: 10px;*/
+/*    padding: 15px;*/
+/*    text-align: center;*/
+/*    transition: transform 0.3s ease, box-shadow 0.3s ease;*/
+/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); !* Ombra per dare profondità *!*/
+/*}*/
+
+.catalogo-item:hover {
+    transform: scale(1.05); /* Effetto di ingrandimento al passaggio del mouse */
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.7); /* Ombra più accentuata */
+}
+
+/* Immagini dei prodotti */
+.catalogo-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+
+.catalogo-item img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.7);
+}
+
+/* Nome del prodotto */
+.catalogo-item h3 {
+    color: #ff2e2e;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+/* Prezzo del prodotto */
+.catalogo-item p {
+    /*color: white;*/
+    /*margin-bottom: 10px;*/
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 1em;
+    max-width: 600px;
+    text-align: center;
+    margin: 20px auto;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Stili per i pulsanti del catalogo */
+/* Stili per i pulsanti del catalogo */
+main .catalogo-item .button {
+    width: 80%; /* Imposta una larghezza maggiore per il pulsante */
+    margin: 10px auto; /* Centro il pulsante e aggiungo margine */
+    padding: 10px 20px; /* Aggiungo padding per ingrandire il pulsante */
+    background-color: #ff2e2e; /* Colore di sfondo rosso */
+    color: white; /* Colore del testo bianco */
+    border-radius: 5px; /* Arrotondo i bordi */
+    text-transform: uppercase; /* Rendo il testo maiuscolo */
+    font-weight: bold; /* Rendo il testo in grassetto */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Aggiungo una transizione per l'hover */
+    display: block; /* Assicuro che sia trattato come blocco per allineamento */
+}
+
+/* Stile hover per il pulsante */
+main .catalogo-item .button:hover {
+    background-color: #e60000; /* Colore più scuro al passaggio del mouse */
+    transform: scale(1.05); /* Aggiungo un leggero effetto di zoom */
+}
+/*--------------------------prodottoinfo*/
+#product-info {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 40px;
+}
+
+#product-info img {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    max-height: 400px;
+}
+
+#product-info div {
+    margin-left: 40px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7); /* Aggiunge un background scuro semi-trasparente */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+}
+
+#product-info div span {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+#product-info div .price {
+    font-weight: bold;
+    color: #ff2e2e;
+    font-size: 1.5em;
+    margin-top: 15px;
+}
+
+#ordina {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #ff2e2e;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#ordina:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
+.descrizione {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    font-size: 1.1em;
+}
+/*stili per carrello.jsp*/
+/*--------------------------------------- Stile generale della pagina */
+body#carrello-page {
+    font-family: 'Roboto', sans-serif;
+    background-color: #1c1c1c; /* Sfondo neutro per contrasto con il contenuto */
+    color: #fff; /* Colore del testo bianco per leggibilità */
+    margin: 0;
+    padding: 0;
+}
+
+/* Sezione di benvenuto utente */
+#benvenuto-utente {
+    background-color: rgba(0, 0, 0, 0.8); /* Sfondo leggermente più opaco */
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#messaggio-benvenuto {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em; /* Aumenta la dimensione del testo per maggiore enfasi */
+    font-weight: bold;
+    color: #ff2e2e; /* Colore rosso per enfasi */
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+#nome-utente {
+    color: #fff;
+    font-size: 1.5em;
+    transition: color 0.3s ease-in-out;
+}
+
+#nome-utente:hover {
+    color: #ff2e2e; /* Cambia colore al passaggio del mouse */
+}
+
+/* Stile del contenuto del carrello */
+#carrello-content {
+    background-color: rgba(0, 0, 0, 0.85); /* Sfondo più scuro per evitare confusione con lo sfondo principale */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Aggiungi ombra più visibile */
+    margin-bottom: 30px; /* Aggiungi più spazio sotto il carrello */
+}
+
+/* Stile della tabella del carrello */
+#carrello-table {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1); /* Sfondo trasparente per la tabella */
+    color: #fff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border-collapse: collapse; /* Rimuove gli spazi tra le celle */
+}
+
+#carrello-table th, #carrello-table td {
+    padding: 12px 15px; /* Aumenta il padding per migliorare la leggibilità */
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Aggiungi un bordo sottile per le righe */
+}
+
+#carrello-table th {
+    background-color: rgba(0, 0, 0, 0.7); /* Sfondo più scuro per l'intestazione */
+    color: #ff2e2e;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+#carrello-table td {
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo scuro per il corpo della tabella */
+}
+
+/* Pulsante ordina */
+#ordina-button {
+    display: inline-block;
+    width: 100%;
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#ordina-button:hover {
+    background-color: #218838; /* Effetto hover più scuro */
+    transform: scale(1.02); /* Aggiungi un leggero effetto di zoom */
+}
+
+/* Pulsante cancella carrello */
+#cancella-carrello-button {
+    display: inline-block;
+    width: 100%;
+    padding: 15px;
+    background-color: #dc3545;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#cancella-carrello-button:hover {
+    background-color: #c82333; /* Colore più scuro al passaggio del mouse */
+    transform: scale(1.02); /* Effetto zoom */
+}
+
+/* Sezione del totale */
+#dettagli-ordine {
+    background-color: rgba(0, 0, 0, 0.8); /* Sfondo più scuro per differenziarlo dal resto */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Aggiungi ombra */
+    margin-bottom: 20px;
+}
+
+#dettagli-ordine p {
+    font-size: 1.3em;
+    color: #fff;
+}
+
+#totale-ordine {
+    font-size: 1.8em; /* Dimensione più grande per maggiore enfasi */
+    font-weight: bold;
+    color: #ff2e2e; /* Colore rosso per il totale */
+}
+
+/* Stile per il footer */
+footer#footer {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    text-align: center;
+    color: #ff2e2e;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+/* Stile per la casella di selezione della quantità */
+#carrello-table select {
+    padding: 5px 10px;
+    border: 1px solid #ff2e2e;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-size: 1em;
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#carrello-table select:hover {
+    background-color: rgba(255, 0, 0, 0.7); /* Cambia colore al passaggio del mouse */
+    transform: scale(1.05); /* Leggero zoom al passaggio del mouse */
+}
+
+#carrello-table select:focus {
+    border-color: #ff2e2e; /* Bordo rosso durante il focus */
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+/* Stile per il pulsante "Rimuovi" */
+#carrello-table .btn-danger {
+    background-color: #ff2e2e; /* Colore di sfondo rosso */
+    color: white; /* Colore del testo bianco */
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+#carrello-table .btn-danger:hover {
+    background-color: #d90000; /* Colore più scuro al passaggio del mouse */
+    transform: scale(1.05); /* Effetto zoom al passaggio del mouse */
+}
+
+#carrello-table .btn-danger:focus {
+    outline: none; /* Rimuove il bordo di focus */
+    background-color: #ff1a1a; /* Colore più chiaro durante il focus */
+}
+/*---------------------------------------stili per pagamento.jsp*/
+/* Stile per la sezione dell'indirizzo di consegna */
+#indirizzoConsegna {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Stile per i campi del form */
+#nazioneField, #cittaField, #viaField, #numeroCivicoField, #capField {
+    margin-bottom: 20px;
+}
+
+#nazioneField input, #cittaField input, #viaField input, #numeroCivicoField input, #capField input {
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #ff2e2e;
+    border-radius: 5px;
+    color: white;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#nazioneField input:focus, #cittaField input:focus, #viaField input:focus,
+#numeroCivicoField input:focus, #capField input:focus {
+    border-color: #ffffff;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}
+
+/* Stile per la sezione della carta di credito */
+#datiPagamento {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+
+/* Stile per i bottoni del form */
+#formButtons input {
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #ff2e2e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#submitButton:hover, #backButton:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
+/* Stile per la form per annullare e tornare indietro */
+form[name="backForm"] {
+    margin-top: 20px;
+}
+/*------------------stile per riepilogo.jsp*/
+/* Stile per la sezione dell'indirizzo di consegna */
+#riepilogoIndirizzo {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+/* Stile per l'address di consegna */
+#riepilogoAddress {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    color: white;
+    margin-bottom: 10px;
+}
+
+/* Stile per i dettagli della carta */
+#riepilogoCarta {
+    color: white;
+    font-size: 1.1em;
+}
+
+/* Stile per i dati del buono sconto */
+#riepilogoCodiceBuono, #riepilogoSconto {
+    color: #ff2e2e;
+    font-size: 1.1em;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Stile per la sezione dei prodotti */
+#riepilogoProdotti {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+#nessunProdotto {
+    color: white;
+}
+
+.riepilogoProdotto {
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* Stile per il prezzo finale */
+#riepilogoPrezzoFinale {
+    color: #ff2e2e;
+    font-weight: bold;
+    font-size: 1.2em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Stile per i bottoni del riepilogo */
+#riepilogoBottoni .button {
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #ff2e2e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#submitButton:hover, #backButton:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
+/* Stile per il form di annullamento */
+#annullaForm {
+    margin-top: 20px;
+}
+/*riepilogo.jsp*/
+/* Stili generali della pagina */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+h2 {
+    text-align: center;
+    color: #ff4444;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Stile per l'indirizzo e i dati del pagamento */
+.indirizzo, .pagamento {
+    float: left;
+    width: 45%;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 0 20px 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.indirizzo {
+    border-color: steelblue;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.pagamento {
+    border-color: green;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.indirizzo h3, .pagamento h3 {
+    color: #ff4444;
+    font-size: 1.2em;
+}
+
+.indirizzo p, .pagamento p, .indirizzo address {
+    color: #fff;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+/* Stili per i bottoni */
+.button {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #cc0000;
+}
+
+/* Stili per i messaggi */
+.alert {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #ff4444;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ff4444;
+}
+
+/* Stili per la lista prodotti */
+.riepilogoProdotto {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.riepilogoProdotto b {
+    color: #ff4444;
+}
+
+#riepilogoPrezzoFinale {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ff4444;
+}
+
+/* Stile per il benvenuto */
+#riepilogoBenvenuto p {
+    font-size: 1.2em;
+    color: #ff4444;
+    text-align: center;
+}
+
+/*footer#footer a {*/
+/*    color: #ff2e2e;*/
+/*    text-decoration: none;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*footer#footer a:hover {*/
+/*    color: #fff;*/
+/*}*/
+
 
 
 /*!* Stili specifici per il modulo di login e registrazione su logging.jsp *!*/

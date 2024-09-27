@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/include/HeaderAdmin.jsp" value="file://$PROJECT_DIR$/src/main/webapp/include" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/acquisto/carrello.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/acquisto" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/acquisto/pagamento.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/acquisto" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/acquisto/riepilogo.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/acquisto" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/utentiManagement/utenti.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/utentiManagement" />
       </map>

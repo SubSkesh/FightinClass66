@@ -1,7 +1,7 @@
 <%--
     Document   : creaBuono
-    Created on : 5-mar-2020, 14.54.22
-    Author     : Giacomo Polastri
+    Created on : 5-mar-2024, 14.54.22
+    Author     : Oscar Costqnzelli
 --%>
 
 <%@page session = "false"%>
@@ -35,6 +35,8 @@
             var sconto = document.creaBuono.sconto.value;
             var dataScadenza = document.creaBuono.dataScadenza.value;
             var quantita = document.creaBuono.quantita.value;
+            var codiceBuono=document.creaBuono.codiceBuono.value;
+
 
             // Controllo il campo nome
             if (!nomeBuono.trim()) {
@@ -63,6 +65,11 @@
                 document.creaBuono.quantita.focus();
                 return false;
             }
+            if (!codiceBuono.trim()) {
+                alert("Il campo codice buono è obbligatorio");
+                document.creaBuono.nomeBuono.focus();
+                return false;
+            }
 
             // Invio il modulo
             else {
@@ -79,36 +86,7 @@
             document.creaBuono.submitButton.addEventListener("click", validateAndSubmit);
         }
     </script>
-    <style>
-        .content {
-            width: 40%;
-            margin-left: 30%;
-        }
 
-        #nome {
-            width: 86%;
-            height: 30px;
-            font-size: large;
-        }
-
-        #sconto {
-            width: 79%;
-            height: 30px;
-            font-size: large;
-        }
-
-        #data {
-            width: 66%;
-            height: 30px;
-            font-size: large;
-        }
-
-        #quantita {
-            width: 46%;
-            height: 30px;
-            font-size: large;
-        }
-    </style>
 
     <%@include file="/include/htmlHead.jsp" %>
 
@@ -133,20 +111,24 @@
 
         <!-- FORM PER LA CREAZIONE DI NUOVI BUONI -->
         <section>
-            <div>
+            <div id = "creaBuonoForm">
                 <form name="creaBuono" action="Dispatcher" method="post">
                     <input type="hidden" name="controllerAction" value="BuonoManagement.inserisciBuono"/>
-                    <div class="form">
+                    <div class="form" >
                         <label for="nomeBuono">Nome: </label>
                         <input type="text" id="nomeBuono" name="nomeBuono" value="" required maxlength="20"/>
                     </div>
                     <div class="form">
-                        <label for="sconto">Sconto: </label>
-                        <input type="text" id="sconto" name="sconto" value="" required/> %
+                        <label for="sconto">Sconto%: </label>
+                        <input type="text" id="sconto" name="sconto" value="" required/>
                     </div>
                     <div class="form">
                         <label for="dataScadenza">Data di Scadenza: </label>
-                        <input type="date" id="dataScadenza" name="dataScadenza" max="2025-12-31"/>
+                        <input type="date" id="dataScadenza" name="dataScadenza" max="2030-12-31"/>
+                    </div>
+                    <div class="form">
+                        <label for="codiceBuono">Codice Buono: </label>
+                        <input type="text" id="codiceBuono" name="codiceBuono" value="" required maxlength="10"/>
                     </div>
                     <div class="form">
                         <label for="quantita">Numero di buoni da generare: </label>
